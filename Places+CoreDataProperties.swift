@@ -2,7 +2,7 @@
 //  Places+CoreDataProperties.swift
 //  T Capstone
 //
-//  Created by modelf on 10/6/16.
+//  Created by modelf on 10/7/16.
 //  Copyright © 2016 modelf. All rights reserved.
 //
 
@@ -20,7 +20,7 @@ extension Places {
     @NSManaged public var countryName: String?
     @NSManaged public var name: String?
     @NSManaged public var placeID: Int32
+    @NSManaged public var pin: Pin?
     @NSManaged public var quote: Quotes?
-    @NSManaged public var pins: Pin?
 
 }
