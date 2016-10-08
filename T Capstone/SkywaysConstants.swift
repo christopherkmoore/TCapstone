@@ -7,3 +7,48 @@
 //
 
 import Foundation
+
+
+extension SkywaysClient {
+    
+    struct API {
+        static var APIKey = "ch219794222311154158537117697185"
+        
+    }
+    
+    struct URL {
+        static var URLBase = "http://partners.api.skyscanner.net/apiservices/"
+        
+    }
+    
+    struct Method {
+        static var BrowseQuotes = "browsequotes/"
+    }
+    
+    struct Version {
+        static var Version = "v1.0/"
+    }
+    struct ParameterKeys {
+        static var market: String = "market"
+        static var currency: String = "currency"
+        static var locale: String = "locale"
+        static var originPlace: String = "originPlace"
+        static var destinationPlace: String = "destinationPlace"
+        static var outboundPartialDate: String = "outboundPartialDate"
+        static var inboundPartialDate: String = "inboundPartialDate"
+    }
+    
+    struct ParameterValues {
+        static var market: String = "US/"
+        static var currency: String = "USD/"
+        static var locale: String = "en-US/"
+        static var originPlace: String?
+        static var destinationPlace: String = "anywhere/"
+        static var outboundPartialDate: String = "anytime?"
+        static var inboundPartialDate: String?
+        
+    }
+    struct HTTPReturn {
+        static var json = "application/json"
+    }
+}

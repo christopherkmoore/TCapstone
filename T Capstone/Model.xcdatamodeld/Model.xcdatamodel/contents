@@ -1,16 +1,18 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="11232" systemVersion="15G1004" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="11232" systemVersion="16A323" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="Pin" representedClassName=".Pin" syncable="YES">
         <attribute name="latitude" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="longitude" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
-        <relationship name="quote" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Quotes" inverseName="pin" inverseEntity="Quotes" syncable="YES"/>
+        <relationship name="places" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Places" inverseName="pin" inverseEntity="Places" syncable="YES"/>
+        <relationship name="quotes" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Quotes" inverseName="pin" inverseEntity="Quotes" syncable="YES"/>
     </entity>
     <entity name="Places" representedClassName=".Places" syncable="YES">
         <attribute name="cityName" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="countryName" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="placeID" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
-        <relationship name="quotes" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Quotes" inverseName="place" inverseEntity="Quotes" syncable="YES"/>
+        <relationship name="pin" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Pin" inverseName="places" inverseEntity="Pin" syncable="YES"/>
+        <relationship name="quote" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Quotes" inverseName="places" inverseEntity="Quotes" syncable="YES"/>
     </entity>
     <entity name="Quotes" representedClassName=".Quotes" syncable="YES">
         <attribute name="carrierID" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
@@ -20,13 +22,15 @@
         <attribute name="minPrice" optional="YES" attributeType="Double" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="originID" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="quoteID" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
-        <relationship name="pin" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Pin" inverseName="quote" inverseEntity="Pin" syncable="YES"/>
-        <relationship name="place" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Places" inverseName="quotes" inverseEntity="Places" syncable="YES"/>
+        <attribute name="stringName" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="pin" optional="YES" maxCount="1" deletionRule="Nullify" ordered="YES" destinationEntity="Pin" inverseName="quotes" inverseEntity="Pin" syncable="YES"/>
+        <relationship name="places" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Places" inverseName="quote" inverseEntity="Places" syncable="YES"/>
     </entity>
-    <fetchRequest name="QuotesFetchRequest" entity="Quotes" predicateString="TRUEPREDICATE"/>
+    <fetchRequest name="PlacesFetchRequest" entity="Places"/>
+    <fetchRequest name="QuotesFetchRequest" entity="Quotes"/>
     <elements>
-        <element name="Pin" positionX="-63" positionY="-18" width="128" height="90"/>
-        <element name="Places" positionX="-54" positionY="-9" width="128" height="120"/>
-        <element name="Quotes" positionX="-36" positionY="9" width="128" height="180"/>
+        <element name="Pin" positionX="-63" positionY="-18" width="128" height="105"/>
+        <element name="Places" positionX="-54" positionY="-9" width="128" height="135"/>
+        <element name="Quotes" positionX="-36" positionY="9" width="128" height="195"/>
     </elements>
 </model>

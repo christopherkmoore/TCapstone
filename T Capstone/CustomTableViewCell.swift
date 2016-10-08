@@ -7,3 +7,17 @@
 //
 
 import Foundation
+import UIKit
+
+class CustomTableViewCell: UITableViewCell {
+    
+    @IBOutlet weak var destination: UILabel!
+    @IBOutlet weak var flightDate: UILabel!
+    @IBOutlet weak var minPrice: UILabel!
+    
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        
+    }
+}

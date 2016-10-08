@@ -8,12 +8,25 @@
 
 /* Begin PBXBuildFile section */
 		79C31AE41DA4A520005A060F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79C31AE31DA4A520005A060F /* AppDelegate.swift */; };
-		79C31AE61DA4A520005A060F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79C31AE51DA4A520005A060F /* ViewController.swift */; };
 		79C31AE91DA4A520005A060F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 79C31AE71DA4A520005A060F /* Main.storyboard */; };
 		79C31AEB1DA4A520005A060F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 79C31AEA1DA4A520005A060F /* Assets.xcassets */; };
 		79C31AEE1DA4A520005A060F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 79C31AEC1DA4A520005A060F /* LaunchScreen.storyboard */; };
 		79C31AF91DA4A520005A060F /* T_CapstoneTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79C31AF81DA4A520005A060F /* T_CapstoneTests.swift */; };
 		79C31B041DA4A520005A060F /* T_CapstoneUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79C31B031DA4A520005A060F /* T_CapstoneUITests.swift */; };
+		79C31B141DA4A620005A060F /* SkywaysClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79C31B131DA4A620005A060F /* SkywaysClient.swift */; };
+		79C31B161DA4A6DB005A060F /* SkywaysConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79C31B151DA4A6DB005A060F /* SkywaysConstants.swift */; };
+		79C31B211DA4A945005A060F /* Places+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79C31B1B1DA4A945005A060F /* Places+CoreDataClass.swift */; };
+		79C31B231DA4A945005A060F /* Pin+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79C31B1D1DA4A945005A060F /* Pin+CoreDataClass.swift */; };
+		79C31B251DA4A945005A060F /* Quotes+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79C31B1F1DA4A945005A060F /* Quotes+CoreDataClass.swift */; };
+		79C31B281DA4A959005A060F /* CoreStackManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79C31B271DA4A959005A060F /* CoreStackManager.swift */; };
+		79C31B2B1DA4AEF9005A060F /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79C31B2A1DA4AEF9005A060F /* MapViewController.swift */; };
+		79C31B2D1DA4B3D8005A060F /* PinSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79C31B2C1DA4B3D8005A060F /* PinSearchViewController.swift */; };
+		79C31B2F1DA57312005A060F /* CustomTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79C31B2E1DA57312005A060F /* CustomTableViewCell.swift */; };
+		79C31B361DA5ACFA005A060F /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 79C31B341DA5ACFA005A060F /* Model.xcdatamodeld */; };
+		79CAC47A1DA86B2900D38CCE /* Pin+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79CAC4771DA86B2900D38CCE /* Pin+CoreDataProperties.swift */; };
+		79CAC47B1DA86B2900D38CCE /* Places+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79CAC4781DA86B2900D38CCE /* Places+CoreDataProperties.swift */; };
+		79CAC47C1DA86B2900D38CCE /* Quotes+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79CAC4791DA86B2900D38CCE /* Quotes+CoreDataProperties.swift */; };
+		79CAC4801DA89BF200D38CCE /* ErrorHandling.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79CAC47F1DA89BF200D38CCE /* ErrorHandling.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,7 +49,6 @@
 /* Begin PBXFileReference section */
 		79C31AE01DA4A520005A060F /* T Capstone.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "T Capstone.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		79C31AE31DA4A520005A060F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		79C31AE51DA4A520005A060F /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		79C31AE81DA4A520005A060F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		79C31AEA1DA4A520005A060F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		79C31AED1DA4A520005A060F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -47,6 +59,20 @@
 		79C31AFF1DA4A520005A060F /* T CapstoneUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "T CapstoneUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		79C31B031DA4A520005A060F /* T_CapstoneUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = T_CapstoneUITests.swift; sourceTree = "<group>"; };
 		79C31B051DA4A520005A060F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		79C31B131DA4A620005A060F /* SkywaysClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SkywaysClient.swift; sourceTree = "<group>"; };
+		79C31B151DA4A6DB005A060F /* SkywaysConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SkywaysConstants.swift; sourceTree = "<group>"; };
+		79C31B1B1DA4A945005A060F /* Places+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Places+CoreDataClass.swift"; path = "../Places+CoreDataClass.swift"; sourceTree = "<group>"; };
+		79C31B1D1DA4A945005A060F /* Pin+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Pin+CoreDataClass.swift"; path = "../Pin+CoreDataClass.swift"; sourceTree = "<group>"; };
+		79C31B1F1DA4A945005A060F /* Quotes+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Quotes+CoreDataClass.swift"; path = "../Quotes+CoreDataClass.swift"; sourceTree = "<group>"; };
+		79C31B271DA4A959005A060F /* CoreStackManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreStackManager.swift; sourceTree = "<group>"; };
+		79C31B2A1DA4AEF9005A060F /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
+		79C31B2C1DA4B3D8005A060F /* PinSearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PinSearchViewController.swift; sourceTree = "<group>"; };
+		79C31B2E1DA57312005A060F /* CustomTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomTableViewCell.swift; sourceTree = "<group>"; };
+		79C31B351DA5ACFA005A060F /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
+		79CAC4771DA86B2900D38CCE /* Pin+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Pin+CoreDataProperties.swift"; path = "../Pin+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		79CAC4781DA86B2900D38CCE /* Places+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Places+CoreDataProperties.swift"; path = "../Places+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		79CAC4791DA86B2900D38CCE /* Quotes+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Quotes+CoreDataProperties.swift"; path = "../Quotes+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		79CAC47F1DA89BF200D38CCE /* ErrorHandling.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrorHandling.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -97,8 +123,11 @@
 		79C31AE21DA4A520005A060F /* T Capstone */ = {
 			isa = PBXGroup;
 			children = (
+				79C31B121DA4A606005A060F /* APIs */,
+				79C31B291DA4AEED005A060F /* Views */,
+				79C31B171DA4A759005A060F /* CoreData */,
+				79C31B111DA4A5E4005A060F /* Model */,
 				79C31AE31DA4A520005A060F /* AppDelegate.swift */,
-				79C31AE51DA4A520005A060F /* ViewController.swift */,
 				79C31AE71DA4A520005A060F /* Main.storyboard */,
 				79C31AEA1DA4A520005A060F /* Assets.xcassets */,
 				79C31AEC1DA4A520005A060F /* LaunchScreen.storyboard */,
@@ -123,6 +152,48 @@
 				79C31B051DA4A520005A060F /* Info.plist */,
 			);
 			path = "T CapstoneUITests";
+			sourceTree = "<group>";
+		};
+		79C31B111DA4A5E4005A060F /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				79CAC47F1DA89BF200D38CCE /* ErrorHandling.swift */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		79C31B121DA4A606005A060F /* APIs */ = {
+			isa = PBXGroup;
+			children = (
+				79C31B131DA4A620005A060F /* SkywaysClient.swift */,
+				79C31B151DA4A6DB005A060F /* SkywaysConstants.swift */,
+			);
+			name = APIs;
+			sourceTree = "<group>";
+		};
+		79C31B171DA4A759005A060F /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+				79CAC4771DA86B2900D38CCE /* Pin+CoreDataProperties.swift */,
+				79CAC4781DA86B2900D38CCE /* Places+CoreDataProperties.swift */,
+				79CAC4791DA86B2900D38CCE /* Quotes+CoreDataProperties.swift */,
+				79C31B341DA5ACFA005A060F /* Model.xcdatamodeld */,
+				79C31B1B1DA4A945005A060F /* Places+CoreDataClass.swift */,
+				79C31B1D1DA4A945005A060F /* Pin+CoreDataClass.swift */,
+				79C31B1F1DA4A945005A060F /* Quotes+CoreDataClass.swift */,
+				79C31B271DA4A959005A060F /* CoreStackManager.swift */,
+			);
+			name = CoreData;
+			sourceTree = "<group>";
+		};
+		79C31B291DA4AEED005A060F /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				79C31B2A1DA4AEF9005A060F /* MapViewController.swift */,
+				79C31B2E1DA57312005A060F /* CustomTableViewCell.swift */,
+				79C31B2C1DA4B3D8005A060F /* PinSearchViewController.swift */,
+			);
+			name = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -262,7 +333,20 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				79C31AE61DA4A520005A060F /* ViewController.swift in Sources */,
+				79CAC47B1DA86B2900D38CCE /* Places+CoreDataProperties.swift in Sources */,
+				79C31B361DA5ACFA005A060F /* Model.xcdatamodeld in Sources */,
+				79C31B281DA4A959005A060F /* CoreStackManager.swift in Sources */,
+				79C31B161DA4A6DB005A060F /* SkywaysConstants.swift in Sources */,
+				79C31B2F1DA57312005A060F /* CustomTableViewCell.swift in Sources */,
+				79C31B2B1DA4AEF9005A060F /* MapViewController.swift in Sources */,
+				79C31B211DA4A945005A060F /* Places+CoreDataClass.swift in Sources */,
+				79C31B231DA4A945005A060F /* Pin+CoreDataClass.swift in Sources */,
+				79C31B141DA4A620005A060F /* SkywaysClient.swift in Sources */,
+				79C31B251DA4A945005A060F /* Quotes+CoreDataClass.swift in Sources */,
+				79CAC47C1DA86B2900D38CCE /* Quotes+CoreDataProperties.swift in Sources */,
+				79CAC47A1DA86B2900D38CCE /* Pin+CoreDataProperties.swift in Sources */,
+				79CAC4801DA89BF200D38CCE /* ErrorHandling.swift in Sources */,
+				79C31B2D1DA4B3D8005A060F /* PinSearchViewController.swift in Sources */,
 				79C31AE41DA4A520005A060F /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -514,6 +598,7 @@
 				79C31B0A1DA4A520005A060F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		79C31B0B1DA4A520005A060F /* Build configuration list for PBXNativeTarget "T CapstoneTests" */ = {
 			isa = XCConfigurationList;
@@ -522,6 +607,7 @@
 				79C31B0D1DA4A520005A060F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		79C31B0E1DA4A520005A060F /* Build configuration list for PBXNativeTarget "T CapstoneUITests" */ = {
 			isa = XCConfigurationList;
@@ -530,8 +616,22 @@
 				79C31B101DA4A520005A060F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		79C31B341DA5ACFA005A060F /* Model.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				79C31B351DA5ACFA005A060F /* Model.xcdatamodel */,
+			);
+			currentVersion = 79C31B351DA5ACFA005A060F /* Model.xcdatamodel */;
+			path = Model.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 79C31AD81DA4A520005A060F /* Project object */;
 }
