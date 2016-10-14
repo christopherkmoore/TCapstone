@@ -20,7 +20,6 @@ class MapViewController: UIViewController, MKMapViewDelegate, NSFetchedResultsCo
     
     var editButtonTapped = true
     
-    
     var sharedContext: NSManagedObjectContext {
         return CoreDataStackManager.sharedInstance().managedObjectContext
     }

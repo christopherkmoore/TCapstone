@@ -91,6 +91,13 @@
                         </variation>
                     </view>
                     <navigationItem key="navigationItem" id="aiX-Vz-Gbz">
+                        <barButtonItem key="leftBarButtonItem" systemItem="search" id="wzp-sI-y7Y">
+                            <connections>
+                                <segue destination="Er4-Zf-Bxr" kind="popoverPresentation" popoverAnchorBarButtonItem="wzp-sI-y7Y" id="ZWA-Gb-uwH">
+                                    <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
+                                </segue>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="Edit" id="GOz-FY-tH7">
                             <connections>
                                 <action selector="editPressed:" destination="Zql-uG-H8c" id="WRr-Gd-991"/>
@@ -107,6 +114,115 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gGq-eq-ZzY" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="202.40000000000001" y="292.80359820089956"/>
+        </scene>
+        <!--Map View Filter View Controller-->
+        <scene sceneID="Qs2-rw-rqZ">
+            <objects>
+                <viewController id="Er4-Zf-Bxr" customClass="MapViewFilterViewController" customModule="T_Capstone" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="hHT-W2-l3F"/>
+                        <viewControllerLayoutGuide type="bottom" id="TdK-v5-x6x"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="o39-gU-6OU">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="IDY-Y4-NHX" userLabel="departureView">
+                                <frame key="frameInset" minY="205" width="375" height="143"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <containerView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="GKJ-P4-hCR">
+                                        <frame key="frameInset" height="162" maxY="-10"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                                        <connections>
+                                            <segue destination="rjV-ln-ahC" kind="embed" id="VMc-ik-0tZ"/>
+                                        </connections>
+                                    </containerView>
+                                    <datePicker contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="hR5-2F-zUX">
+                                        <frame key="frameInset" minY="-9" height="162"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                        <date key="date" timeIntervalSinceReferenceDate="497935590.84564799">
+                                            <!--2016-10-12 03:26:30 +0000-->
+                                        </date>
+                                    </datePicker>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
+                            <slider opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="YOX-yS-90W">
+                                <frame key="frameInset" minX="14" minY="108" width="347" height="31"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </slider>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Price" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Tal-eV-lQU">
+                                <frame key="frameInset" minX="16" minY="79" width="42" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Date" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oIP-Sp-a7E">
+                                <frame key="frameInset" minX="16" minY="173" width="42" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Date" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Hoj-Hh-vU4">
+                                <frame key="frameInset" minX="5" minY="356" width="42" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tqS-iN-gvS">
+                                <frame key="frameInset" minX="286" minY="173" width="40" height="22"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="&gt;"/>
+                                <connections>
+                                    <action selector="showOrHideArrivalView:" destination="Er4-Zf-Bxr" eventType="touchUpInside" id="6EU-v8-9lX"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZR2-Nk-KIB">
+                                <frame key="frameInset" minX="286" minY="355" width="40" height="22"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="&gt;"/>
+                            </button>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6Lz-uS-sAz" userLabel="arrivalView">
+                                <frame key="frameInset" minY="385" width="375" height="143"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <datePicker contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="Lhx-XM-b3q">
+                                        <frame key="frameInset" minY="-10" height="162"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                        <date key="date" timeIntervalSinceReferenceDate="497935590.84564799">
+                                            <!--2016-10-12 03:26:30 +0000-->
+                                        </date>
+                                    </datePicker>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
+                            <navigationBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="VeK-lJ-bmc">
+                                <frame key="frameInset" minY="20" height="44"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <items>
+                                    <navigationItem title="Title" id="DpX-cw-PR4"/>
+                                </items>
+                            </navigationBar>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <connections>
+                        <outlet property="arrivalView" destination="6Lz-uS-sAz" id="cIM-8H-ifR"/>
+                        <outlet property="buttonShowHide" destination="tqS-iN-gvS" id="bGf-Tj-GUS"/>
+                        <outlet property="dateLabel" destination="oIP-Sp-a7E" id="OVM-VG-YY4"/>
+                        <outlet property="datePicker" destination="hR5-2F-zUX" id="Tcp-wa-GS1"/>
+                        <outlet property="departureView" destination="IDY-Y4-NHX" id="ZCD-la-v7r"/>
+                        <outlet property="priceLabel" destination="Tal-eV-lQU" id="bZV-8m-CpQ"/>
+                        <outlet property="priceSlider" destination="YOX-yS-90W" id="kLz-eH-b8d"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="BKI-qX-K0G" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="980" y="-192.05397301349328"/>
         </scene>
         <!--Pin Search View Controller-->
         <scene sceneID="dpS-HX-bqs">
@@ -212,7 +328,20 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="X7L-V5-N7F" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1077.5999999999999" y="292.80359820089956"/>
+            <point key="canvasLocation" x="2388" y="293"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="bDu-VK-RLf">
+            <objects>
+                <viewController id="rjV-ln-ahC" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="jvn-40-3Hc">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="162"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Nhd-Jl-amx" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
         </scene>
     </scenes>
 </document>

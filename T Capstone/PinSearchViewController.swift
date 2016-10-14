@@ -32,6 +32,7 @@ class PinSearchViewController: UIViewController, UITableViewDataSource, NSFetche
         let fetchRequestQuotes: NSFetchRequest<Quotes> = Quotes.fetchRequest()
         fetchRequestQuotes.sortDescriptors = [NSSortDescriptor(key: "minPrice", ascending: true)]
         fetchRequestQuotes.predicate = NSPredicate(format: "pin == %@", self.pin)
+        
         let fetchRequestPlaces: NSFetchRequest<Places> = Places.fetchRequest()
         fetchRequestPlaces.sortDescriptors = []
         fetchRequestPlaces.predicate = NSPredicate(format: "pin == %@", self.pin)
@@ -118,6 +119,9 @@ class PinSearchViewController: UIViewController, UITableViewDataSource, NSFetche
         //future updates
         
         let quote = fetchedResultsQuotesController.object(at: indexPath)
+        AirbnbClient.sharedInstance().browseAirbnbListing(quote, completionHandler: {(success, data, error) in
+            print(data)
+        })
         
     }
 }
