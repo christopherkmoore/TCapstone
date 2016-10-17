@@ -61,11 +61,13 @@ class MapViewFilterViewController: UIViewController {
             let angle = self.isReturnMenuOpen ? CGFloat(M_PI_4) : 0.0
             self.returnButton.transform = CGAffineTransform(rotationAngle: angle)
             if self.isReturnMenuOpen {
+                // if departureDatePicker is showing on screen
                 if self.departDatePicker.center.x > 0 {
-                    self.returnDatePicker.center.y = self.departDatePicker.center.y + 200
+                    self.returnDatePicker.center.y = self.departDatePicker.center.y + self.departDatePicker.frame.height + self.departButton.frame.height
                 }
+                    // if departureDatePicker is not showing on screen.
                 else {
-                    self.returnDatePicker.center.y = 300
+                    self.returnDatePicker.center.y = self.departDatePicker.center.y + self.departButton.frame.height * 2
                 }
             } else {
                 self.returnDatePicker.center.y += self.view.frame.height
