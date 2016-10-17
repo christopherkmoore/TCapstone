@@ -127,97 +127,113 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="IDY-Y4-NHX" userLabel="departureView">
-                                <frame key="frameInset" minY="205" width="375" height="143"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <subviews>
-                                    <containerView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="GKJ-P4-hCR">
-                                        <frame key="frameInset" height="162" maxY="-10"/>
-                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
-                                        <connections>
-                                            <segue destination="rjV-ln-ahC" kind="embed" id="VMc-ik-0tZ"/>
-                                        </connections>
-                                    </containerView>
-                                    <datePicker contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="hR5-2F-zUX">
-                                        <frame key="frameInset" minY="-9" height="162"/>
-                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                                        <date key="date" timeIntervalSinceReferenceDate="497935590.84564799">
-                                            <!--2016-10-12 03:26:30 +0000-->
-                                        </date>
-                                    </datePicker>
-                                </subviews>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            </view>
-                            <slider opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="YOX-yS-90W">
-                                <frame key="frameInset" minX="14" minY="108" width="347" height="31"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </slider>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Price" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Tal-eV-lQU">
-                                <frame key="frameInset" minX="16" minY="79" width="42" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Price" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Tal-eV-lQU">
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Date" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oIP-Sp-a7E">
-                                <frame key="frameInset" minX="16" minY="173" width="42" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="YOX-yS-90W"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Departure Date" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oIP-Sp-a7E">
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="25" id="2O4-7e-2BC"/>
+                                    <constraint firstAttribute="width" constant="120" id="yZD-3X-0fk"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Date" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Hoj-Hh-vU4">
-                                <frame key="frameInset" minX="5" minY="356" width="42" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Return Date" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Hoj-Hh-vU4">
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="120" id="8Ok-SC-obP"/>
+                                    <constraint firstAttribute="height" constant="25" id="Y6N-SF-eGn"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tqS-iN-gvS">
-                                <frame key="frameInset" minX="286" minY="173" width="40" height="22"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="&gt;"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tqS-iN-gvS" userLabel="Depart Button">
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="25" id="Y13-lC-CTt"/>
+                                    <constraint firstAttribute="width" constant="40" id="qwY-tY-Wpa"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                                <state key="normal" title="+"/>
                                 <connections>
-                                    <action selector="showOrHideArrivalView:" destination="Er4-Zf-Bxr" eventType="touchUpInside" id="6EU-v8-9lX"/>
+                                    <action selector="showDepartureMenu:" destination="Er4-Zf-Bxr" eventType="touchUpInside" id="8EX-Yo-9xm"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZR2-Nk-KIB">
-                                <frame key="frameInset" minX="286" minY="355" width="40" height="22"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="&gt;"/>
-                            </button>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6Lz-uS-sAz" userLabel="arrivalView">
-                                <frame key="frameInset" minY="385" width="375" height="143"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <subviews>
-                                    <datePicker contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="Lhx-XM-b3q">
-                                        <frame key="frameInset" minY="-10" height="162"/>
-                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                                        <date key="date" timeIntervalSinceReferenceDate="497935590.84564799">
-                                            <!--2016-10-12 03:26:30 +0000-->
-                                        </date>
-                                    </datePicker>
-                                </subviews>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            </view>
-                            <navigationBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="VeK-lJ-bmc">
-                                <frame key="frameInset" minY="20" height="44"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VeK-lJ-bmc">
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="60" id="6Qi-h4-t93"/>
+                                </constraints>
                                 <items>
-                                    <navigationItem title="Title" id="DpX-cw-PR4"/>
+                                    <navigationItem title="Filter" id="DpX-cw-PR4">
+                                        <barButtonItem key="leftBarButtonItem" style="plain" id="uhR-ef-aSn">
+                                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="wiV-jI-zw2">
+                                                <rect key="frame" x="16" y="23" width="83" height="30"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <state key="normal" title="Return"/>
+                                                <connections>
+                                                    <action selector="dismissWithSender:" destination="Er4-Zf-Bxr" eventType="touchUpInside" id="bOa-Lq-Pcv"/>
+                                                </connections>
+                                            </button>
+                                        </barButtonItem>
+                                    </navigationItem>
                                 </items>
                             </navigationBar>
+                            <datePicker contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="pCq-0h-aJP" userLabel="ReturnDatePicker">
+                                <frame key="frameInset" minY="487" height="165"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <date key="date" timeIntervalSinceReferenceDate="498364205.71492398">
+                                    <!--2016-10-17 02:30:05 +0000-->
+                                </date>
+                            </datePicker>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="R0p-Qh-LFH" userLabel="Return Button">
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="40" id="XgM-WC-DaA"/>
+                                    <constraint firstAttribute="height" constant="25" id="eqX-T5-C1O"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                                <state key="normal" title="+"/>
+                                <connections>
+                                    <action selector="showReturnMenu:" destination="Er4-Zf-Bxr" eventType="touchUpInside" id="Pjp-sv-XTQ"/>
+                                </connections>
+                            </button>
+                            <datePicker contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="b8a-r2-MpY" userLabel="DepartureDatePicker">
+                                <frame key="frameInset" minY="158" height="165"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <date key="date" timeIntervalSinceReferenceDate="498364197.39797902">
+                                    <!--2016-10-17 02:29:57 +0000-->
+                                </date>
+                            </datePicker>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="tqS-iN-gvS" firstAttribute="top" secondItem="YOX-yS-90W" secondAttribute="bottom" constant="19" id="3Ob-lG-EcO"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="R0p-Qh-LFH" secondAttribute="trailing" id="BN5-5x-Nb9"/>
+                            <constraint firstAttribute="leadingMargin" secondItem="oIP-Sp-a7E" secondAttribute="leading" id="CKn-Eg-vBQ"/>
+                            <constraint firstItem="Tal-eV-lQU" firstAttribute="top" secondItem="VeK-lJ-bmc" secondAttribute="bottom" constant="9" id="HBY-Sf-Lxv"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="tqS-iN-gvS" secondAttribute="trailing" id="HpF-ph-gWj"/>
+                            <constraint firstItem="YOX-yS-90W" firstAttribute="top" secondItem="Tal-eV-lQU" secondAttribute="bottom" constant="-5.5" id="NVo-Ci-VOq"/>
+                            <constraint firstAttribute="leadingMargin" secondItem="Hoj-Hh-vU4" secondAttribute="leading" id="OGm-ya-glo"/>
+                            <constraint firstItem="Hoj-Hh-vU4" firstAttribute="top" secondItem="oIP-Sp-a7E" secondAttribute="bottom" constant="15" id="Ovd-NT-wwQ"/>
+                            <constraint firstItem="VeK-lJ-bmc" firstAttribute="leading" secondItem="o39-gU-6OU" secondAttribute="leadingMargin" constant="-16" id="TbJ-0j-E5N"/>
+                            <constraint firstItem="VeK-lJ-bmc" firstAttribute="top" secondItem="o39-gU-6OU" secondAttribute="topMargin" id="b9X-Mh-pzi"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="VeK-lJ-bmc" secondAttribute="trailing" constant="-16" id="gtV-2h-5VJ"/>
+                            <constraint firstItem="R0p-Qh-LFH" firstAttribute="top" secondItem="tqS-iN-gvS" secondAttribute="bottom" constant="15" id="hBq-pk-Ghe"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="YOX-yS-90W" secondAttribute="trailing" id="r3C-R6-ma2"/>
+                            <constraint firstAttribute="leadingMargin" secondItem="YOX-yS-90W" secondAttribute="leading" id="rBg-3a-DYN"/>
+                            <constraint firstAttribute="leadingMargin" secondItem="Tal-eV-lQU" secondAttribute="leading" id="ry7-k7-PJF"/>
+                            <constraint firstItem="oIP-Sp-a7E" firstAttribute="top" secondItem="YOX-yS-90W" secondAttribute="bottom" constant="19" id="uYx-2w-itf"/>
+                        </constraints>
                     </view>
                     <connections>
-                        <outlet property="arrivalView" destination="6Lz-uS-sAz" id="cIM-8H-ifR"/>
-                        <outlet property="buttonShowHide" destination="tqS-iN-gvS" id="bGf-Tj-GUS"/>
-                        <outlet property="dateLabel" destination="oIP-Sp-a7E" id="OVM-VG-YY4"/>
-                        <outlet property="datePicker" destination="hR5-2F-zUX" id="Tcp-wa-GS1"/>
-                        <outlet property="departureView" destination="IDY-Y4-NHX" id="ZCD-la-v7r"/>
-                        <outlet property="priceLabel" destination="Tal-eV-lQU" id="bZV-8m-CpQ"/>
-                        <outlet property="priceSlider" destination="YOX-yS-90W" id="kLz-eH-b8d"/>
+                        <outlet property="departButton" destination="tqS-iN-gvS" id="TDP-pb-hz1"/>
+                        <outlet property="departButtonBottom" destination="hBq-pk-Ghe" id="8He-Ir-4BT"/>
+                        <outlet property="departDateBottom" destination="Ovd-NT-wwQ" id="zlk-cC-idk"/>
+                        <outlet property="departDatePicker" destination="b8a-r2-MpY" id="Y5D-rX-4xJ"/>
+                        <outlet property="returnButton" destination="R0p-Qh-LFH" id="OxS-KR-Qxk"/>
+                        <outlet property="returnDatePicker" destination="pCq-0h-aJP" id="aMI-CC-CfK"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="BKI-qX-K0G" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -243,7 +259,7 @@
                                         <rect key="frame" x="0.0" y="28" width="375" height="100"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="kPh-rH-TJw" id="3nL-cg-vgl">
-                                            <frame key="frameInset" width="375" height="99"/>
+                                            <frame key="frameInset" width="375" height="100"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vnr-oQ-Noz" userLabel="Destination">
@@ -329,19 +345,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="X7L-V5-N7F" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2388" y="293"/>
-        </scene>
-        <!--View Controller-->
-        <scene sceneID="bDu-VK-RLf">
-            <objects>
-                <viewController id="rjV-ln-ahC" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="jvn-40-3Hc">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="162"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Nhd-Jl-amx" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
         </scene>
     </scenes>
 </document>

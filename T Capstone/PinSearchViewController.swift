@@ -13,7 +13,7 @@ import MapKit
 import AddressBookUI
 
 
-class PinSearchViewController: UIViewController, UITableViewDataSource, NSFetchedResultsControllerDelegate {
+class PinSearchViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, NSFetchedResultsControllerDelegate {
     
     @IBOutlet weak var tableView: UITableView!
     
@@ -57,6 +57,13 @@ class PinSearchViewController: UIViewController, UITableViewDataSource, NSFetche
 
         convertPlaces()
         tableView.dataSource = self
+        tableView.delegate = self
+        
+        
+//        var quotetest = fetchedResultsQuotesController.fetchedObjects
+//        AirbnbClient.sharedInstance().browseAirbnbListing(quotetest!.first!, completionHandler: {(success, data, error) in
+//            print(data)
+//        })
         
     }
 
@@ -116,12 +123,15 @@ class PinSearchViewController: UIViewController, UITableViewDataSource, NSFetche
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        //future updates
-        
         let quote = fetchedResultsQuotesController.object(at: indexPath)
-        AirbnbClient.sharedInstance().browseAirbnbListing(quote, completionHandler: {(success, data, error) in
-            print(data)
-        })
         
+        AirbnbClient.sharedInstance().browseAirbnbListing(quote, completionHandler: {(success, data, error) in
+            
+            if (success) {
+                print(data!)
+            }
+            
+        })
+    
     }
 }

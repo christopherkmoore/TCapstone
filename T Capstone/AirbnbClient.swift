@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class AirbnbClient: NSObject {
+class AirbnbClient {
     
     class func sharedInstance() -> AirbnbClient {
         struct Static {
@@ -21,33 +21,8 @@ class AirbnbClient: NSObject {
     lazy var session = {
         return URLSession.shared
     }()
-    
-    func getLocationForBrowse(_ quote: Quotes) -> String {
-        var urlString: String!
-        if let location = quote.stringName {
-            let urlString = location.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed)
-        }
-        return urlString
-    }
-    
-    func escapedParameters(_ parameters: [String: String]) -> String {
-        
-        var urlVars = [String]()
-        
-        for (key, value) in parameters {
-            if !(key.isEmpty) {
-                let stringVal = "\(value)"
-                
-                let escapedValues = stringVal.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed)
-                
-                urlVars += [key + "=" + "\(escapedValues!)"]
-            }
-        }
-        return urlVars.joined(separator: "&")
-    }
 
-
-    func browseAirbnbListing(_ quote: Quotes, completionHandler: @escaping (Bool?, AnyObject?, String?) -> Void) {
+    func browseAirbnbListing(_ quote: Quotes, completionHandler: @escaping (Bool, [[String:AnyObject]]?, String?) -> Void) {
     
         let parameters: [String: String] = [
             ParameterKeys.client_id : API.APIKey,
@@ -69,16 +44,17 @@ class AirbnbClient: NSObject {
             ParameterKeys.sort: ParameterValues.sort,
             ParameterKeys.suppress_facets: ParameterValues.suppress_facets,
         ]
-        print(parameters)
+//        print(parameters)
         
         let url = URL.URLBase + Method.BrowseQuotes + escapedParameters(parameters)
         
-        print(url)
+//        print(url)
         
         let request = URLRequest(url: Foundation.URL(string: url)!)
         
         session.dataTask(with: request, completionHandler: {(data, response, error) in
             guard let data = data else {
+                completionHandler(false, nil, error?.localizedDescription)
                 return
             }
             var parsedObject: AnyObject?
@@ -87,8 +63,43 @@ class AirbnbClient: NSObject {
             } catch {
                 completionHandler(false, nil, error.localizedDescription)
             }
-            
-            completionHandler(true, parsedObject!, nil)
-        })
+            print(parsedObject!)
+            let parsedPlaces = self.parserHelper(parsedObject)
+            completionHandler(true, parsedPlaces, nil)
+        }).resume()
+    }
+    func parserHelper (_ data: AnyObject!) -> [[String: AnyObject]]? {
+        
+        if data != nil {
+            guard let searchResults = data.value(forKey: "search_results") as? [[String:AnyObject]] else {
+                return nil
+            }
+            return searchResults
+        }
+        return nil
+    }
+    
+    func getLocationForBrowse(_ quote: Quotes) -> String {
+        var urlString: String!
+        if let location = quote.stringName {
+            urlString = location.replacingOccurrences(of: ",", with: "")
+        }
+        return urlString
+    }
+    
+    func escapedParameters(_ parameters: [String: String]) -> String {
+        
+        var urlVars = [String]()
+        
+        for (key, value) in parameters {
+            if !(key.isEmpty) {
+                let stringVal = "\(value)"
+                
+                let escapedValues = stringVal.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed)
+                
+                urlVars += [key + "=" + "\(escapedValues!)"]
+            }
+        }
+        return urlVars.joined(separator: "&")
     }
 }
