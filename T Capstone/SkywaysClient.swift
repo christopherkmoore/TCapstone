@@ -51,7 +51,7 @@ class SkywaysClient {
         let url = URL.URLBase + Method.BrowseQuotes + Version.Version + parameters
         
         //debug
-//        print(url)
+        print(url)
         
         let request = URLRequest(url: Foundation.URL(string: url)!)
         
@@ -99,4 +99,19 @@ class SkywaysClient {
             }
             return nil
         }
+    func escapedParameters(_ parameters: [String: String]) -> String {
+        
+        var urlVars = [String]()
+        
+        for (key, value) in parameters {
+            if !(key.isEmpty) {
+                let stringVal = "\(value)"
+                
+                let escapedValues = stringVal.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed)
+                
+                urlVars += [key + "=" + "\(escapedValues!)"]
+            }
+        }
+        return urlVars.joined(separator: "&")
+    }
 }

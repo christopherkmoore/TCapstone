@@ -27,6 +27,9 @@ class MapViewFilterViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        departDatePicker.datePickerMode = .date
+        returnDatePicker.datePickerMode = .date
+        
         returnDatePicker.center.y += view.frame.height
         
         departDatePicker.center.x -= view.frame.width
@@ -51,7 +54,7 @@ class MapViewFilterViewController: UIViewController {
             self.view.layoutIfNeeded()
             }, completion: nil)
         
-        
+        getDepartureDate()
         
     }
     
@@ -77,7 +80,6 @@ class MapViewFilterViewController: UIViewController {
             }, completion: nil)
         
         
-        
     }
     
     @IBAction func dismiss(sender: AnyObject) {
@@ -86,7 +88,22 @@ class MapViewFilterViewController: UIViewController {
         
     }
     
-    
+    func getDepartureDate () {
+        let timeDate = DateFormatter()
+        timeDate.dateFormat = "YYYY-MM-dd"
+        let today = timeDate.string(from: Date())
+        print("todays date is \(today)")
+        
+        if !(isDepartureMenuOpen) {
+            let dateString = timeDate.string(from: departDatePicker.date)
+            if dateString != today {
+                // may have to format the ',' and spaces out of string.
+                SkywaysClient.ParameterValues.outboundPartialDate = "\(dateString)?"
+            }
+        }
+        
+
+    }
 }
 
 
