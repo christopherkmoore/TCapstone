@@ -44,8 +44,8 @@ extension SkywaysClient {
         static var locale: String = "en-US/"
         static var originPlace: String?
         static var destinationPlace: String = "anywhere/"
-        static var outboundPartialDate: String = "anytime?"
-        static var inboundPartialDate: String?
+        static var outboundPartialDate: String = "anytime/"
+        static var inboundPartialDate: String = "anytime?"
         
     }
     struct HTTPReturn {

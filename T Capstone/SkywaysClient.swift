@@ -35,14 +35,8 @@ class SkywaysClient {
         
         let latLon = getLatLonString(pin)
         
-        var parameters = "\(ParameterValues.market)\(ParameterValues.currency)\(ParameterValues.locale)\(latLon)\(ParameterValues.destinationPlace)\(ParameterValues.outboundPartialDate)"
+        var parameters = "\(ParameterValues.market)\(ParameterValues.currency)\(ParameterValues.locale)\(latLon)\(ParameterValues.destinationPlace)\(ParameterValues.outboundPartialDate)\(ParameterValues.inboundPartialDate)"
         
-        if let unwrappedValue = ParameterValues.inboundPartialDate {
-            if unwrappedValue != "" {
-                parameters.append(unwrappedValue)
-                ParameterValues.outboundPartialDate.replacingOccurrences(of: "?", with: "/")
-            }
-        }
         parameters.append("apiKey=\(API.APIKey)")
         
         let url = URL.URLBase + Method.BrowseQuotes + Version.Version + parameters

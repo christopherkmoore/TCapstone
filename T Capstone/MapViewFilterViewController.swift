@@ -98,7 +98,7 @@ class MapViewFilterViewController: UIViewController {
             let dateString = timeDate.string(from: departDatePicker.date)
             if dateString != today {
                 // may have to format the ',' and spaces out of string.
-                SkywaysClient.ParameterValues.outboundPartialDate = "\(dateString)?"
+                SkywaysClient.ParameterValues.outboundPartialDate = "\(dateString)/"
             }
         }
     }
