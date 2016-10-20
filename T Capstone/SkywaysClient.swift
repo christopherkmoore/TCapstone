@@ -23,14 +23,6 @@ class SkywaysClient {
         
     }()
     
-    func getParametersForBrowse() {
-        SkywaysClient.ParameterValues.market = "US/"
-        SkywaysClient.ParameterValues.currency = "USD/"
-        SkywaysClient.ParameterValues.locale = "en-US/"
-        SkywaysClient.ParameterValues.destinationPlace = "anywhere/"
-        SkywaysClient.ParameterValues.outboundPartialDate = "anytime?"
-
-    }
     
     func browseCheapest (_ pin: Pin, completionHandler: @escaping (Bool, [[String:AnyObject]]?, [[String:AnyObject]]?, String?) -> Void ) {
        
@@ -43,10 +35,15 @@ class SkywaysClient {
         
         let latLon = getLatLonString(pin)
         
-        //debug
-//        print(latLon)
+        var parameters = "\(ParameterValues.market)\(ParameterValues.currency)\(ParameterValues.locale)\(latLon)\(ParameterValues.destinationPlace)\(ParameterValues.outboundPartialDate)"
         
-        let parameters = "\(ParameterValues.market)\(ParameterValues.currency)\(ParameterValues.locale)\(latLon)\(ParameterValues.destinationPlace)\(ParameterValues.outboundPartialDate)apiKey=\(API.APIKey)"
+        if let unwrappedValue = ParameterValues.inboundPartialDate {
+            if unwrappedValue != "" {
+                parameters.append(unwrappedValue)
+                ParameterValues.outboundPartialDate.replacingOccurrences(of: "?", with: "/")
+            }
+        }
+        parameters.append("apiKey=\(API.APIKey)")
         
         let url = URL.URLBase + Method.BrowseQuotes + Version.Version + parameters
         

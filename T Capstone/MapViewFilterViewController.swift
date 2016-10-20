@@ -78,7 +78,7 @@ class MapViewFilterViewController: UIViewController {
     
             self.view.layoutIfNeeded()
             }, completion: nil)
-        
+        getReturnDate()
         
     }
     
@@ -101,8 +101,19 @@ class MapViewFilterViewController: UIViewController {
                 SkywaysClient.ParameterValues.outboundPartialDate = "\(dateString)?"
             }
         }
+    }
+    
+    func getReturnDate() {
+        let timeDate = DateFormatter()
+        timeDate.dateFormat = "YYYY-MM-dd"
+        let today = timeDate.string(from: Date())
         
-
+        if !(isReturnMenuOpen) {
+            let dateString = timeDate.string(from: returnDatePicker.date)
+            if dateString != today {
+                SkywaysClient.ParameterValues.inboundPartialDate = "\(dateString)?"
+            }
+        }
     }
 }
 
