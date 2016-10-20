@@ -25,7 +25,7 @@
             </objects>
             <point key="canvasLocation" x="-681" y="293"/>
         </scene>
-        <!--Map View Controller-->
+        <!--Browse Flights-->
         <scene sceneID="Ffm-MA-UqJ">
             <objects>
                 <viewController id="Zql-uG-H8c" customClass="MapViewController" customModule="T_Capstone" customModuleProvider="target" sceneMemberID="viewController">
@@ -90,7 +90,7 @@
                             </mask>
                         </variation>
                     </view>
-                    <navigationItem key="navigationItem" id="aiX-Vz-Gbz">
+                    <navigationItem key="navigationItem" title="Browse Flights" id="aiX-Vz-Gbz">
                         <barButtonItem key="leftBarButtonItem" systemItem="search" id="wzp-sI-y7Y">
                             <connections>
                                 <segue destination="Er4-Zf-Bxr" kind="popoverPresentation" popoverAnchorBarButtonItem="wzp-sI-y7Y" id="ZWA-Gb-uwH">
@@ -132,7 +132,11 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="YOX-yS-90W"/>
+                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="1" minValue="0.0" maxValue="2000" translatesAutoresizingMaskIntoConstraints="NO" id="YOX-yS-90W">
+                                <connections>
+                                    <action selector="sliderDidChangeWithSender:" destination="Er4-Zf-Bxr" eventType="valueChanged" id="qb5-qp-d6i"/>
+                                </connections>
+                            </slider>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Departure Date" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oIP-Sp-a7E">
                                 <constraints>
                                     <constraint firstAttribute="height" constant="25" id="2O4-7e-2BC"/>
@@ -206,6 +210,13 @@
                                     <!--2016-10-17 02:29:57 +0000-->
                                 </date>
                             </datePicker>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KQM-T4-yXE">
+                                <frame key="frameInset" minX="137" minY="69" width="100" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -232,8 +243,10 @@
                         <outlet property="departButtonBottom" destination="hBq-pk-Ghe" id="8He-Ir-4BT"/>
                         <outlet property="departDateBottom" destination="Ovd-NT-wwQ" id="zlk-cC-idk"/>
                         <outlet property="departDatePicker" destination="b8a-r2-MpY" id="Y5D-rX-4xJ"/>
+                        <outlet property="priceData" destination="KQM-T4-yXE" id="kvG-V8-Yu1"/>
                         <outlet property="returnButton" destination="R0p-Qh-LFH" id="OxS-KR-Qxk"/>
                         <outlet property="returnDatePicker" destination="pCq-0h-aJP" id="aMI-CC-CfK"/>
+                        <outlet property="slider" destination="YOX-yS-90W" id="flZ-Im-2qj"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="BKI-qX-K0G" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -255,7 +268,7 @@
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="100" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="dEC-Ge-cQN">
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="CustomTableViewCell" rowHeight="100" id="kPh-rH-TJw" customClass="CustomTableViewCell" customModule="T_Capstone" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="CustomTableViewCell" rowHeight="100" id="kPh-rH-TJw" customClass="CustomTableViewCell" customModule="T_Capstone" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="375" height="100"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="kPh-rH-TJw" id="3nL-cg-vgl">

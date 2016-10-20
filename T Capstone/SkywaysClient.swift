@@ -24,7 +24,7 @@ class SkywaysClient {
     }()
     
     
-    func browseCheapest (_ pin: Pin, completionHandler: @escaping (Bool, [[String:AnyObject]]?, [[String:AnyObject]]?, String?) -> Void ) {
+    func browseCacheQuotes (_ pin: Pin, completionHandler: @escaping (Bool, [[String:AnyObject]]?, [[String:AnyObject]]?, String?) -> Void ) {
        
         func getLatLonString(_ pin: Pin) -> String {
             let newLat = "\(pin.latitude)"

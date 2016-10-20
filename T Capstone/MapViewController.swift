@@ -56,7 +56,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, NSFetchedResultsCo
     
     func grabPlaces(_ pin: Pin ) {
 
-        SkywaysClient.sharedInstance().browseCheapest(pin) {(success, quotes, places, error) in
+        SkywaysClient.sharedInstance().browseCacheQuotes(pin) {(success, quotes, places, error) in
                 
             print(success)
                 
@@ -91,7 +91,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, NSFetchedResultsCo
     func grabQuotes (_ pin: Pin ) {
         if pin.quotes?.count == 0 {
             
-            SkywaysClient.sharedInstance().browseCheapest(pin) {(success, quotes, places, error) in
+            SkywaysClient.sharedInstance().browseCacheQuotes(pin) {(success, quotes, places, error) in
 
                 if (success) {
                     if let data = quotes {

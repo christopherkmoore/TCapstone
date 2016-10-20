@@ -15,6 +15,10 @@ class MapViewFilterViewController: UIViewController {
     var isDepartureMenuOpen = false
     var isReturnMenuOpen = false
     
+    @IBOutlet weak var priceData: UILabel!
+    @IBOutlet weak var slider: UISlider!
+    
+    
     @IBOutlet weak var departDatePicker: UIDatePicker!
     @IBOutlet weak var departButtonBottom: NSLayoutConstraint!
     @IBOutlet weak var departDateBottom: NSLayoutConstraint!
@@ -33,6 +37,10 @@ class MapViewFilterViewController: UIViewController {
         returnDatePicker.center.y += view.frame.height
         
         departDatePicker.center.x -= view.frame.width
+    }
+    
+    @IBAction func sliderDidChange(sender: UISlider) {
+        priceData.text = "$\(slider.value)"
     }
     
     
