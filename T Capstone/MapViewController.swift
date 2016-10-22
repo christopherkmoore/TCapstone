@@ -123,12 +123,14 @@ class MapViewController: UIViewController, MKMapViewDelegate, NSFetchedResultsCo
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        deleteView.center.x -= view.frame.width
         pins = fetchAllPins()
         
         mapView.delegate = self
         deleteView.isHidden = false
         
         editButton.title = "Edit"
+        print(deleteView.center.x)
         
         let longPressRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(MapViewController.handleLongPress(_:)))
         longPressRecognizer.minimumPressDuration = 0.7
@@ -172,21 +174,23 @@ class MapViewController: UIViewController, MKMapViewDelegate, NSFetchedResultsCo
     
     @IBAction func editPressed(_ sender: AnyObject) {
         
-        if editButton.title == "Done" {
+        if editButton.title == "Edit" {
             UIView.animate(withDuration: 0.7, animations: {
-                self.mapView.frame.origin.y += self.deleteView.frame.height
+                self.deleteView.center.x += self.view.frame.width
+//                self.mapView.frame.origin.y += self.deleteView.frame.height
                 
             })
             // hide tab bar, remember to animate the drop later.
-            self.tabBarController!.tabBar.isHidden = false
-            editButton.title = "Edit"
+//            self.tabBarController!.tabBar.isHidden = false
+            editButton.title = "Done"
             CoreDataStackManager.sharedInstance().saveContext()
         } else {
             UIView.animate(withDuration: 0.7, animations: {
-                self.mapView.frame.origin.y -= self.deleteView.frame.height
+                self.deleteView.center.x -= self.view.frame.width
+//                self.mapView.frame.origin.y -= self.deleteView.frame.height
             })
-            self.tabBarController!.tabBar.isHidden = true
-            editButton.title = "Done"
+//            self.tabBarController!.tabBar.isHidden = true
+            editButton.title = "Edit"
             CoreDataStackManager.sharedInstance().saveContext()
         }
     }

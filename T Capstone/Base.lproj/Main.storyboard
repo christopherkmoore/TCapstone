@@ -9,7 +9,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Browse Flights-->
+        <!--Item-->
         <scene sceneID="Ffm-MA-UqJ">
             <objects>
                 <viewController id="Zql-uG-H8c" customClass="MapViewController" customModule="T_Capstone" customModuleProvider="target" sceneMemberID="viewController">
@@ -21,32 +21,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZjP-mb-XHV">
-                                <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Delete Pins" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wfg-K0-64W">
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                </subviews>
-                                <color key="backgroundColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="375" id="3c0-Ye-zFN"/>
-                                    <constraint firstAttribute="height" constant="65" id="5Ia-0u-i6X"/>
-                                    <constraint firstItem="wfg-K0-64W" firstAttribute="centerY" secondItem="ZjP-mb-XHV" secondAttribute="centerY" id="SnB-dv-yZe"/>
-                                    <constraint firstItem="wfg-K0-64W" firstAttribute="centerX" secondItem="ZjP-mb-XHV" secondAttribute="centerX" id="qiM-Oo-7up"/>
-                                </constraints>
-                                <variation key="default">
-                                    <mask key="subviews">
-                                        <exclude reference="wfg-K0-64W"/>
-                                    </mask>
-                                </variation>
-                                <variation key="widthClass=compact">
-                                    <mask key="subviews">
-                                        <include reference="wfg-K0-64W"/>
-                                    </mask>
-                                </variation>
-                            </view>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="LIJ-XJ-o2q"/>
                             <navigationBar contentMode="scaleToFill" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oPy-9B-d1e">
                                 <items>
@@ -66,19 +40,42 @@
                                     </navigationItem>
                                 </items>
                             </navigationBar>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZjP-mb-XHV">
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Delete Pins" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wfg-K0-64W">
+                                        <frame key="frameInset" minX="144" minY="22" width="87" height="21"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <variation key="default">
+                                    <mask key="subviews">
+                                        <exclude reference="wfg-K0-64W"/>
+                                    </mask>
+                                </variation>
+                                <variation key="widthClass=compact">
+                                    <mask key="subviews">
+                                        <include reference="wfg-K0-64W"/>
+                                    </mask>
+                                </variation>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="LIJ-XJ-o2q" firstAttribute="top" secondItem="iId-2E-Fko" secondAttribute="bottom" id="0af-z0-zsh"/>
+                            <constraint firstItem="LIJ-XJ-o2q" firstAttribute="top" secondItem="oPy-9B-d1e" secondAttribute="bottom" id="5uq-y9-wEa"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="ZjP-mb-XHV" secondAttribute="trailing" constant="-16" id="9gy-Fr-gzN"/>
                             <constraint firstAttribute="trailingMargin" secondItem="oPy-9B-d1e" secondAttribute="trailing" constant="-16" id="HKz-0z-Bcu"/>
+                            <constraint firstItem="ZjP-mb-XHV" firstAttribute="leading" secondItem="jG4-u6-hIF" secondAttribute="leadingMargin" constant="-16" id="I7C-G4-LTj"/>
                             <constraint firstItem="oPy-9B-d1e" firstAttribute="top" secondItem="iId-2E-Fko" secondAttribute="bottom" id="NGy-nh-8uf"/>
                             <constraint firstItem="LIJ-XJ-o2q" firstAttribute="leading" secondItem="jG4-u6-hIF" secondAttribute="leadingMargin" constant="-16" id="Pm8-qh-DYC"/>
-                            <constraint firstItem="LIJ-XJ-o2q" firstAttribute="bottom" secondItem="ZjP-mb-XHV" secondAttribute="bottom" id="ikw-pi-M26"/>
+                            <constraint firstItem="gBa-hm-PRN" firstAttribute="top" secondItem="ZjP-mb-XHV" secondAttribute="bottom" id="Yc4-rb-IM9"/>
+                            <constraint firstItem="ZjP-mb-XHV" firstAttribute="top" secondItem="oPy-9B-d1e" secondAttribute="bottom" constant="489" id="itD-TE-fMe"/>
                             <constraint firstItem="oPy-9B-d1e" firstAttribute="leading" secondItem="jG4-u6-hIF" secondAttribute="leadingMargin" constant="-16" id="j9s-zD-SI6"/>
-                            <constraint firstItem="gBa-hm-PRN" firstAttribute="top" secondItem="ZjP-mb-XHV" secondAttribute="bottom" id="kec-8p-QF2"/>
                             <constraint firstAttribute="trailingMargin" secondItem="LIJ-XJ-o2q" secondAttribute="trailing" constant="-16" id="rBE-8a-Kn0"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="ZjP-mb-XHV" secondAttribute="trailing" constant="-16" id="xlp-cM-5Ik"/>
-                            <constraint firstItem="ZjP-mb-XHV" firstAttribute="leading" secondItem="jG4-u6-hIF" secondAttribute="leadingMargin" constant="-16" id="zSD-Lv-Myf"/>
+                            <constraint firstItem="gBa-hm-PRN" firstAttribute="top" secondItem="LIJ-XJ-o2q" secondAttribute="bottom" id="s16-Vi-art"/>
                         </constraints>
                         <variation key="default">
                             <mask key="subviews">
@@ -91,8 +88,9 @@
                             </mask>
                         </variation>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Item" id="skA-nD-jhm"/>
-                    <navigationItem key="navigationItem" title="Browse Flights" id="3Cd-if-cs1"/>
+                    <tabBarItem key="tabBarItem" title="Item" id="skA-nD-jhm">
+                        <offsetWrapper key="titlePositionAdjustment" horizontal="0.0" vertical="0.0"/>
+                    </tabBarItem>
                     <connections>
                         <outlet property="deleteView" destination="ZjP-mb-XHV" id="P7c-k1-zy0"/>
                         <outlet property="editButton" destination="AOd-4e-dL9" id="TLD-ss-Mcu"/>
@@ -101,7 +99,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gGq-eq-ZzY" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1708" y="778"/>
+            <point key="canvasLocation" x="-1708" y="777.66116941529242"/>
         </scene>
         <!--Item 1-->
         <scene sceneID="cTo-s1-6ME">
@@ -311,7 +309,7 @@
                                         <rect key="frame" x="0.0" y="28" width="375" height="100"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="kPh-rH-TJw" id="3nL-cg-vgl">
-                                            <frame key="frameInset" width="375" height="99.5"/>
+                                            <frame key="frameInset" width="375" height="99"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vnr-oQ-Noz" userLabel="Destination">
