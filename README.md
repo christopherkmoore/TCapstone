@@ -6,7 +6,11 @@ Info -
 
 Creates a call to Skyways API to browse a flight based on the coordinates of a pin you drop on a map. 
 You might be surprised how cheap some flights could be ;)
-![alt tag](https://raw.githubusercontent.com/christopherkmoore/TCapstone/development/readmeImgs/IMG_0791.PNG)
+
+
+![alt tag](https://raw.githubusercontent.com/christopherkmoore/TCapstone/development/readmeImgs/WeedkendrPhotosStiched.png)
+
+
 just touch and hold where you'd like to drop the pin, then click it to see where you can go!'
 
 Install - 
