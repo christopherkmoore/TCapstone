@@ -51,6 +51,9 @@
                                     </label>
                                 </subviews>
                                 <color key="backgroundColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="65" id="xhE-3n-DLs"/>
+                                </constraints>
                                 <variation key="default">
                                     <mask key="subviews">
                                         <exclude reference="wfg-K0-64W"/>
@@ -69,10 +72,9 @@
                             <constraint firstAttribute="trailingMargin" secondItem="ZjP-mb-XHV" secondAttribute="trailing" constant="-16" id="9gy-Fr-gzN"/>
                             <constraint firstAttribute="trailingMargin" secondItem="oPy-9B-d1e" secondAttribute="trailing" constant="-16" id="HKz-0z-Bcu"/>
                             <constraint firstItem="ZjP-mb-XHV" firstAttribute="leading" secondItem="jG4-u6-hIF" secondAttribute="leadingMargin" constant="-16" id="I7C-G4-LTj"/>
-                            <constraint firstItem="oPy-9B-d1e" firstAttribute="top" secondItem="iId-2E-Fko" secondAttribute="bottom" id="NGy-nh-8uf"/>
+                            <constraint firstItem="oPy-9B-d1e" firstAttribute="top" secondItem="iId-2E-Fko" secondAttribute="bottom" id="JZt-Po-ePa"/>
                             <constraint firstItem="LIJ-XJ-o2q" firstAttribute="leading" secondItem="jG4-u6-hIF" secondAttribute="leadingMargin" constant="-16" id="Pm8-qh-DYC"/>
                             <constraint firstItem="gBa-hm-PRN" firstAttribute="top" secondItem="ZjP-mb-XHV" secondAttribute="bottom" id="Yc4-rb-IM9"/>
-                            <constraint firstItem="ZjP-mb-XHV" firstAttribute="top" secondItem="oPy-9B-d1e" secondAttribute="bottom" constant="489" id="itD-TE-fMe"/>
                             <constraint firstItem="oPy-9B-d1e" firstAttribute="leading" secondItem="jG4-u6-hIF" secondAttribute="leadingMargin" constant="-16" id="j9s-zD-SI6"/>
                             <constraint firstAttribute="trailingMargin" secondItem="LIJ-XJ-o2q" secondAttribute="trailing" constant="-16" id="rBE-8a-Kn0"/>
                             <constraint firstItem="gBa-hm-PRN" firstAttribute="top" secondItem="LIJ-XJ-o2q" secondAttribute="bottom" id="s16-Vi-art"/>
