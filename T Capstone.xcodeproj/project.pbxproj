@@ -200,9 +200,9 @@
 			isa = PBXGroup;
 			children = (
 				79C31B2A1DA4AEF9005A060F /* MapViewController.swift */,
+				7902C60D1DADDED7005FA334 /* MapViewFilterViewController.swift */,
 				79C31B2E1DA57312005A060F /* CustomTableViewCell.swift */,
 				79C31B2C1DA4B3D8005A060F /* PinSearchViewController.swift */,
-				7902C60D1DADDED7005FA334 /* MapViewFilterViewController.swift */,
 				7902C6161DB09377005FA334 /* AirbnbMapViewController.swift */,
 			);
 			name = Views;

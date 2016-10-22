@@ -13,10 +13,11 @@ import CoreData
 
 class MapViewController: UIViewController, MKMapViewDelegate, NSFetchedResultsControllerDelegate {
     
-    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var deleteView: UIView!
     @IBOutlet weak var editButton: UIBarButtonItem!
+    
+    @IBOutlet weak var tabBar: UITabBar!
     
     var editButtonTapped = true
     
@@ -123,8 +124,6 @@ class MapViewController: UIViewController, MKMapViewDelegate, NSFetchedResultsCo
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        activityIndicator.isHidden = true
-        
         pins = fetchAllPins()
         
         mapView.delegate = self
@@ -148,9 +147,6 @@ class MapViewController: UIViewController, MKMapViewDelegate, NSFetchedResultsCo
         
         
         if gestureRecognizer.state != .began { return }
-        activityIndicator.isHidden = false
-        activityIndicator.startAnimating()
-        
         let touchPoint = gestureRecognizer.location(in: self.mapView)
         let touchMapCoordinates = mapView.convert(touchPoint, toCoordinateFrom: self.mapView)
         let newMapPoint = MKPointAnnotation()
@@ -166,9 +162,6 @@ class MapViewController: UIViewController, MKMapViewDelegate, NSFetchedResultsCo
             grabQuotes(newPin!)
             CoreDataStackManager.sharedInstance().saveContext()
             break
-        case .ended:
-            activityIndicator.isHidden = true
-            activityIndicator.stopAnimating()
         default:
             return
         }
@@ -182,7 +175,10 @@ class MapViewController: UIViewController, MKMapViewDelegate, NSFetchedResultsCo
         if navigationItem.rightBarButtonItem?.title == "Done" {
             UIView.animate(withDuration: 0.7, animations: {
                 self.mapView.frame.origin.y += self.deleteView.frame.height
+                
             })
+            // hide tab bar, remember to animate the drop later.
+            self.tabBar.isHidden = false
             navigationItem.rightBarButtonItem?.title = "Edit"
             self.editButtonTapped = true
             print("edit button is \(editButtonTapped)")
@@ -191,8 +187,8 @@ class MapViewController: UIViewController, MKMapViewDelegate, NSFetchedResultsCo
         } else {
             UIView.animate(withDuration: 0.7, animations: {
                 self.mapView.frame.origin.y -= self.deleteView.frame.height
-                
             })
+            self.tabBar.isHidden = true
             navigationItem.rightBarButtonItem?.title = "Done"
             self.editButtonTapped = false
             CoreDataStackManager.sharedInstance().saveContext()
