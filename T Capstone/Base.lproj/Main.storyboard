@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11201" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="zVl-6z-FH0">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11201" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="baf-X2-l1B">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
@@ -9,22 +9,6 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Navigation Controller-->
-        <scene sceneID="eT5-hj-9nT">
-            <objects>
-                <navigationController id="zVl-6z-FH0" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Ten-zh-iQX">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <connections>
-                        <segue destination="Zql-uG-H8c" kind="relationship" relationship="rootViewController" id="Uno-3h-Rh2"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="OGW-49-ygb" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-2910" y="293"/>
-        </scene>
         <!--Browse Flights-->
         <scene sceneID="Ffm-MA-UqJ">
             <objects>
@@ -64,21 +48,33 @@
                                 </variation>
                             </view>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="LIJ-XJ-o2q"/>
-                            <tabBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="oB8-J7-Mpd">
-                                <frame key="frameInset" height="49"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            <navigationBar contentMode="scaleToFill" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oPy-9B-d1e">
                                 <items>
-                                    <tabBarItem title="Browse" id="Iug-Mn-q2u"/>
-                                    <tabBarItem title="Search" id="jMD-9c-8Jt"/>
+                                    <navigationItem title="Browse Items" id="kgg-0E-VCo">
+                                        <barButtonItem key="leftBarButtonItem" systemItem="search" id="DIl-ih-E1W">
+                                            <connections>
+                                                <segue destination="Er4-Zf-Bxr" kind="popoverPresentation" popoverAnchorBarButtonItem="DIl-ih-E1W" id="MEU-Jm-QZz">
+                                                    <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
+                                                </segue>
+                                            </connections>
+                                        </barButtonItem>
+                                        <barButtonItem key="rightBarButtonItem" title="Edit" id="AOd-4e-dL9">
+                                            <connections>
+                                                <action selector="editPressed:" destination="Zql-uG-H8c" id="hjh-Z9-ukg"/>
+                                            </connections>
+                                        </barButtonItem>
+                                    </navigationItem>
                                 </items>
-                            </tabBar>
+                            </navigationBar>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="LIJ-XJ-o2q" firstAttribute="top" secondItem="iId-2E-Fko" secondAttribute="bottom" id="0af-z0-zsh"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="oPy-9B-d1e" secondAttribute="trailing" constant="-16" id="HKz-0z-Bcu"/>
+                            <constraint firstItem="oPy-9B-d1e" firstAttribute="top" secondItem="iId-2E-Fko" secondAttribute="bottom" id="NGy-nh-8uf"/>
                             <constraint firstItem="LIJ-XJ-o2q" firstAttribute="leading" secondItem="jG4-u6-hIF" secondAttribute="leadingMargin" constant="-16" id="Pm8-qh-DYC"/>
                             <constraint firstItem="LIJ-XJ-o2q" firstAttribute="bottom" secondItem="ZjP-mb-XHV" secondAttribute="bottom" id="ikw-pi-M26"/>
+                            <constraint firstItem="oPy-9B-d1e" firstAttribute="leading" secondItem="jG4-u6-hIF" secondAttribute="leadingMargin" constant="-16" id="j9s-zD-SI6"/>
                             <constraint firstItem="gBa-hm-PRN" firstAttribute="top" secondItem="ZjP-mb-XHV" secondAttribute="bottom" id="kec-8p-QF2"/>
                             <constraint firstAttribute="trailingMargin" secondItem="LIJ-XJ-o2q" secondAttribute="trailing" constant="-16" id="rBE-8a-Kn0"/>
                             <constraint firstAttribute="trailingMargin" secondItem="ZjP-mb-XHV" secondAttribute="trailing" constant="-16" id="xlp-cM-5Ik"/>
@@ -95,31 +91,63 @@
                             </mask>
                         </variation>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Browse" id="yaA-Wd-c6C" userLabel="Browse"/>
-                    <navigationItem key="navigationItem" title="Browse Flights" id="3Cd-if-cs1">
-                        <barButtonItem key="leftBarButtonItem" systemItem="search" id="DIl-ih-E1W">
-                            <connections>
-                                <segue destination="Er4-Zf-Bxr" kind="popoverPresentation" popoverAnchorBarButtonItem="DIl-ih-E1W" id="MEU-Jm-QZz">
-                                    <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
-                                </segue>
-                            </connections>
-                        </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" title="Edit" id="AOd-4e-dL9">
-                            <connections>
-                                <action selector="editPressed:" destination="Zql-uG-H8c" id="hjh-Z9-ukg"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
+                    <tabBarItem key="tabBarItem" title="Item" id="skA-nD-jhm"/>
+                    <navigationItem key="navigationItem" title="Browse Flights" id="3Cd-if-cs1"/>
                     <connections>
                         <outlet property="deleteView" destination="ZjP-mb-XHV" id="P7c-k1-zy0"/>
                         <outlet property="editButton" destination="AOd-4e-dL9" id="TLD-ss-Mcu"/>
                         <outlet property="mapView" destination="LIJ-XJ-o2q" id="ZAd-Op-6q8"/>
-                        <outlet property="tabBar" destination="oB8-J7-Mpd" id="091-cH-uYL"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gGq-eq-ZzY" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1849" y="312"/>
+            <point key="canvasLocation" x="-1708" y="778"/>
+        </scene>
+        <!--Item 1-->
+        <scene sceneID="cTo-s1-6ME">
+            <objects>
+                <viewController id="OVe-Ei-Z2L" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="SHG-uL-yI7"/>
+                        <viewControllerLayoutGuide type="bottom" id="Hjy-Ra-hr1"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="4SO-xD-Mbg">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Suh dude" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="09m-mV-G3y">
+                                <frame key="frameInset" minX="126" minY="216" width="162" height="168"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Item 1" id="Ws8-zD-34X"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="C4z-8q-vrV" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1708" y="-7.6461769115442282"/>
+        </scene>
+        <!--Tab Bar Controller-->
+        <scene sceneID="4Nn-vx-JU9">
+            <objects>
+                <tabBarController id="baf-X2-l1B" sceneMemberID="viewController">
+                    <tabBar key="tabBar" contentMode="scaleToFill" id="bke-cC-27Q">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="OVe-Ei-Z2L" kind="relationship" relationship="viewControllers" id="ST9-JT-D7b"/>
+                        <segue destination="Zql-uG-H8c" kind="relationship" relationship="viewControllers" id="Xaj-LY-J36"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="vdh-85-4VN" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-2558" y="326"/>
         </scene>
         <!--Map View Filter View Controller-->
         <scene sceneID="Qs2-rw-rqZ">
@@ -262,7 +290,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="BKI-qX-K0G" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1217" y="-367"/>
+            <point key="canvasLocation" x="-1708" y="1613"/>
         </scene>
         <!--Pin Search View Controller-->
         <scene sceneID="dpS-HX-bqs">
@@ -368,7 +396,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="X7L-V5-N7F" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-794" y="348"/>
+            <point key="canvasLocation" x="-838" y="778"/>
         </scene>
     </scenes>
 </document>

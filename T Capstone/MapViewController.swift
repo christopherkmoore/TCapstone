@@ -17,9 +17,8 @@ class MapViewController: UIViewController, MKMapViewDelegate, NSFetchedResultsCo
     @IBOutlet weak var deleteView: UIView!
     @IBOutlet weak var editButton: UIBarButtonItem!
     
-    @IBOutlet weak var tabBar: UITabBar!
     
-    var editButtonTapped = true
+//    var editButtonTapped = true
     
     var sharedContext: NSManagedObjectContext {
         return CoreDataStackManager.sharedInstance().managedObjectContext
@@ -129,6 +128,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, NSFetchedResultsCo
         mapView.delegate = self
         deleteView.isHidden = false
         
+        editButton.title = "Edit"
         
         let longPressRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(MapViewController.handleLongPress(_:)))
         longPressRecognizer.minimumPressDuration = 0.7
@@ -172,25 +172,21 @@ class MapViewController: UIViewController, MKMapViewDelegate, NSFetchedResultsCo
     
     @IBAction func editPressed(_ sender: AnyObject) {
         
-        if navigationItem.rightBarButtonItem?.title == "Done" {
+        if editButton.title == "Done" {
             UIView.animate(withDuration: 0.7, animations: {
                 self.mapView.frame.origin.y += self.deleteView.frame.height
                 
             })
             // hide tab bar, remember to animate the drop later.
-            self.tabBar.isHidden = false
-            navigationItem.rightBarButtonItem?.title = "Edit"
-            self.editButtonTapped = true
-            print("edit button is \(editButtonTapped)")
-            
+            self.tabBarController!.tabBar.isHidden = false
+            editButton.title = "Edit"
             CoreDataStackManager.sharedInstance().saveContext()
         } else {
             UIView.animate(withDuration: 0.7, animations: {
                 self.mapView.frame.origin.y -= self.deleteView.frame.height
             })
-            self.tabBar.isHidden = true
-            navigationItem.rightBarButtonItem?.title = "Done"
-            self.editButtonTapped = false
+            self.tabBarController!.tabBar.isHidden = true
+            editButton.title = "Done"
             CoreDataStackManager.sharedInstance().saveContext()
         }
     }
@@ -229,7 +225,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, NSFetchedResultsCo
         }
 
         
-        if editButtonTapped == true {
+        if editButton.title == "Edit" {
             if let value = findSelectedPin() {
                 let controller = self.storyboard?.instantiateViewController(withIdentifier: "PinSearchViewController") as! PinSearchViewController
                 controller.pin = value
