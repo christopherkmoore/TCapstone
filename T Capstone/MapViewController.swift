@@ -124,13 +124,13 @@ class MapViewController: UIViewController, MKMapViewDelegate, NSFetchedResultsCo
     override func viewDidLoad() {
         super.viewDidLoad()
         pins = fetchAllPins()
-        deleteView.center.x -= view.frame.height
+//        deleteView.center.x -= view.frame.height
 
         mapView.delegate = self
         deleteView.isHidden = false
         
-        editButton.title = "Done"
-        print(deleteView.center.x)
+        editButton.title = "Edit"
+        print("center.x durinv ViewDidLoad: \(deleteView.center.x)")
         
         let longPressRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(MapViewController.handleLongPress(_:)))
         longPressRecognizer.minimumPressDuration = 0.7
@@ -140,7 +140,27 @@ class MapViewController: UIViewController, MKMapViewDelegate, NSFetchedResultsCo
             loadMapPins()
         }
     }
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(true)
+        editButton.title = "Edit"
+        if deleteView.center.x > 0 {
+            deleteView.center.x -= view.frame.width
+        }
+        print("center.x durinv viewDidAppear: \(deleteView.center.x)")
+
+
+    }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        
+        /* this code seems redundant but without it, the view glitches when you switch back to the screen in viewDidAppear, so it's important to at least take the view off screen so it doesn't seem glitch */
+        
+        if editButton.title == "Done" {
+            deleteView.center.x -= view.frame.width
+            print("center.x durinv viewWillDissapear: \(deleteView.center.x)")
+
+        }
+    }
     
     //MARK create pins with longPress
     
@@ -173,7 +193,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, NSFetchedResultsCo
     
     @IBAction func editPressed(_ sender: AnyObject) {
         
-        if editButton.title == "Done" {
+        if editButton.title == "Edit" {
             UIView.animate(withDuration: 0.7, animations: {
                 self.deleteView.center.x += self.view.frame.width
 //                self.mapView.frame.origin.y += self.deleteView.frame.height
@@ -181,7 +201,8 @@ class MapViewController: UIViewController, MKMapViewDelegate, NSFetchedResultsCo
             })
             // hide tab bar, remember to animate the drop later.
 //            self.tabBarController!.tabBar.isHidden = false
-            editButton.title = "Edit"
+            print("center.x durinv Edit true Animation: \(deleteView.center.x)")
+            editButton.title = "Done"
             CoreDataStackManager.sharedInstance().saveContext()
         } else {
             UIView.animate(withDuration: 0.7, animations: {
@@ -189,6 +210,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, NSFetchedResultsCo
 //                self.mapView.frame.origin.y -= self.deleteView.frame.height
             })
 //            self.tabBarController!.tabBar.isHidden = true
+            print("center.x during Done true Animation: \(deleteView.center.x)")
             editButton.title = "Edit"
             CoreDataStackManager.sharedInstance().saveContext()
         }
@@ -216,7 +238,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, NSFetchedResultsCo
         guard let selectedAnnotation = view.annotation else {return}
 
         func findSelectedPin() -> Pin? {
-            
+           
             for pin in pins {
                 if pin.latitude == selectedAnnotation.coordinate.latitude && pin.longitude == selectedAnnotation.coordinate.longitude {
                     
@@ -228,11 +250,11 @@ class MapViewController: UIViewController, MKMapViewDelegate, NSFetchedResultsCo
         }
 
         
-        if editButton.title == "Done" {
+        if editButton.title == "Edit" {
             if let value = findSelectedPin() {
                 let controller = self.storyboard?.instantiateViewController(withIdentifier: "PinSearchViewController") as! PinSearchViewController
                 controller.pin = value
-                present(controller, animated: true)
+                self.navigationController?.pushViewController(controller, animated: true)
             }
         } else {
             if let value = findSelectedPin() {

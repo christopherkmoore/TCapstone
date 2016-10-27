@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11201" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="baf-X2-l1B">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11201" systemVersion="16B2555" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="baf-X2-l1B">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
@@ -24,7 +24,7 @@
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="LIJ-XJ-o2q"/>
                             <navigationBar contentMode="scaleToFill" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oPy-9B-d1e">
                                 <items>
-                                    <navigationItem title="Browse Items" id="kgg-0E-VCo">
+                                    <navigationItem title="Browse Flights" id="kgg-0E-VCo">
                                         <barButtonItem key="leftBarButtonItem" systemItem="search" id="DIl-ih-E1W">
                                             <connections>
                                                 <segue destination="Er4-Zf-Bxr" kind="popoverPresentation" popoverAnchorBarButtonItem="DIl-ih-E1W" id="MEU-Jm-QZz">
@@ -106,7 +106,7 @@
         <!--Item 1-->
         <scene sceneID="cTo-s1-6ME">
             <objects>
-                <viewController id="OVe-Ei-Z2L" sceneMemberID="viewController">
+                <viewController id="OVe-Ei-Z2L" customClass="LocationSearchViewController" customModule="T_Capstone" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="SHG-uL-yI7"/>
                         <viewControllerLayoutGuide type="bottom" id="Hjy-Ra-hr1"/>
@@ -304,6 +304,13 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <navigationBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="834-JI-sua">
+                                <frame key="frameInset" minY="15" height="44"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <items>
+                                    <navigationItem title="Browse Flights" id="rQ8-3e-VrD"/>
+                                </items>
+                            </navigationBar>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="100" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="dEC-Ge-cQN">
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <prototypes>
@@ -311,7 +318,7 @@
                                         <rect key="frame" x="0.0" y="28" width="375" height="100"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="kPh-rH-TJw" id="3nL-cg-vgl">
-                                            <frame key="frameInset" width="375" height="99"/>
+                                            <frame key="frameInset" width="375" height="99.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vnr-oQ-Noz" userLabel="Destination">
@@ -377,7 +384,7 @@
                             <constraint firstItem="dEC-Ge-cQN" firstAttribute="bottom" secondItem="M1k-kH-F63" secondAttribute="top" id="9Yd-ri-7bm"/>
                             <constraint firstAttribute="trailing" secondItem="dEC-Ge-cQN" secondAttribute="trailing" id="coy-MU-sF9"/>
                             <constraint firstItem="dEC-Ge-cQN" firstAttribute="leading" secondItem="meS-Py-zDL" secondAttribute="leading" id="erH-MJ-hqv"/>
-                            <constraint firstItem="dEC-Ge-cQN" firstAttribute="top" secondItem="g2p-lQ-CNl" secondAttribute="bottom" id="lnR-n8-76A"/>
+                            <constraint firstItem="dEC-Ge-cQN" firstAttribute="top" secondItem="g2p-lQ-CNl" secondAttribute="bottom" constant="39" id="lnR-n8-76A"/>
                         </constraints>
                         <variation key="default">
                             <mask key="subviews">
@@ -396,7 +403,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="X7L-V5-N7F" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-838" y="778"/>
+            <point key="canvasLocation" x="-850.39999999999998" y="777.66116941529242"/>
         </scene>
     </scenes>
 </document>

@@ -12,6 +12,8 @@
 		7902C6131DB069B6005FA334 /* AirbnbClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7902C6121DB069B6005FA334 /* AirbnbClient.swift */; };
 		7902C6151DB069C5005FA334 /* AirbnbConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7902C6141DB069C5005FA334 /* AirbnbConstants.swift */; };
 		7902C6171DB09377005FA334 /* AirbnbMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7902C6161DB09377005FA334 /* AirbnbMapViewController.swift */; };
+		799D25651DC286E3005AC0D9 /* LocationSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 799D25641DC286E3005AC0D9 /* LocationSearchViewController.swift */; };
+		799D25681DC28978005AC0D9 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 799D25671DC28978005AC0D9 /* CoreLocation.framework */; };
 		79C31AE41DA4A520005A060F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79C31AE31DA4A520005A060F /* AppDelegate.swift */; };
 		79C31AEB1DA4A520005A060F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 79C31AEA1DA4A520005A060F /* Assets.xcassets */; };
 		79C31AEE1DA4A520005A060F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 79C31AEC1DA4A520005A060F /* LaunchScreen.storyboard */; };
@@ -56,6 +58,8 @@
 		7902C6121DB069B6005FA334 /* AirbnbClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AirbnbClient.swift; sourceTree = "<group>"; };
 		7902C6141DB069C5005FA334 /* AirbnbConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AirbnbConstants.swift; sourceTree = "<group>"; };
 		7902C6161DB09377005FA334 /* AirbnbMapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AirbnbMapViewController.swift; sourceTree = "<group>"; };
+		799D25641DC286E3005AC0D9 /* LocationSearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationSearchViewController.swift; sourceTree = "<group>"; };
+		799D25671DC28978005AC0D9 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		79C31AE01DA4A520005A060F /* T Capstone.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "T Capstone.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		79C31AE31DA4A520005A060F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		79C31AEA1DA4A520005A060F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -88,6 +92,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				799D25681DC28978005AC0D9 /* CoreLocation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -108,6 +113,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		799D25661DC28978005AC0D9 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				799D25671DC28978005AC0D9 /* CoreLocation.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		79C31AD71DA4A520005A060F = {
 			isa = PBXGroup;
 			children = (
@@ -115,6 +128,7 @@
 				79C31AF71DA4A520005A060F /* T CapstoneTests */,
 				79C31B021DA4A520005A060F /* T CapstoneUITests */,
 				79C31AE11DA4A520005A060F /* Products */,
+				799D25661DC28978005AC0D9 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -200,6 +214,7 @@
 			isa = PBXGroup;
 			children = (
 				79C31B2A1DA4AEF9005A060F /* MapViewController.swift */,
+				799D25641DC286E3005AC0D9 /* LocationSearchViewController.swift */,
 				7902C60D1DADDED7005FA334 /* MapViewFilterViewController.swift */,
 				79C31B2E1DA57312005A060F /* CustomTableViewCell.swift */,
 				79C31B2C1DA4B3D8005A060F /* PinSearchViewController.swift */,
@@ -352,6 +367,7 @@
 				79C31B161DA4A6DB005A060F /* SkywaysConstants.swift in Sources */,
 				7902C6171DB09377005FA334 /* AirbnbMapViewController.swift in Sources */,
 				79C31B2F1DA57312005A060F /* CustomTableViewCell.swift in Sources */,
+				799D25651DC286E3005AC0D9 /* LocationSearchViewController.swift in Sources */,
 				79C31B2B1DA4AEF9005A060F /* MapViewController.swift in Sources */,
 				79C31B211DA4A945005A060F /* Places+CoreDataClass.swift in Sources */,
 				79C31B231DA4A945005A060F /* Pin+CoreDataClass.swift in Sources */,
