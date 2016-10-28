@@ -42,9 +42,7 @@
                             </navigationBar>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZjP-mb-XHV">
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Delete Pins" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wfg-K0-64W">
-                                        <frame key="frameInset" minX="144" minY="22" width="87" height="21"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Delete Pins" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wfg-K0-64W">
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
@@ -52,6 +50,8 @@
                                 </subviews>
                                 <color key="backgroundColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
+                                    <constraint firstItem="wfg-K0-64W" firstAttribute="centerX" secondItem="ZjP-mb-XHV" secondAttribute="centerX" id="OcM-FP-3oc"/>
+                                    <constraint firstItem="wfg-K0-64W" firstAttribute="centerY" secondItem="ZjP-mb-XHV" secondAttribute="centerY" id="hzM-rC-gT5"/>
                                     <constraint firstAttribute="height" constant="65" id="xhE-3n-DLs"/>
                                 </constraints>
                                 <variation key="default">
@@ -308,7 +308,13 @@
                                 <frame key="frameInset" minY="15" height="44"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                 <items>
-                                    <navigationItem title="Browse Flights" id="rQ8-3e-VrD"/>
+                                    <navigationItem title="Browse Flights" id="rQ8-3e-VrD">
+                                        <barButtonItem key="leftBarButtonItem" systemItem="done" id="jgB-LC-nnX">
+                                            <connections>
+                                                <action selector="dismissVCWithSender:" destination="pFl-uz-Grv" id="UY0-Je-Cqg"/>
+                                            </connections>
+                                        </barButtonItem>
+                                    </navigationItem>
                                 </items>
                             </navigationBar>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="100" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="dEC-Ge-cQN">

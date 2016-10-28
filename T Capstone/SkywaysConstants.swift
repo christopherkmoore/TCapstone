@@ -12,7 +12,7 @@ import Foundation
 extension SkywaysClient {
     
     struct API {
-        static var APIKey = "ch219794222311154158537117697185"
+        static var APIKey = "prtl6749387986743898559646983194"
         
     }
     

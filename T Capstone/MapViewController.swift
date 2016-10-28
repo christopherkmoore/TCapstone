@@ -11,7 +11,7 @@ import UIKit
 import MapKit
 import CoreData
 
-class MapViewController: UIViewController, MKMapViewDelegate, NSFetchedResultsControllerDelegate {
+class MapViewController: UIViewController, MKMapViewDelegate, NSFetchedResultsControllerDelegate, APICall {
     
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var deleteView: UIView!
@@ -52,77 +52,11 @@ class MapViewController: UIViewController, MKMapViewDelegate, NSFetchedResultsCo
         }
     }
     
-    //MARK loading places
-    
-    func grabPlaces(_ pin: Pin ) {
-
-        SkywaysClient.sharedInstance().browseCacheQuotes(pin) {(success, quotes, places, error) in
-                
-            print(success)
-                
-            if (success) {
-                if let data = places {
-                    DispatchQueue.main.async { [unowned self] in
-                        self.pins.append(pin)
-                        self.mapView.addAnnotation(pin)
-                        
-                        let mappedArray = data.map() {(item: [String:AnyObject]) -> Places in
-                            
-                            let places = Places(content: item, context: self.sharedContext)
-                            
-                            places.pin = pin
-                            
-                            return places
-                        }
-                        CoreDataStackManager.sharedInstance().saveContext()
-
-                    }
-                }
-            } else {
-                self.sharedContext.delete(pin)
-                CoreDataStackManager.sharedInstance().saveContext()
-                ErrorHandling.displayError(self, error: error)
-                }
-        }
-    }
-    
-
-    
-    func grabQuotes (_ pin: Pin ) {
-        if pin.quotes?.count == 0 {
-            
-            SkywaysClient.sharedInstance().browseCacheQuotes(pin) {(success, quotes, places, error) in
-
-                if (success) {
-                    if let data = quotes {
-                        DispatchQueue.main.async {[unowned self] in
-                            
-                            let mappedArrayQuotes = data.map() {(item: [String:AnyObject]) -> Quotes in
-                                
-                                let quotes = Quotes(content: item, context: self.sharedContext)
-                                
-                                quotes.pin = pin
-                                
-                                return quotes
-                            }
-                            CoreDataStackManager.sharedInstance().saveContext()
-                        }
-                    }
-                }
-                else {
-                    self.sharedContext.delete(pin)
-                    CoreDataStackManager.sharedInstance().saveContext()
-                    ErrorHandling.displayError(self, error: error)
-                }
-            }
-        }
-    }
-    
-    
     //Mark Loading Views
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         pins = fetchAllPins()
 //        deleteView.center.x -= view.frame.height
 
@@ -140,6 +74,16 @@ class MapViewController: UIViewController, MKMapViewDelegate, NSFetchedResultsCo
             loadMapPins()
         }
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        
+        if mapView.annotations.count == 0 {
+            loadMapPins()
+        }
+        print(pins)
+    }
+    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(true)
         editButton.title = "Edit"
@@ -181,6 +125,10 @@ class MapViewController: UIViewController, MKMapViewDelegate, NSFetchedResultsCo
 
             grabPlaces(newPin!)
             grabQuotes(newPin!)
+            
+            pins.append(newPin!)
+            mapView.addAnnotation(newPin!)
+            
             CoreDataStackManager.sharedInstance().saveContext()
             break
         default:
@@ -254,7 +202,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, NSFetchedResultsCo
             if let value = findSelectedPin() {
                 let controller = self.storyboard?.instantiateViewController(withIdentifier: "PinSearchViewController") as! PinSearchViewController
                 controller.pin = value
-                self.navigationController?.pushViewController(controller, animated: true)
+                present(controller, animated: true, completion: nil)
             }
         } else {
             if let value = findSelectedPin() {
@@ -267,3 +215,85 @@ class MapViewController: UIViewController, MKMapViewDelegate, NSFetchedResultsCo
     }
     
 }
+
+protocol APICall {
+    
+    var sharedContext: NSManagedObjectContext { get }
+    
+    func grabQuotes(_ pin: Pin)
+    func grabPlaces(_ pin: Pin)
+}
+
+extension APICall {
+    
+    //MARK loading places
+    
+    func grabPlaces(_ pin: Pin ) {
+        
+        SkywaysClient.sharedInstance().browseCacheQuotes(pin) {(success, quotes, places, error) in
+            
+            print(success)
+            
+            if (success) {
+                if let data = places {
+                    DispatchQueue.main.async {
+                        
+                        let mappedArray = data.map() {(item: [String:AnyObject]) -> Places in
+                            
+                            let places = Places(content: item, context: self.sharedContext)
+                            
+                            places.pin = pin
+                            
+                            return places
+                        }
+                        CoreDataStackManager.sharedInstance().saveContext()
+                        
+                    }
+                }
+            } else {
+                self.sharedContext.delete(pin)
+                CoreDataStackManager.sharedInstance().saveContext()
+                ErrorHandling.displayError(self as! UIViewController, error: error)
+            }
+        }
+    }
+    
+    
+    
+    func grabQuotes (_ pin: Pin ) {
+        if pin.quotes?.count == 0 {
+            
+            SkywaysClient.sharedInstance().browseCacheQuotes(pin) {(success, quotes, places, error) in
+                
+                if (success) {
+                    if let data = quotes {
+                        DispatchQueue.main.async {
+                            
+                            let mappedArrayQuotes = data.map() {(item: [String:AnyObject]) -> Quotes in
+                                
+                                let quotes = Quotes(content: item, context: self.sharedContext)
+                                
+                                quotes.pin = pin
+                                
+                                return quotes
+                            }
+                            CoreDataStackManager.sharedInstance().saveContext()
+                        }
+                    }
+                }
+                else {
+                    self.sharedContext.delete(pin)
+                    CoreDataStackManager.sharedInstance().saveContext()
+                    ErrorHandling.displayError(self as! UIViewController, error: error)
+                }
+            }
+        }
+    }
+    
+
+}
+
+
+
+
+

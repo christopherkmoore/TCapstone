@@ -26,6 +26,10 @@ class PinSearchViewController: UIViewController, UITableViewDataSource, UITableV
         return CoreDataStackManager.sharedInstance().managedObjectContext
     }
     
+    @IBAction func dismissVC(sender: AnyObject) {
+        dismiss(animated: true, completion: nil)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
