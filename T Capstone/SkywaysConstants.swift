@@ -42,7 +42,7 @@ extension SkywaysClient {
         static var market: String = "US/"
         static var currency: String = "USD/"
         static var locale: String = "en-US/"
-        static var originPlace: String?
+        static var originPlace: String = "anywhere/"
         static var destinationPlace: String = "anywhere/"
         static var outboundPartialDate: String = "anytime/"
         static var inboundPartialDate: String = "anytime?"

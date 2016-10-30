@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11201" systemVersion="16B2555" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="baf-X2-l1B">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11542" systemVersion="16B2555" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="baf-X2-l1B">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
         <capability name="Alignment constraints to the first baseline" minToolsVersion="6.0"/>
         <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
@@ -21,10 +24,20 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="LIJ-XJ-o2q"/>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="LIJ-XJ-o2q">
+                                <rect key="frame" x="0.0" y="64" width="375" height="554"/>
+                            </mapView>
+                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8Nj-Mr-jO4">
+                                <rect key="frame" x="163" y="76" width="51" height="31"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <connections>
+                                    <action selector="changeSwitch:" destination="Zql-uG-H8c" eventType="valueChanged" id="mAw-cS-DAD"/>
+                                </connections>
+                            </switch>
                             <navigationBar contentMode="scaleToFill" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oPy-9B-d1e">
+                                <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                                 <items>
-                                    <navigationItem title="Browse Flights" id="kgg-0E-VCo">
+                                    <navigationItem title="Flying From " id="kgg-0E-VCo">
                                         <barButtonItem key="leftBarButtonItem" systemItem="search" id="DIl-ih-E1W">
                                             <connections>
                                                 <segue destination="Er4-Zf-Bxr" kind="popoverPresentation" popoverAnchorBarButtonItem="DIl-ih-E1W" id="MEU-Jm-QZz">
@@ -41,8 +54,10 @@
                                 </items>
                             </navigationBar>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZjP-mb-XHV">
+                                <rect key="frame" x="0.0" y="553" width="375" height="65"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Delete Pins" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wfg-K0-64W">
+                                        <rect key="frame" x="144" y="22" width="87" height="21"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
@@ -97,6 +112,7 @@
                         <outlet property="deleteView" destination="ZjP-mb-XHV" id="P7c-k1-zy0"/>
                         <outlet property="editButton" destination="AOd-4e-dL9" id="TLD-ss-Mcu"/>
                         <outlet property="mapView" destination="LIJ-XJ-o2q" id="ZAd-Op-6q8"/>
+                        <outlet property="switchTitle" destination="kgg-0E-VCo" id="sDT-Tf-Pe8"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gGq-eq-ZzY" sceneMemberID="firstResponder"/>
@@ -116,7 +132,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Suh dude" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="09m-mV-G3y">
-                                <frame key="frameInset" minX="126" minY="216" width="162" height="168"/>
+                                <rect key="frame" x="126" y="216" width="162" height="168"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
@@ -162,16 +178,19 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Price" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Tal-eV-lQU">
+                                <rect key="frame" x="16" y="69" width="39" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="1" minValue="0.0" maxValue="2000" translatesAutoresizingMaskIntoConstraints="NO" id="YOX-yS-90W">
+                                <rect key="frame" x="14" y="84" width="347" height="31"/>
                                 <connections>
                                     <action selector="sliderDidChangeWithSender:" destination="Er4-Zf-Bxr" eventType="valueChanged" id="qb5-qp-d6i"/>
                                 </connections>
                             </slider>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Departure Date" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oIP-Sp-a7E">
+                                <rect key="frame" x="16" y="133" width="120" height="25"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="25" id="2O4-7e-2BC"/>
                                     <constraint firstAttribute="width" constant="120" id="yZD-3X-0fk"/>
@@ -181,6 +200,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Return Date" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Hoj-Hh-vU4">
+                                <rect key="frame" x="16" y="173" width="120" height="25"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="120" id="8Ok-SC-obP"/>
                                     <constraint firstAttribute="height" constant="25" id="Y6N-SF-eGn"/>
@@ -190,6 +210,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tqS-iN-gvS" userLabel="Depart Button">
+                                <rect key="frame" x="319" y="133" width="40" height="25"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="25" id="Y13-lC-CTt"/>
                                     <constraint firstAttribute="width" constant="40" id="qwY-tY-Wpa"/>
@@ -201,6 +222,7 @@
                                 </connections>
                             </button>
                             <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VeK-lJ-bmc">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="60"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="60" id="6Qi-h4-t93"/>
                                 </constraints>
@@ -220,13 +242,14 @@
                                 </items>
                             </navigationBar>
                             <datePicker contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="pCq-0h-aJP" userLabel="ReturnDatePicker">
-                                <frame key="frameInset" minY="487" height="165"/>
+                                <rect key="frame" x="0.0" y="487" width="375" height="165"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                 <date key="date" timeIntervalSinceReferenceDate="498364205.71492398">
                                     <!--2016-10-17 02:30:05 +0000-->
                                 </date>
                             </datePicker>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="R0p-Qh-LFH" userLabel="Return Button">
+                                <rect key="frame" x="319" y="173" width="40" height="25"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="40" id="XgM-WC-DaA"/>
                                     <constraint firstAttribute="height" constant="25" id="eqX-T5-C1O"/>
@@ -238,13 +261,14 @@
                                 </connections>
                             </button>
                             <datePicker contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="b8a-r2-MpY" userLabel="DepartureDatePicker">
-                                <frame key="frameInset" minY="158" height="165"/>
+                                <rect key="frame" x="0.0" y="158" width="375" height="165"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                 <date key="date" timeIntervalSinceReferenceDate="498364197.39797902">
                                     <!--2016-10-17 02:29:57 +0000-->
                                 </date>
                             </datePicker>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KQM-T4-yXE">
+                                <rect key="frame" x="137" y="69" width="98" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="21" id="dAr-fc-rf2"/>
                                     <constraint firstAttribute="width" constant="98" id="sJT-Kv-EKW"/>
@@ -305,7 +329,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <navigationBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="834-JI-sua">
-                                <frame key="frameInset" minY="15" height="44"/>
+                                <rect key="frame" x="0.0" y="15" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                 <items>
                                     <navigationItem title="Browse Flights" id="rQ8-3e-VrD">
@@ -318,16 +342,18 @@
                                 </items>
                             </navigationBar>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="100" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="dEC-Ge-cQN">
+                                <rect key="frame" x="0.0" y="59" width="375" height="608"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="CustomTableViewCell" rowHeight="100" id="kPh-rH-TJw" customClass="CustomTableViewCell" customModule="T_Capstone" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="375" height="100"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="kPh-rH-TJw" id="3nL-cg-vgl">
-                                            <frame key="frameInset" width="375" height="99.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="99"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vnr-oQ-Noz" userLabel="Destination">
+                                                    <rect key="frame" x="8" y="8" width="253" height="44"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="253" id="vnq-2k-kCl"/>
                                                     </constraints>
@@ -336,11 +362,13 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OeO-W1-qOH" userLabel="FlightDate">
+                                                    <rect key="frame" x="8" y="44" width="277" height="55"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="giM-Cu-9hm" userLabel="minPrice">
+                                                    <rect key="frame" x="313" y="13" width="54" height="35"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="54" id="Xg0-UR-ufL"/>
                                                     </constraints>

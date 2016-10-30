@@ -2,12 +2,13 @@
 //  Pin+CoreDataProperties.swift
 //  T Capstone
 //
-//  Created by modelf on 10/7/16.
+//  Created by modelf on 10/30/16.
 //  Copyright © 2016 modelf. All rights reserved.
 //
 
 import Foundation
 import CoreData
+
 
 extension Pin {
 
@@ -17,25 +18,7 @@ extension Pin {
 
     @NSManaged public var latitude: Double
     @NSManaged public var longitude: Double
-    @NSManaged public var places: NSSet?
     @NSManaged public var quotes: NSSet?
-
-}
-
-// MARK: Generated accessors for places
-extension Pin {
-
-    @objc(addPlacesObject:)
-    @NSManaged public func addToPlaces(_ value: Places)
-
-    @objc(removePlacesObject:)
-    @NSManaged public func removeFromPlaces(_ value: Places)
-
-    @objc(addPlaces:)
-    @NSManaged public func addToPlaces(_ values: NSSet)
-
-    @objc(removePlaces:)
-    @NSManaged public func removeFromPlaces(_ values: NSSet)
 
 }
 

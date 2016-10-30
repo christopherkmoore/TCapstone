@@ -39,7 +39,7 @@ class PinSearchViewController: UIViewController, UITableViewDataSource, UITableV
         
         let fetchRequestPlaces: NSFetchRequest<Places> = Places.fetchRequest()
         fetchRequestPlaces.sortDescriptors = []
-        fetchRequestPlaces.predicate = NSPredicate(format: "pin == %@", self.pin)
+//        fetchRequestPlaces.predicate = NSPredicate(format: "pin == %@", self.pin)
         
         fetchedResultsQuotesController = NSFetchedResultsController(fetchRequest: fetchRequestQuotes, managedObjectContext: sharedContext, sectionNameKeyPath: nil, cacheName: nil)
         fetchedResultsPlacesController = NSFetchedResultsController(fetchRequest: fetchRequestPlaces, managedObjectContext: sharedContext, sectionNameKeyPath: nil, cacheName: nil)
@@ -63,12 +63,6 @@ class PinSearchViewController: UIViewController, UITableViewDataSource, UITableV
         tableView.dataSource = self
         tableView.delegate = self
         
-        
-//        var quotetest = fetchedResultsQuotesController.fetchedObjects
-//        AirbnbClient.sharedInstance().browseAirbnbListing(quotetest!.first!, completionHandler: {(success, data, error) in
-//            print(data)
-//        })
-        
     }
 
     
@@ -76,6 +70,7 @@ class PinSearchViewController: UIViewController, UITableViewDataSource, UITableV
         let quotes = fetchedResultsQuotesController.fetchedObjects
         let places = fetchedResultsPlacesController.fetchedObjects
         
+        //This can probably be replaced with one of the higher level functions map filter reduce
         
         for item in places! {
             for quote in quotes! {

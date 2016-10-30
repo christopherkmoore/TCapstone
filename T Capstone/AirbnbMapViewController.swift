@@ -10,6 +10,12 @@ import Foundation
 import UIKit
 import MapKit
 
-class AirbnbMapViewController: UIViewController {
+class AirbnbMapViewController: MapViewController {
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        
+    }
     
 }

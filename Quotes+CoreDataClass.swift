@@ -43,13 +43,13 @@ public class Quotes: NSManagedObject {
         minPrice = content["MinPrice"] as! Double
         quoteID = Int32(content["QuoteId"] as! Int)
         
-        let direct = content["Direct"] as! Int
-        if direct == 0 {
-            isDirect = false
-        } else {
-            isDirect = true
-        }
-            
+        let direct = content["Direct"] as! Bool
+//        if direct == 0 {
+//            isDirect = false
+//        } else {
+//            isDirect = true
+//        }
+        
 //        print("Creating Quotes Entity \(quoteID), with price of $\(minPrice) value direct = \(isDirect), value originID = \(originID), value destinationID = \(destinationID), value departureDate = \(departureDate), value carrierID = \(carrierID), string name is \(stringName)")
         
     }

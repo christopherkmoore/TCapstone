@@ -2,12 +2,13 @@
 //  Quotes+CoreDataProperties.swift
 //  T Capstone
 //
-//  Created by modelf on 10/7/16.
+//  Created by modelf on 10/30/16.
 //  Copyright © 2016 modelf. All rights reserved.
 //
 
 import Foundation
 import CoreData
+
 
 extension Quotes {
 
@@ -24,23 +25,5 @@ extension Quotes {
     @NSManaged public var quoteID: Int32
     @NSManaged public var stringName: String?
     @NSManaged public var pin: Pin?
-    @NSManaged public var places: NSSet?
-
-}
-
-// MARK: Generated accessors for places
-extension Quotes {
-
-    @objc(addPlacesObject:)
-    @NSManaged public func addToPlaces(_ value: Places)
-
-    @objc(removePlacesObject:)
-    @NSManaged public func removeFromPlaces(_ value: Places)
-
-    @objc(addPlaces:)
-    @NSManaged public func addToPlaces(_ values: NSSet)
-
-    @objc(removePlaces:)
-    @NSManaged public func removeFromPlaces(_ values: NSSet)
 
 }

@@ -26,16 +26,14 @@ class SkywaysClient {
     
     func browseCacheQuotes (_ pin: Pin, completionHandler: @escaping (Bool, [[String:AnyObject]]?, [[String:AnyObject]]?, String?) -> Void ) {
        
-        func getLatLonString(_ pin: Pin) -> String {
-            let newLat = "\(pin.latitude)"
-            let newLon = "\(pin.longitude)"
-            return "\(newLat),\(newLon)-latlong/"
-            
-        }
-        
-        let latLon = getLatLonString(pin)
-        
-        var parameters = "\(ParameterValues.market)\(ParameterValues.currency)\(ParameterValues.locale)\(latLon)\(ParameterValues.destinationPlace)\(ParameterValues.outboundPartialDate)\(ParameterValues.inboundPartialDate)"
+//        func getLatLonString(_ pin: Pin) -> String {
+//            let newLat = "\(pin.latitude)"
+//            let newLon = "\(pin.longitude)"
+//            return "\(newLat),\(newLon)-latlong/"
+//            
+//        }
+                
+        var parameters = "\(ParameterValues.market)\(ParameterValues.currency)\(ParameterValues.locale)\(ParameterValues.originPlace)\(ParameterValues.destinationPlace)\(ParameterValues.outboundPartialDate)\(ParameterValues.inboundPartialDate)"
         
         parameters.append("apiKey=\(API.APIKey)")
         

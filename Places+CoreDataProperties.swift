@@ -2,12 +2,13 @@
 //  Places+CoreDataProperties.swift
 //  T Capstone
 //
-//  Created by modelf on 10/7/16.
+//  Created by modelf on 10/30/16.
 //  Copyright © 2016 modelf. All rights reserved.
 //
 
 import Foundation
 import CoreData
+
 
 extension Places {
 
@@ -19,7 +20,5 @@ extension Places {
     @NSManaged public var countryName: String?
     @NSManaged public var name: String?
     @NSManaged public var placeID: Int32
-    @NSManaged public var pin: Pin?
-    @NSManaged public var quote: Quotes?
 
 }

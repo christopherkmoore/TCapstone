@@ -18,6 +18,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, NSFetchedResultsCo
     @IBOutlet weak var editButton: UIBarButtonItem!
     
     
+    @IBOutlet weak var switchTitle: UINavigationItem!
 //    var editButtonTapped = true
     
     var sharedContext: NSManagedObjectContext {
@@ -137,6 +138,23 @@ class MapViewController: UIViewController, MKMapViewDelegate, NSFetchedResultsCo
         
     }
     
+    @IBAction func changeSwitch(_ sender: UISwitch) {
+        if !(sender.isOn) {
+            switchTitle.title! = "Flying To"
+            SkywaysClient.ParameterValues.originPlace = "anywhere/"
+            if let newPin = newPin {
+                SkywaysClient.ParameterValues.destinationPlace = "\(newPin.latitude),\(newPin.longitude)-latlong/"
+            }
+        } else {
+            switchTitle.title! = "Flying From"
+            SkywaysClient.ParameterValues.destinationPlace = "anywhere/"
+            if let newPin = newPin {
+                SkywaysClient.ParameterValues.originPlace = "\(newPin.latitude),\(newPin.longitude)-latlong/"
+            }
+
+        }
+    }
+
     //MARK Delete Pins
     
     @IBAction func editPressed(_ sender: AnyObject) {
@@ -222,6 +240,8 @@ protocol APICall {
     
     func grabQuotes(_ pin: Pin)
     func grabPlaces(_ pin: Pin)
+    func displayError (_ vc: UIViewController, error: String?)
+    func deleteSamePin( _ pin: Pin)
 }
 
 extension APICall {
@@ -242,7 +262,6 @@ extension APICall {
                             
                             let places = Places(content: item, context: self.sharedContext)
                             
-                            places.pin = pin
                             
                             return places
                         }
@@ -253,7 +272,7 @@ extension APICall {
             } else {
                 self.sharedContext.delete(pin)
                 CoreDataStackManager.sharedInstance().saveContext()
-                ErrorHandling.displayError(self as! UIViewController, error: error)
+                self.displayError(self as! UIViewController, error: error)
             }
         }
     }
@@ -284,11 +303,28 @@ extension APICall {
                 else {
                     self.sharedContext.delete(pin)
                     CoreDataStackManager.sharedInstance().saveContext()
-                    ErrorHandling.displayError(self as! UIViewController, error: error)
+                    self.displayError(self as! UIViewController, error: error)
                 }
             }
         }
     }
+    
+    func displayError (_ vc: UIViewController, error: String?) {
+        if let error = error {
+            let alertController = UIAlertController(title: "Error", message: error, preferredStyle: .alert)
+            let action = UIAlertAction(title: "Done", style: UIAlertActionStyle.default, handler: {(paramAction: UIAlertAction!) in
+                print(paramAction.title!)})
+            
+            alertController.addAction(action)
+            vc.present(alertController, animated: true, completion: nil)
+        }
+        
+    }
+    
+    func deleteSamePin(_ pin: Pin) {
+        pin
+    }
+
     
 
 }
