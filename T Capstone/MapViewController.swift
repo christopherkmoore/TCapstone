@@ -6,12 +6,12 @@
 //  Copyright © 2016 modelf. All rights reserved.
 //
 
-import Foundation
 import UIKit
 import MapKit
 import CoreData
+import CoreLocation
 
-class MapViewController: UIViewController, MKMapViewDelegate, NSFetchedResultsControllerDelegate, APICall {
+class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate, NSFetchedResultsControllerDelegate, APICall {
     
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var deleteView: UIView!
@@ -26,9 +26,11 @@ class MapViewController: UIViewController, MKMapViewDelegate, NSFetchedResultsCo
     }
     
     var newPin: Pin?
-    var pins = [Pin]()
+    var pins = [Pin]() 
     var selectedPinToPass : Pin? = nil
     
+    var locationManager = CLLocationManager()
+
     //MARK Loading Pins
     
     func fetchAllPins() -> [Pin] {
@@ -59,53 +61,65 @@ class MapViewController: UIViewController, MKMapViewDelegate, NSFetchedResultsCo
         super.viewDidLoad()
         
         pins = fetchAllPins()
-//        deleteView.center.x -= view.frame.height
 
         mapView.delegate = self
-        deleteView.isHidden = false
-        
         editButton.title = "Edit"
+        deleteView.center.x -= view.frame.width
+        
+        self.locationManager.requestWhenInUseAuthorization()
+        
+
+//        if deleteView.center.x > 0 {
+//        }
         print("center.x durinv ViewDidLoad: \(deleteView.center.x)")
+        for item in pins {
+            print(item)
+        }
+        
+        if CLLocationManager.locationServicesEnabled() {
+            locationManager.delegate = self
+            locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
+            locationManager.requestLocation()
+        }
         
         let longPressRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(MapViewController.handleLongPress(_:)))
         longPressRecognizer.minimumPressDuration = 0.7
         mapView.addGestureRecognizer(longPressRecognizer)
         
-        if mapView.annotations.count == 0 {
+        if pins.count != 0 {
             loadMapPins()
         }
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(true)
-        
-        if mapView.annotations.count == 0 {
-            loadMapPins()
-        }
-        print(pins)
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(true)
-        editButton.title = "Edit"
-        if deleteView.center.x > 0 {
-            deleteView.center.x -= view.frame.width
-        }
-        print("center.x durinv viewDidAppear: \(deleteView.center.x)")
+//    override func viewWillAppear(_ animated: Bool) {
+//        super.viewWillAppear(animated)
+//        
+//
+//    }
+//
+//    override func viewDidAppear(_ animated: Bool) {
+//        super.viewDidAppear(animated)
+//        
+//        // Make sure titles and view positions are set.
+//        
+//        editButton.title = "Edit"
+//        if deleteView.center.x > 0 {
+//            deleteView.center.x -= view.frame.width
+//        }
+//        print("center.x durinv viewDidAppear: \(deleteView.center.x)")
+//
+//    }
 
-
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        
-        /* this code seems redundant but without it, the view glitches when you switch back to the screen in viewDidAppear, so it's important to at least take the view off screen so it doesn't seem glitch */
-        
-        if editButton.title == "Done" {
-            deleteView.center.x -= view.frame.width
-            print("center.x durinv viewWillDissapear: \(deleteView.center.x)")
-
-        }
-    }
+//    override func viewWillDisappear(_ animated: Bool) {
+//        
+//        /* this code seems redundant but without it, the view glitches when you switch back to the screen in viewDidAppear, so it's important to at least take the view off screen so it doesn't seem glitch */
+//        
+//        if editButton.title == "Done" {
+//            deleteView.center.x -= view.frame.width
+//            print("center.x durinv viewWillDissapear: \(deleteView.center.x)")
+//
+//        }
+//    }
     
     //MARK create pins with longPress
     
@@ -232,7 +246,31 @@ class MapViewController: UIViewController, MKMapViewDelegate, NSFetchedResultsCo
         
     }
     
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error){
+        print(error.localizedDescription)
+    }
+    
+    // when user clicks agree, use CLLocation manager to get a pin and append to map.
+    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+        
+        // if there are no pins, let's drop one and make it the first.
+        if pins.count == 0 {
+            if let locationManager = self.locationManager.location {
+                self.pins.append(Pin(latitude: locationManager.coordinate.latitude, longitude: locationManager.coordinate.longitude, context: self.sharedContext))
+                CoreDataStackManager.sharedInstance().saveContext()
+                self.loadMapPins()
+                
+            }
+        }
+    }
+    
 }
+
+
 
 protocol APICall {
     
@@ -241,7 +279,7 @@ protocol APICall {
     func grabQuotes(_ pin: Pin)
     func grabPlaces(_ pin: Pin)
     func displayError (_ vc: UIViewController, error: String?)
-    func deleteSamePin( _ pin: Pin)
+//    func deleteSamePin( _ pin: Pin)
 }
 
 extension APICall {
@@ -321,9 +359,9 @@ extension APICall {
         
     }
     
-    func deleteSamePin(_ pin: Pin) {
-        pin
-    }
+//    func deleteSamePin(_ pin: Pin) {
+//        pin
+//    }
 
     
 

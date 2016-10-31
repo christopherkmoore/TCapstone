@@ -10,3 +10,6 @@ mapViewFilter functionality is kinda shitty. need to adjust it for better result
 Bugs
 ________
 
+switch is broken. very broken.
+apparently viewDidLoad is not changing the position of delete view? wtf?
+    -> temp fix = use viewWillAppear but the result is a bug where a brief flash displays the view before leaving the UI
