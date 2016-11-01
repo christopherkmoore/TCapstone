@@ -37,6 +37,10 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         do {
             let fetchRequest: NSFetchRequest<Pin> = NSFetchRequest(entityName: "Pin")
             pins = try sharedContext.fetch(fetchRequest)
+            for item in pins {
+                SkywaysClient.ParameterValues.destinationPlace = "\(item.latitude),\(item.longitude)-latlong/"
+
+            }
             return pins
         } catch {
             print("error fetching pins")
@@ -136,6 +140,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         case .began:
             
             newPin = Pin(latitude: touchMapCoordinates.latitude, longitude: touchMapCoordinates.longitude, context: self.sharedContext)
+            SkywaysClient.ParameterValues.originPlace = "\(touchMapCoordinates.latitude),\(touchMapCoordinates.longitude)-latlong/"
             newPin!.coordinate = touchMapCoordinates
 
             grabPlaces(newPin!)
@@ -152,22 +157,22 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         
     }
     
-    @IBAction func changeSwitch(_ sender: UISwitch) {
-        if !(sender.isOn) {
-            switchTitle.title! = "Flying To"
-            SkywaysClient.ParameterValues.originPlace = "anywhere/"
-            if let newPin = newPin {
-                SkywaysClient.ParameterValues.destinationPlace = "\(newPin.latitude),\(newPin.longitude)-latlong/"
-            }
-        } else {
-            switchTitle.title! = "Flying From"
-            SkywaysClient.ParameterValues.destinationPlace = "anywhere/"
-            if let newPin = newPin {
-                SkywaysClient.ParameterValues.originPlace = "\(newPin.latitude),\(newPin.longitude)-latlong/"
-            }
-
-        }
-    }
+//    @IBAction func changeSwitch(_ sender: UISwitch) {
+//        if !(sender.isOn) {
+//            switchTitle.title! = "Flying To"
+//            SkywaysClient.ParameterValues.originPlace = "anywhere/"
+//            if let newPin = newPin {
+//                SkywaysClient.ParameterValues.destinationPlace = "\(newPin.latitude),\(newPin.longitude)-latlong/"
+//            }
+//        } else {
+//            switchTitle.title! = "Flying From"
+//            SkywaysClient.ParameterValues.destinationPlace = "anywhere/"
+//            if let newPin = newPin {
+//                SkywaysClient.ParameterValues.originPlace = "\(newPin.latitude),\(newPin.longitude)-latlong/"
+//            }
+//
+//        }
+//    }
 
     //MARK Delete Pins
     
@@ -262,6 +267,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
             if let locationManager = self.locationManager.location {
                 self.pins.append(Pin(latitude: locationManager.coordinate.latitude, longitude: locationManager.coordinate.longitude, context: self.sharedContext))
                 CoreDataStackManager.sharedInstance().saveContext()
+                SkywaysClient.ParameterValues.destinationPlace = "\(locationManager.coordinate.latitude),\(locationManager.coordinate.longitude)-latlong/"
                 self.loadMapPins()
                 
             }

@@ -33,6 +33,7 @@ class PinSearchViewController: UIViewController, UITableViewDataSource, UITableV
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        
         let fetchRequestQuotes: NSFetchRequest<Quotes> = Quotes.fetchRequest()
         fetchRequestQuotes.sortDescriptors = [NSSortDescriptor(key: "minPrice", ascending: true)]
         fetchRequestQuotes.predicate = NSPredicate(format: "pin == %@", self.pin)
@@ -71,6 +72,7 @@ class PinSearchViewController: UIViewController, UITableViewDataSource, UITableV
         let places = fetchedResultsPlacesController.fetchedObjects
         
         //This can probably be replaced with one of the higher level functions map filter reduce
+        
         
         for item in places! {
             for quote in quotes! {
