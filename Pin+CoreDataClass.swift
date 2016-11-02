@@ -43,14 +43,16 @@ public class Pin: NSManagedObject, MKAnnotation {
         super.init(entity: entity, insertInto: context)
     }
     
-    init(latitude: CLLocationDegrees, longitude: CLLocationDegrees, context: NSManagedObjectContext) {
+    init(latitude: CLLocationDegrees, longitude: CLLocationDegrees, isOrigin: Bool, context: NSManagedObjectContext) {
         
         if let entity = NSEntityDescription.entity(forEntityName: "Pin", in: context){
             super.init(entity: entity, insertInto: context)
             
             self.latitude = latitude
             self.longitude = longitude
-                
+            self.isOrigin = isOrigin
+            
+            
             coordinate = CLLocationCoordinate2DMake(latitude as CLLocationDegrees, longitude as CLLocationDegrees)
         } else {
             fatalError("Unable to find Entity Name")

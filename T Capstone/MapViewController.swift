@@ -18,6 +18,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     @IBOutlet weak var editButton: UIBarButtonItem!
     
     
+    @IBOutlet weak var switchForPin: UISwitch!
     @IBOutlet weak var switchTitle: UINavigationItem!
 //    var editButtonTapped = true
     
@@ -37,10 +38,6 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         do {
             let fetchRequest: NSFetchRequest<Pin> = NSFetchRequest(entityName: "Pin")
             pins = try sharedContext.fetch(fetchRequest)
-            for item in pins {
-                SkywaysClient.ParameterValues.destinationPlace = "\(item.latitude),\(item.longitude)-latlong/"
-
-            }
             return pins
         } catch {
             print("error fetching pins")
@@ -49,11 +46,12 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     }
     
     func loadMapPins() {
-                
+        
         mapView.removeAnnotations(pins)
         
+        
         if mapView.annotations.count == 0 {
-            if pins.count > 0 {
+            if pins.count > 0 {                
                 mapView.addAnnotations(pins)
             }
         }
@@ -63,18 +61,20 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        pins = fetchAllPins()
-
         mapView.delegate = self
+
+        pins = fetchAllPins()
+        
+        for item in pins {
+            if item.isOrigin == true {
+                SkywaysClient.ParameterValues.originPlace = "\(item.latitude),\(item.longitude)-latlong/"
+            }
+        }
         editButton.title = "Edit"
         deleteView.center.x -= view.frame.width
         
         self.locationManager.requestWhenInUseAuthorization()
-        
 
-//        if deleteView.center.x > 0 {
-//        }
         print("center.x durinv ViewDidLoad: \(deleteView.center.x)")
         for item in pins {
             print(item)
@@ -90,17 +90,18 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         longPressRecognizer.minimumPressDuration = 0.7
         mapView.addGestureRecognizer(longPressRecognizer)
         
+
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
         if pins.count != 0 {
             loadMapPins()
         }
+        
     }
-    
-//    override func viewWillAppear(_ animated: Bool) {
-//        super.viewWillAppear(animated)
-//        
-//
-//    }
-//
+
 //    override func viewDidAppear(_ animated: Bool) {
 //        super.viewDidAppear(animated)
 //        
@@ -127,6 +128,39 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     
     //MARK create pins with longPress
     
+    @IBAction func changeTitle (_ sender: UISwitch) {
+        if sender.isOn == true {
+            switchTitle.title = "Flying From"
+        } else {
+            switchTitle.title = "Flying To"
+        }
+    }
+    
+    @IBAction func editPressed(_ sender: AnyObject) {
+        
+        if editButton.title == "Edit" {
+            UIView.animate(withDuration: 0.7, animations: {
+                self.deleteView.center.x += self.view.frame.width
+                //                self.mapView.frame.origin.y += self.deleteView.frame.height
+                
+            })
+            // hide tab bar, remember to animate the drop later.
+            //            self.tabBarController!.tabBar.isHidden = false
+            print("center.x durinv Edit true Animation: \(deleteView.center.x)")
+            editButton.title = "Done"
+            CoreDataStackManager.sharedInstance().saveContext()
+        } else {
+            UIView.animate(withDuration: 0.7, animations: {
+                self.deleteView.center.x -= self.view.frame.width
+                //                self.mapView.frame.origin.y -= self.deleteView.frame.height
+            })
+            //            self.tabBarController!.tabBar.isHidden = true
+            print("center.x during Done true Animation: \(deleteView.center.x)")
+            editButton.title = "Edit"
+            CoreDataStackManager.sharedInstance().saveContext()
+        }
+    }
+    
     func handleLongPress(_ gestureRecognizer: UIGestureRecognizer) {
         
         
@@ -139,80 +173,71 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         switch gestureRecognizer.state {
         case .began:
             
-            newPin = Pin(latitude: touchMapCoordinates.latitude, longitude: touchMapCoordinates.longitude, context: self.sharedContext)
-            SkywaysClient.ParameterValues.originPlace = "\(touchMapCoordinates.latitude),\(touchMapCoordinates.longitude)-latlong/"
-            newPin!.coordinate = touchMapCoordinates
-
-            grabPlaces(newPin!)
-            grabQuotes(newPin!)
-            
-            pins.append(newPin!)
-            mapView.addAnnotation(newPin!)
-            
-            CoreDataStackManager.sharedInstance().saveContext()
+            if switchForPin.isOn == true {
+                var counter: Int = 0
+                for item in pins {
+                    if item.isOrigin == true {
+                        counter += 1
+                        if counter >= 1 {
+                            sharedContext.delete(item)
+                            mapView.removeAnnotation(item)
+                        }
+                    }
+                }
+                if pins.count == 0 {
+                    newPin = Pin(latitude: touchMapCoordinates.latitude, longitude: touchMapCoordinates.longitude, isOrigin: true, context: self.sharedContext)
+                    SkywaysClient.ParameterValues.originPlace = "\(touchMapCoordinates.latitude),\(touchMapCoordinates.longitude)-latlong/"
+                    pins.append(newPin!)
+                    mapView.addAnnotation(newPin!)
+                    CoreDataStackManager.sharedInstance().saveContext()
+                }
+                else {
+                    newPin = Pin(latitude: touchMapCoordinates.latitude, longitude: touchMapCoordinates.longitude, isOrigin: true, context: self.sharedContext)
+                    SkywaysClient.ParameterValues.originPlace = "\(touchMapCoordinates.latitude),\(touchMapCoordinates.longitude)-latlong/"
+                    pins.append(newPin!)
+                    mapView.addAnnotation(newPin!)
+                    CoreDataStackManager.sharedInstance().saveContext()
+                }
+            }
+            else {
+                newPin = Pin(latitude: touchMapCoordinates.latitude, longitude: touchMapCoordinates.longitude, isOrigin: false, context: self.sharedContext)
+                SkywaysClient.ParameterValues.destinationPlace = "\(touchMapCoordinates.latitude),\(touchMapCoordinates.longitude)-latlong/"
+                pins.append(newPin!)
+                mapView.addAnnotation(newPin!)
+                grabPlaces(newPin!)
+                grabQuotes(newPin!)
+                CoreDataStackManager.sharedInstance().saveContext()
+            }
             break
         default:
             return
         }
         
     }
-    
-//    @IBAction func changeSwitch(_ sender: UISwitch) {
-//        if !(sender.isOn) {
-//            switchTitle.title! = "Flying To"
-//            SkywaysClient.ParameterValues.originPlace = "anywhere/"
-//            if let newPin = newPin {
-//                SkywaysClient.ParameterValues.destinationPlace = "\(newPin.latitude),\(newPin.longitude)-latlong/"
-//            }
-//        } else {
-//            switchTitle.title! = "Flying From"
-//            SkywaysClient.ParameterValues.destinationPlace = "anywhere/"
-//            if let newPin = newPin {
-//                SkywaysClient.ParameterValues.originPlace = "\(newPin.latitude),\(newPin.longitude)-latlong/"
-//            }
-//
-//        }
-//    }
+}
 
-    //MARK Delete Pins
-    
-    @IBAction func editPressed(_ sender: AnyObject) {
-        
-        if editButton.title == "Edit" {
-            UIView.animate(withDuration: 0.7, animations: {
-                self.deleteView.center.x += self.view.frame.width
-//                self.mapView.frame.origin.y += self.deleteView.frame.height
-                
-            })
-            // hide tab bar, remember to animate the drop later.
-//            self.tabBarController!.tabBar.isHidden = false
-            print("center.x durinv Edit true Animation: \(deleteView.center.x)")
-            editButton.title = "Done"
-            CoreDataStackManager.sharedInstance().saveContext()
-        } else {
-            UIView.animate(withDuration: 0.7, animations: {
-                self.deleteView.center.x -= self.view.frame.width
-//                self.mapView.frame.origin.y -= self.deleteView.frame.height
-            })
-//            self.tabBarController!.tabBar.isHidden = true
-            print("center.x during Done true Animation: \(deleteView.center.x)")
-            editButton.title = "Edit"
-            CoreDataStackManager.sharedInstance().saveContext()
-        }
-    }
-    
+//delegate functions for MapKit
+extension MapViewController {
+
     //MARK create MapView
     
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
         
-        let reuseIdentifier = "pin"
+        let reuseIdentifier = "pinOrigin"
         var pinView = mapView.dequeueReusableAnnotationView(withIdentifier: reuseIdentifier) as?MKPinAnnotationView
+     
         if (pinView == nil) {
-            pinView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: reuseIdentifier)
+            pinView = MKPinAnnotationView(annotation: pinView?.annotation, reuseIdentifier: reuseIdentifier)
             pinView!.animatesDrop = true
+            pinView?.pinTintColor = .red
             
+        } else {
+            for item in pins {
+                if item.isOrigin == false {
+                    pinView?.pinTintColor = .blue
+                }
+            }
         }
-        
         return pinView
     }
     
@@ -233,7 +258,6 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
             }
             return nil
         }
-
         
         if editButton.title == "Edit" {
             if let value = findSelectedPin() {
@@ -250,6 +274,9 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         }
         
     }
+}
+// delegates functions for CLLocationManager
+extension MapViewController {
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         
@@ -263,15 +290,28 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
         
         // if there are no pins, let's drop one and make it the first.
-        if pins.count == 0 {
-            if let locationManager = self.locationManager.location {
-                self.pins.append(Pin(latitude: locationManager.coordinate.latitude, longitude: locationManager.coordinate.longitude, context: self.sharedContext))
-                CoreDataStackManager.sharedInstance().saveContext()
-                SkywaysClient.ParameterValues.destinationPlace = "\(locationManager.coordinate.latitude),\(locationManager.coordinate.longitude)-latlong/"
-                self.loadMapPins()
-                
+        if CLLocationManager.authorizationStatus() == .authorizedWhenInUse {
+            if pins.count == 0 {
+                if let locationManager = self.locationManager.location {
+                    
+                    
+                    self.pins.append(Pin(latitude: locationManager.coordinate.latitude, longitude: locationManager.coordinate.longitude, isOrigin: true, context: self.sharedContext))
+                    CoreDataStackManager.sharedInstance().saveContext()
+                    
+                    SkywaysClient.ParameterValues.originPlace = "\(locationManager.coordinate.latitude),\(locationManager.coordinate.longitude)-latlong/"
+                    
+                }
             }
+        
         }
+        if CLLocationManager.authorizationStatus() == .denied {
+            switchTitle.title = "Flying From"
+            switchForPin.isOn = true
+        } else {
+            switchTitle.title = "Flying To"
+            switchForPin.isOn = false
+        }
+        
     }
     
 }
@@ -285,7 +325,6 @@ protocol APICall {
     func grabQuotes(_ pin: Pin)
     func grabPlaces(_ pin: Pin)
     func displayError (_ vc: UIViewController, error: String?)
-//    func deleteSamePin( _ pin: Pin)
 }
 
 extension APICall {
@@ -364,13 +403,6 @@ extension APICall {
         }
         
     }
-    
-//    func deleteSamePin(_ pin: Pin) {
-//        pin
-//    }
-
-    
-
 }
 
 

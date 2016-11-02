@@ -2,7 +2,7 @@
 //  Pin+CoreDataProperties.swift
 //  T Capstone
 //
-//  Created by modelf on 10/30/16.
+//  Created by modelf on 11/1/16.
 //  Copyright © 2016 modelf. All rights reserved.
 //
 
@@ -18,6 +18,7 @@ extension Pin {
 
     @NSManaged public var latitude: Double
     @NSManaged public var longitude: Double
+    @NSManaged public var isOrigin: Bool
     @NSManaged public var quotes: NSSet?
 
 }

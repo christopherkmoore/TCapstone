@@ -6,6 +6,8 @@ create check to eliminate pins too close to each other
 
 mapViewFilter functionality is kinda shitty. need to adjust it for better results
 
+init for Pin should have default state of isOrigin set to false.
+
 
 Bugs
 ________

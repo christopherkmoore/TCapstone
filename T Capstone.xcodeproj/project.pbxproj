@@ -29,9 +29,9 @@
 		79C31B2D1DA4B3D8005A060F /* PinSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79C31B2C1DA4B3D8005A060F /* PinSearchViewController.swift */; };
 		79C31B2F1DA57312005A060F /* CustomTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79C31B2E1DA57312005A060F /* CustomTableViewCell.swift */; };
 		79C31B361DA5ACFA005A060F /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 79C31B341DA5ACFA005A060F /* Model.xcdatamodeld */; };
-		79CAC47A1DA86B2900D38CCE /* Pin+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79CAC4771DA86B2900D38CCE /* Pin+CoreDataProperties.swift */; };
 		79CAC47B1DA86B2900D38CCE /* Places+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79CAC4781DA86B2900D38CCE /* Places+CoreDataProperties.swift */; };
 		79CAC47C1DA86B2900D38CCE /* Quotes+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79CAC4791DA86B2900D38CCE /* Quotes+CoreDataProperties.swift */; };
+		79E5EE491DC92F9C0071AA39 /* Pin+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79E5EE481DC92F9C0071AA39 /* Pin+CoreDataProperties.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -80,9 +80,9 @@
 		79C31B2C1DA4B3D8005A060F /* PinSearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PinSearchViewController.swift; sourceTree = "<group>"; };
 		79C31B2E1DA57312005A060F /* CustomTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomTableViewCell.swift; sourceTree = "<group>"; };
 		79C31B351DA5ACFA005A060F /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
-		79CAC4771DA86B2900D38CCE /* Pin+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Pin+CoreDataProperties.swift"; path = "../Pin+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		79CAC4781DA86B2900D38CCE /* Places+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Places+CoreDataProperties.swift"; path = "../Places+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		79CAC4791DA86B2900D38CCE /* Quotes+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Quotes+CoreDataProperties.swift"; path = "../Quotes+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		79E5EE481DC92F9C0071AA39 /* Pin+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Pin+CoreDataProperties.swift"; path = "../Pin+CoreDataProperties.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -196,7 +196,7 @@
 		79C31B171DA4A759005A060F /* CoreData */ = {
 			isa = PBXGroup;
 			children = (
-				79CAC4771DA86B2900D38CCE /* Pin+CoreDataProperties.swift */,
+				79E5EE481DC92F9C0071AA39 /* Pin+CoreDataProperties.swift */,
 				79CAC4781DA86B2900D38CCE /* Places+CoreDataProperties.swift */,
 				79CAC4791DA86B2900D38CCE /* Quotes+CoreDataProperties.swift */,
 				79C31B341DA5ACFA005A060F /* Model.xcdatamodeld */,
@@ -283,7 +283,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0800;
-				LastUpgradeCheck = 0800;
+				LastUpgradeCheck = 0810;
 				ORGANIZATIONNAME = modelf;
 				TargetAttributes = {
 					79C31ADF1DA4A520005A060F = {
@@ -359,6 +359,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				79CAC47B1DA86B2900D38CCE /* Places+CoreDataProperties.swift in Sources */,
+				79E5EE491DC92F9C0071AA39 /* Pin+CoreDataProperties.swift in Sources */,
 				7902C6151DB069C5005FA334 /* AirbnbConstants.swift in Sources */,
 				79C31B361DA5ACFA005A060F /* Model.xcdatamodeld in Sources */,
 				79C31B281DA4A959005A060F /* CoreStackManager.swift in Sources */,
@@ -372,7 +373,6 @@
 				79C31B251DA4A945005A060F /* Quotes+CoreDataClass.swift in Sources */,
 				79CAC47C1DA86B2900D38CCE /* Quotes+CoreDataProperties.swift in Sources */,
 				7902C6131DB069B6005FA334 /* AirbnbClient.swift in Sources */,
-				79CAC47A1DA86B2900D38CCE /* Pin+CoreDataProperties.swift in Sources */,
 				79C31B2D1DA4B3D8005A060F /* PinSearchViewController.swift in Sources */,
 				7902C60E1DADDED7005FA334 /* MapViewFilterViewController.swift in Sources */,
 				79C31AE41DA4A520005A060F /* AppDelegate.swift in Sources */,
@@ -448,6 +448,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -498,6 +499,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;

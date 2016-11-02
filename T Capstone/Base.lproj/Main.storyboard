@@ -25,13 +25,13 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="LIJ-XJ-o2q">
-                                <rect key="frame" x="0.0" y="64" width="375" height="554"/>
+                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                             </mapView>
                             <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8Nj-Mr-jO4">
                                 <rect key="frame" x="163" y="76" width="51" height="31"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <connections>
-                                    <action selector="changeSwitch:" destination="Zql-uG-H8c" eventType="valueChanged" id="mAw-cS-DAD"/>
+                                    <action selector="changeTitle:" destination="Zql-uG-H8c" eventType="valueChanged" id="3gY-Gx-KuS"/>
                                 </connections>
                             </switch>
                             <navigationBar contentMode="scaleToFill" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oPy-9B-d1e">
@@ -54,7 +54,7 @@
                                 </items>
                             </navigationBar>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZjP-mb-XHV">
-                                <rect key="frame" x="0.0" y="553" width="375" height="65"/>
+                                <rect key="frame" x="0.0" y="602" width="375" height="65"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Delete Pins" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wfg-K0-64W">
                                         <rect key="frame" x="144" y="22" width="87" height="21"/>
@@ -112,6 +112,7 @@
                         <outlet property="deleteView" destination="ZjP-mb-XHV" id="P7c-k1-zy0"/>
                         <outlet property="editButton" destination="AOd-4e-dL9" id="TLD-ss-Mcu"/>
                         <outlet property="mapView" destination="LIJ-XJ-o2q" id="ZAd-Op-6q8"/>
+                        <outlet property="switchForPin" destination="8Nj-Mr-jO4" id="J1L-mx-jb5"/>
                         <outlet property="switchTitle" destination="kgg-0E-VCo" id="sDT-Tf-Pe8"/>
                     </connections>
                 </viewController>
@@ -303,7 +304,7 @@
                                         <rect key="frame" x="0.0" y="28" width="375" height="100"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="kPh-rH-TJw" id="3nL-cg-vgl">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="99.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="99"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vnr-oQ-Noz" userLabel="Destination">
