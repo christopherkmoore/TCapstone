@@ -29,6 +29,8 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     var newPin: Pin?
     var pins = [Pin]() 
     var selectedPinToPass : Pin? = nil
+    var originPin = [OriginPin]()
+    var newOriginPin: OriginPin?
     
     var locationManager = CLLocationManager()
 
@@ -45,16 +47,41 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         return [Pin]()
     }
     
+    func fetchOriginPin() -> [OriginPin] {
+        do {
+            let fetchRequest: NSFetchRequest<OriginPin> = NSFetchRequest(entityName: "OriginPin")
+            originPin = try sharedContext.fetch(fetchRequest)
+            return originPin
+        } catch {
+            print("error fetching origin pin")
+        }
+        return [OriginPin]()
+    }
+    
+    //Mark deletetion
+    func deleteOriginPin() {
+        
+        if !(originPin.isEmpty) {
+            mapView.removeAnnotations(originPin)
+            sharedContext.delete(originPin[0])
+            CoreDataStackManager.sharedInstance().saveContext()
+        }
+        
+    }
+    
     func loadMapPins() {
         
-        mapView.removeAnnotations(pins)
-        
-        
-        if mapView.annotations.count == 0 {
-            if pins.count > 0 {                
-                mapView.addAnnotations(pins)
+//        DispatchQueue.main.async {
+            deleteOriginPin()
+
+            mapView.removeAnnotations(pins)
+            
+            if mapView.annotations.count == 0 {
+                if pins.count > 0 {
+                   mapView.addAnnotations(pins)
+                }
             }
-        }
+//        }
     }
     
     //Mark Loading Views
@@ -65,20 +92,18 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
 
         pins = fetchAllPins()
         
-        for item in pins {
-            if item.isOrigin == true {
-                SkywaysClient.ParameterValues.originPlace = "\(item.latitude),\(item.longitude)-latlong/"
-            }
+        if pins.count != 0 {
+            loadMapPins()
         }
+        
         editButton.title = "Edit"
         deleteView.center.x -= view.frame.width
         
         self.locationManager.requestWhenInUseAuthorization()
 
         print("center.x durinv ViewDidLoad: \(deleteView.center.x)")
-        for item in pins {
-            print(item)
-        }
+
+        
         
         if CLLocationManager.locationServicesEnabled() {
             locationManager.delegate = self
@@ -93,14 +118,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
 
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        if pins.count != 0 {
-            loadMapPins()
-        }
-        
-    }
+
 
 //    override func viewDidAppear(_ animated: Bool) {
 //        super.viewDidAppear(animated)
@@ -131,6 +149,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     @IBAction func changeTitle (_ sender: UISwitch) {
         if sender.isOn == true {
             switchTitle.title = "Flying From"
+            deleteOriginPin()
         } else {
             switchTitle.title = "Flying To"
         }
@@ -167,40 +186,34 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         if gestureRecognizer.state != .began { return }
         let touchPoint = gestureRecognizer.location(in: self.mapView)
         let touchMapCoordinates = mapView.convert(touchPoint, toCoordinateFrom: self.mapView)
-        let newMapPoint = MKPointAnnotation()
+        let newMapPoint = MKPointAnnotation()        
         newMapPoint.coordinate = CLLocationCoordinate2DMake(touchMapCoordinates.latitude, touchMapCoordinates.longitude)
+        
         
         switch gestureRecognizer.state {
         case .began:
             
             if switchForPin.isOn == true {
-                var counter: Int = 0
-                for item in pins {
-                    if item.isOrigin == true {
-                        counter += 1
-                        if counter >= 1 {
-                            sharedContext.delete(item)
-                            mapView.removeAnnotation(item)
-                        }
-                    }
-                }
+                
                 if pins.count == 0 {
-                    newPin = Pin(latitude: touchMapCoordinates.latitude, longitude: touchMapCoordinates.longitude, isOrigin: true, context: self.sharedContext)
+                    deleteOriginPin()
+                    newOriginPin = OriginPin(latitude: touchMapCoordinates.latitude, longitude: touchMapCoordinates.longitude, context: self.sharedContext)
                     SkywaysClient.ParameterValues.originPlace = "\(touchMapCoordinates.latitude),\(touchMapCoordinates.longitude)-latlong/"
-                    pins.append(newPin!)
-                    mapView.addAnnotation(newPin!)
+                    originPin.append(newOriginPin!)
+                    mapView.addAnnotation(newOriginPin!)
                     CoreDataStackManager.sharedInstance().saveContext()
                 }
                 else {
-                    newPin = Pin(latitude: touchMapCoordinates.latitude, longitude: touchMapCoordinates.longitude, isOrigin: true, context: self.sharedContext)
+                    deleteOriginPin()
+                    newOriginPin = OriginPin(latitude: touchMapCoordinates.latitude, longitude: touchMapCoordinates.longitude, context: self.sharedContext)
                     SkywaysClient.ParameterValues.originPlace = "\(touchMapCoordinates.latitude),\(touchMapCoordinates.longitude)-latlong/"
-                    pins.append(newPin!)
-                    mapView.addAnnotation(newPin!)
+                    originPin.append(newOriginPin!)
+                    mapView.addAnnotation(newOriginPin!)
                     CoreDataStackManager.sharedInstance().saveContext()
                 }
             }
             else {
-                newPin = Pin(latitude: touchMapCoordinates.latitude, longitude: touchMapCoordinates.longitude, isOrigin: false, context: self.sharedContext)
+                newPin = Pin(latitude: touchMapCoordinates.latitude, longitude: touchMapCoordinates.longitude, context: self.sharedContext)
                 SkywaysClient.ParameterValues.destinationPlace = "\(touchMapCoordinates.latitude),\(touchMapCoordinates.longitude)-latlong/"
                 pins.append(newPin!)
                 mapView.addAnnotation(newPin!)
@@ -219,26 +232,36 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
 //delegate functions for MapKit
 extension MapViewController {
 
-    //MARK create MapView
+    //MARK MapView delegate functions
+    
+
     
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
         
-        let reuseIdentifier = "pinOrigin"
-        var pinView = mapView.dequeueReusableAnnotationView(withIdentifier: reuseIdentifier) as?MKPinAnnotationView
-     
-        if (pinView == nil) {
-            pinView = MKPinAnnotationView(annotation: pinView?.annotation, reuseIdentifier: reuseIdentifier)
-            pinView!.animatesDrop = true
-            pinView?.pinTintColor = .red
-            
-        } else {
-            for item in pins {
-                if item.isOrigin == false {
-                    pinView?.pinTintColor = .blue
-                }
+        if (annotation is Pin) {
+            var pinView = mapView.dequeueReusableAnnotationView(withIdentifier: "red") as? MKPinAnnotationView
+            if pinView == nil {
+                pinView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: "red")
+                pinView?.animatesDrop = true
+                
+                return pinView
             }
         }
-        return pinView
+        
+        
+        if (annotation is OriginPin) {
+            var annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: "blue") as? MKPinAnnotationView
+            if annotationView == nil {
+                annotationView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: "blue")
+                annotationView?.animatesDrop = true
+                annotationView?.pinTintColor = .blue
+
+            
+                return annotationView
+            }
+        }
+
+        return nil
     }
     
     func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
@@ -246,6 +269,8 @@ extension MapViewController {
         mapView.deselectAnnotation(view.annotation, animated: true)
         
         guard let selectedAnnotation = view.annotation else {return}
+        
+
 
         func findSelectedPin() -> Pin? {
            
@@ -295,7 +320,8 @@ extension MapViewController {
                 if let locationManager = self.locationManager.location {
                     
                     
-                    self.pins.append(Pin(latitude: locationManager.coordinate.latitude, longitude: locationManager.coordinate.longitude, isOrigin: true, context: self.sharedContext))
+                    newOriginPin = OriginPin(latitude: locationManager.coordinate.latitude, longitude: locationManager.coordinate.longitude, context: self.sharedContext)
+                    originPin.append(newOriginPin!)
                     CoreDataStackManager.sharedInstance().saveContext()
                     
                     SkywaysClient.ParameterValues.originPlace = "\(locationManager.coordinate.latitude),\(locationManager.coordinate.longitude)-latlong/"
