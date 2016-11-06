@@ -62,11 +62,12 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     func deleteOriginPin() {
         
         if !(originPin.isEmpty) {
-            mapView.removeAnnotations(originPin)
-            sharedContext.delete(originPin[0])
-            CoreDataStackManager.sharedInstance().saveContext()
+            DispatchQueue.main.async {
+                self.mapView.removeAnnotation(self.originPin[0])
+                self.originPin.removeFirst()
+                CoreDataStackManager.sharedInstance().saveContext()
+            }
         }
-        
     }
     
     func loadMapPins() {
@@ -150,6 +151,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         if sender.isOn == true {
             switchTitle.title = "Flying From"
             deleteOriginPin()
+            SkywaysClient.ParameterValues.originPlace = "anywhere/"
         } else {
             switchTitle.title = "Flying To"
         }
@@ -195,32 +197,44 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
             
             if switchForPin.isOn == true {
                 
-                if pins.count == 0 {
-                    deleteOriginPin()
+                if originPin.count == 0 {
                     newOriginPin = OriginPin(latitude: touchMapCoordinates.latitude, longitude: touchMapCoordinates.longitude, context: self.sharedContext)
                     SkywaysClient.ParameterValues.originPlace = "\(touchMapCoordinates.latitude),\(touchMapCoordinates.longitude)-latlong/"
                     originPin.append(newOriginPin!)
                     mapView.addAnnotation(newOriginPin!)
                     CoreDataStackManager.sharedInstance().saveContext()
+                    print("new pin created in nested if")
                 }
                 else {
-                    deleteOriginPin()
+                    
                     newOriginPin = OriginPin(latitude: touchMapCoordinates.latitude, longitude: touchMapCoordinates.longitude, context: self.sharedContext)
                     SkywaysClient.ParameterValues.originPlace = "\(touchMapCoordinates.latitude),\(touchMapCoordinates.longitude)-latlong/"
                     originPin.append(newOriginPin!)
+                  
                     mapView.addAnnotation(newOriginPin!)
                     CoreDataStackManager.sharedInstance().saveContext()
+                    print("new pin created in nested else")
+                    
+                    deleteOriginPin()
                 }
             }
-            else {
+            if switchForPin.isOn == false {
                 newPin = Pin(latitude: touchMapCoordinates.latitude, longitude: touchMapCoordinates.longitude, context: self.sharedContext)
-                SkywaysClient.ParameterValues.destinationPlace = "\(touchMapCoordinates.latitude),\(touchMapCoordinates.longitude)-latlong/"
+                if originPin.count == 0 {
+                    SkywaysClient.ParameterValues.originPlace = "\(touchMapCoordinates.latitude),\(touchMapCoordinates.longitude)-latlong/"
+                    SkywaysClient.ParameterValues.destinationPlace = "anywhere/"
+
+                } else {
+                    SkywaysClient.ParameterValues.destinationPlace = "\(touchMapCoordinates.latitude),\(touchMapCoordinates.longitude)-latlong/"
+                }
                 pins.append(newPin!)
                 mapView.addAnnotation(newPin!)
                 grabPlaces(newPin!)
                 grabQuotes(newPin!)
                 CoreDataStackManager.sharedInstance().saveContext()
+                print("new pin created in last if statement")
             }
+
             break
         default:
             return
@@ -243,7 +257,12 @@ extension MapViewController {
             if pinView == nil {
                 pinView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: "red")
                 pinView?.animatesDrop = true
+                pinView?.pinTintColor = .red
                 
+                print("delegate method firing for red pin")
+                return pinView
+            } else {
+                pinView?.annotation = annotation
                 return pinView
             }
         }
@@ -257,6 +276,10 @@ extension MapViewController {
                 annotationView?.pinTintColor = .blue
 
             
+                print("delegate method firing for blue pin")
+                return annotationView
+            } else {
+                annotationView?.annotation = annotation
                 return annotationView
             }
         }
@@ -316,7 +339,7 @@ extension MapViewController {
         
         // if there are no pins, let's drop one and make it the first.
         if CLLocationManager.authorizationStatus() == .authorizedWhenInUse {
-            if pins.count == 0 {
+            if originPin.count == 0 {
                 if let locationManager = self.locationManager.location {
                     
                     
@@ -325,7 +348,7 @@ extension MapViewController {
                     CoreDataStackManager.sharedInstance().saveContext()
                     
                     SkywaysClient.ParameterValues.originPlace = "\(locationManager.coordinate.latitude),\(locationManager.coordinate.longitude)-latlong/"
-                    
+                    mapView.addAnnotation(newOriginPin!)
                 }
             }
         
