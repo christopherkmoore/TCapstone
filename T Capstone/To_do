@@ -1,17 +1,16 @@
 
 Need
 ________
-
-create check to eliminate pins too close to each other
+delete all pins function?
 
 mapViewFilter functionality is kinda shitty. need to adjust it for better results
 
-init for Pin should have default state of isOrigin set to false.
+calls for origin -> taking too long, reduce number or set price ceiling
 
+explication screen.
 
 Bugs
 ________
 
-switch is broken. very broken.
 apparently viewDidLoad is not changing the position of delete view? wtf?
     -> temp fix = use viewWillAppear but the result is a bug where a brief flash displays the view before leaving the UI

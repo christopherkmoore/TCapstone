@@ -98,7 +98,6 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         }
         
         editButton.title = "Edit"
-        deleteView.center.x -= view.frame.width
         
         self.locationManager.requestWhenInUseAuthorization()
 
@@ -394,6 +393,7 @@ extension APICall {
                             
                             let places = Places(content: item, context: self.sharedContext)
                             
+                            places.pin = pin
                             
                             return places
                         }

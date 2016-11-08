@@ -2,7 +2,7 @@
 //  OriginPin+CoreDataProperties.swift
 //  T Capstone
 //
-//  Created by modelf on 11/4/16.
+//  Created by modelf on 11/6/16.
 //  Copyright © 2016 modelf. All rights reserved.
 //
 

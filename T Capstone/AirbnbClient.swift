@@ -81,9 +81,12 @@ class AirbnbClient {
     
     func getLocationForBrowse(_ quote: Quotes) -> String {
         var urlString: String!
-        if let location = quote.stringName {
-            urlString = location.replacingOccurrences(of: ",", with: "")
-        }
+        
+        // gunna need to change this
+        
+//        if let location = quote.stringName {
+//            urlString = location.replacingOccurrences(of: ",", with: "")
+//        }
         return urlString
     }
     

@@ -20,35 +20,45 @@ public class Quotes: NSManagedObject {
         super.init(entity: entity, insertInto: context)
         
         
-        //        print(content)
         
         if let outboundLeg = content["OutboundLeg"] as? [String: AnyObject] {
-            destinationID = Int32(outboundLeg["DestinationId"] as! Int)
-            originID = Int32(outboundLeg["OriginId"] as! Int)
+            outboundDestinationID = outboundLeg["DestinationId"] as! Int32
+            outboundOriginID = outboundLeg["OriginId"] as! Int32
             if let newCarrier = outboundLeg["CarrierIds"] as? [Int32] {
                 if newCarrier.count > 0 {
-                    self.carrierID = newCarrier.first!
-                    // is there a case that could cause a crash above?
+                    outboundCarrierID = newCarrier.first!
                 }
             }
             if let stringForDate = outboundLeg["DepartureDate"] as? String {
                 let dateFor = DateFormatter()
                 dateFor.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
-                self.departureDate = dateFor.date(from: stringForDate)! as NSDate?
+                outboundDepartureDate = dateFor.date(from: stringForDate)! as NSDate?
             }
         }
         
+        if let inboundLeg = content["InboundLeg"] as? [String: AnyObject] {
+            inboundDestinationID = inboundLeg["DestinationId"] as? String
+            inboundOriginID = inboundLeg["OriginId"] as? String
+            if let newCarrier = inboundLeg["CarrierIds"] as? [String] {
+                if newCarrier.count > 0 {
+                    inboundCarrierID = newCarrier.first!
+                    // is there a case that could cause a crash above?
+                }
+            }
+            if let stringForDate = inboundLeg["DepartureDate"] as? String {
+                let dateFor = DateFormatter()
+                dateFor.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
+                inboundDepartureDate = dateFor.date(from: stringForDate)! as NSDate?
+            }
+        }
+        
+
+        // need to create conversions
         
         
-        minPrice = content["MinPrice"] as! Double
+        price = content["MinPrice"] as! Double
         quoteID = Int32(content["QuoteId"] as! Int)
-        
-        let direct = content["Direct"] as! Bool
-//        if direct == 0 {
-//            isDirect = false
-//        } else {
-//            isDirect = true
-//        }
+        isDirect = content["Direct"] as! Bool
         
 //        print("Creating Quotes Entity \(quoteID), with price of $\(minPrice) value direct = \(isDirect), value originID = \(originID), value destinationID = \(destinationID), value departureDate = \(departureDate), value carrierID = \(carrierID), string name is \(stringName)")
         
@@ -56,3 +66,5 @@ public class Quotes: NSManagedObject {
     
     
 }
+
+

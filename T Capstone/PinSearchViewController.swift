@@ -35,10 +35,11 @@ class PinSearchViewController: UIViewController, UITableViewDataSource, UITableV
 
         
         let fetchRequestQuotes: NSFetchRequest<Quotes> = Quotes.fetchRequest()
-        fetchRequestQuotes.sortDescriptors = [NSSortDescriptor(key: "minPrice", ascending: true)]
+        fetchRequestQuotes.sortDescriptors = [NSSortDescriptor(key: "price", ascending: true)]
         fetchRequestQuotes.predicate = NSPredicate(format: "pin == %@", self.pin)
         
         let fetchRequestPlaces: NSFetchRequest<Places> = Places.fetchRequest()
+        fetchRequestPlaces.predicate = NSPredicate(format: "pin == %@", self.pin)
         fetchRequestPlaces.sortDescriptors = []
 //        fetchRequestPlaces.predicate = NSPredicate(format: "pin == %@", self.pin)
         
@@ -60,32 +61,34 @@ class PinSearchViewController: UIViewController, UITableViewDataSource, UITableV
 
         fetchedResultsQuotesController.delegate = self
 
-        convertPlaces()
+//        convertPlaces()
         tableView.dataSource = self
         tableView.delegate = self
         
     }
 
     
-    func convertPlaces () {
-        let quotes = fetchedResultsQuotesController.fetchedObjects
-        let places = fetchedResultsPlacesController.fetchedObjects
-        
-        //This can probably be replaced with one of the higher level functions map filter reduce
-        
-        
-        for item in places! {
-            for quote in quotes! {
-                if item.placeID == quote.destinationID {
-                    if let cityName = item.cityName {
-                        if let countryName = item.countryName {
-                            quote.stringName = "\(cityName), \(countryName)"
-                        }
-                    }
-                }
-            }
-        }
-    }
+//    func convertPlaces () {
+//        let quotes = fetchedResultsQuotesController.fetchedObjects
+//        let places = fetchedResultsPlacesController.fetchedObjects
+//        
+//        //This can probably be replaced with one of the higher level functions map filter reduce
+//        
+//        //OutboundDestination
+//        for item in places! {
+//            for quote in quotes! {
+//                if item.placeID == quote.outboundDestinationID {
+//                    if let cityName = item.cityName {
+//                        if let countryName = item.countryName {
+//                            quote.outboundDestinationIDString = "\(cityName), \(countryName)"
+//                        }
+//                    }
+//                    
+//                
+//                }
+//            }
+//        }
+//    }
     
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -107,19 +110,17 @@ class PinSearchViewController: UIViewController, UITableViewDataSource, UITableV
     
     func configureCell(cell: CustomTableViewCell, indexPath: IndexPath) {
         let quote = fetchedResultsQuotesController.object(at: indexPath)
-
+        quote.place.
         
         let timeDate = DateFormatter()
         timeDate.dateFormat = "yyyy-MM-dd'T'HH:mm:ss +zzzz"
         timeDate.timeStyle = .long
         timeDate.dateStyle = .medium
-        cell.flightDate.text = timeDate.string(from: quote.departureDate! as Date)
+        cell.flightDate.text = timeDate.string(from: quote.inboundDepartureDate! as Date)
 
-        if let destinationName = quote.stringName {
-            cell.destination.text = "\(destinationName)"
-        }
-        
-        cell.minPrice.text = "$\(quote.minPrice)0"
+        cell.destination.text = quote.outboundDestinationIDString
+            
+        cell.minPrice.text = "$\(quote.price)0"
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

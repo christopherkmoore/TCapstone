@@ -11,6 +11,7 @@ import CoreData
 
 
 public class Places: NSManagedObject {
+
     
     override init (entity: NSEntityDescription, insertInto context: NSManagedObjectContext?) {
         super.init(entity: entity, insertInto: context)
@@ -20,10 +21,11 @@ public class Places: NSManagedObject {
         super.init(entity: entity, insertInto: context)
         
 
-        placeID = Int32(content["PlaceId"] as! Int)
+        placeID = content["PlaceId"] as! Int32
         name = content["Name"] as? String
         cityName = content["CityName"] as? String
         countryName = content["CountryName"] as? String
+        
         
         
 //        print("saving placeID of \(placeID) to name \(name) with optional values city name = \(cityName) and country name = \(countryName)")
