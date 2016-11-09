@@ -96,15 +96,14 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         if pins.count != 0 {
             loadMapPins()
         }
+        deleteView.isHidden = false
         
         editButton.title = "Edit"
         
         self.locationManager.requestWhenInUseAuthorization()
 
-        print("center.x durinv ViewDidLoad: \(deleteView.center.x)")
+        print("delete view center.x during ViewDidLoad: \(deleteView.center.x)")
 
-        
-        
         if CLLocationManager.locationServicesEnabled() {
             locationManager.delegate = self
             locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
@@ -117,32 +116,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         
 
     }
-    
 
-
-//    override func viewDidAppear(_ animated: Bool) {
-//        super.viewDidAppear(animated)
-//        
-//        // Make sure titles and view positions are set.
-//        
-//        editButton.title = "Edit"
-//        if deleteView.center.x > 0 {
-//            deleteView.center.x -= view.frame.width
-//        }
-//        print("center.x durinv viewDidAppear: \(deleteView.center.x)")
-//
-//    }
-
-//    override func viewWillDisappear(_ animated: Bool) {
-//        
-//        /* this code seems redundant but without it, the view glitches when you switch back to the screen in viewDidAppear, so it's important to at least take the view off screen so it doesn't seem glitch */
-//        
-//        if editButton.title == "Done" {
-//            deleteView.center.x -= view.frame.width
-//            print("center.x durinv viewWillDissapear: \(deleteView.center.x)")
-//
-//        }
-//    }
     
     //MARK create pins with longPress
     
@@ -158,25 +132,25 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     
     @IBAction func editPressed(_ sender: AnyObject) {
         
-        if editButton.title == "Edit" {
+        if editButton.title == "Done" {
             UIView.animate(withDuration: 0.7, animations: {
-                self.deleteView.center.x += self.view.frame.width
+                self.mapView.frame.origin.y += self.deleteView.frame.height
                 //                self.mapView.frame.origin.y += self.deleteView.frame.height
                 
             })
             // hide tab bar, remember to animate the drop later.
             //            self.tabBarController!.tabBar.isHidden = false
             print("center.x durinv Edit true Animation: \(deleteView.center.x)")
-            editButton.title = "Done"
+            editButton.title = "Edit"
             CoreDataStackManager.sharedInstance().saveContext()
         } else {
             UIView.animate(withDuration: 0.7, animations: {
-                self.deleteView.center.x -= self.view.frame.width
+                self.mapView.frame.origin.y -= self.deleteView.frame.height
                 //                self.mapView.frame.origin.y -= self.deleteView.frame.height
             })
             //            self.tabBarController!.tabBar.isHidden = true
             print("center.x during Done true Animation: \(deleteView.center.x)")
-            editButton.title = "Edit"
+            editButton.title = "Done"
             CoreDataStackManager.sharedInstance().saveContext()
         }
     }

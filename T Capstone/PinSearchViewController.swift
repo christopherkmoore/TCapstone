@@ -110,7 +110,10 @@ class PinSearchViewController: UIViewController, UITableViewDataSource, UITableV
     
     func configureCell(cell: CustomTableViewCell, indexPath: IndexPath) {
         let quote = fetchedResultsQuotesController.object(at: indexPath)
-        quote.place.
+        let places = fetchedResultsPlacesController.fetchedObjects
+        if let places = places {
+            quote.outboundDestinationIDConvert(places)
+        }
         
         let timeDate = DateFormatter()
         timeDate.dateFormat = "yyyy-MM-dd'T'HH:mm:ss +zzzz"
@@ -127,13 +130,13 @@ class PinSearchViewController: UIViewController, UITableViewDataSource, UITableV
         
         let quote = fetchedResultsQuotesController.object(at: indexPath)
         
-        AirbnbClient.sharedInstance().browseAirbnbListing(quote, completionHandler: {(success, data, error) in
-            
-            if (success) {
-                print(data!)
-            }
-            
-        })
-    
+//        AirbnbClient.sharedInstance().browseAirbnbListing(quote, completionHandler: {(success, data, error) in
+//            
+//            if (success) {
+//                print(data!)
+//            }
+//            
+//        })
+//    
     }
 }

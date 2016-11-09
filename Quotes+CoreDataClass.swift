@@ -67,4 +67,21 @@ public class Quotes: NSManagedObject {
     
 }
 
+extension Quotes {
+    
+    func outboundDestinationIDConvert(_ places: [Places]) {
+        for item in places {
+            if item.placeID == outboundDestinationID {
+                outboundDestinationIDString = "\(item.cityName!), \(item.countryName!)"
+            }
+        }
+    }
+}
+
+
+
+
+
+
+
 
