@@ -4,7 +4,6 @@
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
         <capability name="Alignment constraints to the first baseline" minToolsVersion="6.0"/>
         <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
@@ -15,7 +14,7 @@
         <!--Item-->
         <scene sceneID="Ffm-MA-UqJ">
             <objects>
-                <viewController id="Zql-uG-H8c" customClass="MapViewController" customModule="T_Capstone" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="Zql-uG-H8c" customClass="MapViewController" customModule="Go" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="iId-2E-Fko"/>
                         <viewControllerLayoutGuide type="bottom" id="gBa-hm-PRN"/>
@@ -120,7 +119,7 @@
         <!--Map View Filter View Controller-->
         <scene sceneID="Qs2-rw-rqZ">
             <objects>
-                <viewController id="Er4-Zf-Bxr" customClass="MapViewFilterViewController" customModule="T_Capstone" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="Er4-Zf-Bxr" customClass="MapViewFilterViewController" customModule="Go" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="hHT-W2-l3F"/>
                         <viewControllerLayoutGuide type="bottom" id="TdK-v5-x6x"/>
@@ -271,7 +270,7 @@
         <!--Pin Search View Controller-->
         <scene sceneID="dpS-HX-bqs">
             <objects>
-                <viewController storyboardIdentifier="PinSearchViewController" id="pFl-uz-Grv" customClass="PinSearchViewController" customModule="T_Capstone" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="PinSearchViewController" id="pFl-uz-Grv" customClass="PinSearchViewController" customModule="Go" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="g2p-lQ-CNl"/>
                         <viewControllerLayoutGuide type="bottom" id="M1k-kH-F63"/>
@@ -297,7 +296,7 @@
                                 <rect key="frame" x="0.0" y="59" width="375" height="608"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="CustomTableViewCell" rowHeight="100" id="kPh-rH-TJw" customClass="CustomTableViewCell" customModule="T_Capstone" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="CustomTableViewCell" rowHeight="100" id="kPh-rH-TJw" customClass="CustomTableViewCell" customModule="Go" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="375" height="100"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="kPh-rH-TJw" id="3nL-cg-vgl">

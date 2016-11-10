@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "79C31ADF1DA4A520005A060F"
-               BuildableName = "T Capstone.app"
-               BlueprintName = "T Capstone"
-               ReferencedContainer = "container:T Capstone.xcodeproj">
+               BuildableName = "Go.app"
+               BlueprintName = "Go"
+               ReferencedContainer = "container:Go.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -33,9 +33,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "79C31AF31DA4A520005A060F"
-               BuildableName = "T CapstoneTests.xctest"
-               BlueprintName = "T CapstoneTests"
-               ReferencedContainer = "container:T Capstone.xcodeproj">
+               BuildableName = "GoTests.xctest"
+               BlueprintName = "GoTests"
+               ReferencedContainer = "container:Go.xcodeproj">
             </BuildableReference>
          </TestableReference>
          <TestableReference
@@ -43,9 +43,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "79C31AFE1DA4A520005A060F"
-               BuildableName = "T CapstoneUITests.xctest"
-               BlueprintName = "T CapstoneUITests"
-               ReferencedContainer = "container:T Capstone.xcodeproj">
+               BuildableName = "GoUITests.xctest"
+               BlueprintName = "GoUITests"
+               ReferencedContainer = "container:Go.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -53,9 +53,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "79C31ADF1DA4A520005A060F"
-            BuildableName = "T Capstone.app"
-            BlueprintName = "T Capstone"
-            ReferencedContainer = "container:T Capstone.xcodeproj">
+            BuildableName = "Go.app"
+            BlueprintName = "Go"
+            ReferencedContainer = "container:Go.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
@@ -76,9 +76,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "79C31ADF1DA4A520005A060F"
-            BuildableName = "T Capstone.app"
-            BlueprintName = "T Capstone"
-            ReferencedContainer = "container:T Capstone.xcodeproj">
+            BuildableName = "Go.app"
+            BlueprintName = "Go"
+            ReferencedContainer = "container:Go.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
@@ -95,9 +95,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "79C31ADF1DA4A520005A060F"
-            BuildableName = "T Capstone.app"
-            BlueprintName = "T Capstone"
-            ReferencedContainer = "container:T Capstone.xcodeproj">
+            BuildableName = "Go.app"
+            BlueprintName = "Go"
+            ReferencedContainer = "container:Go.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

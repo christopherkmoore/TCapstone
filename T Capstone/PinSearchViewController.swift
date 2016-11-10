@@ -41,7 +41,6 @@ class PinSearchViewController: UIViewController, UITableViewDataSource, UITableV
         let fetchRequestPlaces: NSFetchRequest<Places> = Places.fetchRequest()
         fetchRequestPlaces.predicate = NSPredicate(format: "pin == %@", self.pin)
         fetchRequestPlaces.sortDescriptors = []
-//        fetchRequestPlaces.predicate = NSPredicate(format: "pin == %@", self.pin)
         
         fetchedResultsQuotesController = NSFetchedResultsController(fetchRequest: fetchRequestQuotes, managedObjectContext: sharedContext, sectionNameKeyPath: nil, cacheName: nil)
         fetchedResultsPlacesController = NSFetchedResultsController(fetchRequest: fetchRequestPlaces, managedObjectContext: sharedContext, sectionNameKeyPath: nil, cacheName: nil)
@@ -61,40 +60,19 @@ class PinSearchViewController: UIViewController, UITableViewDataSource, UITableV
 
         fetchedResultsQuotesController.delegate = self
 
-//        convertPlaces()
         tableView.dataSource = self
         tableView.delegate = self
         
     }
-
-    
-//    func convertPlaces () {
-//        let quotes = fetchedResultsQuotesController.fetchedObjects
-//        let places = fetchedResultsPlacesController.fetchedObjects
-//        
-//        //This can probably be replaced with one of the higher level functions map filter reduce
-//        
-//        //OutboundDestination
-//        for item in places! {
-//            for quote in quotes! {
-//                if item.placeID == quote.outboundDestinationID {
-//                    if let cityName = item.cityName {
-//                        if let countryName = item.countryName {
-//                            quote.outboundDestinationIDString = "\(cityName), \(countryName)"
-//                        }
-//                    }
-//                    
-//                
-//                }
-//            }
-//        }
-//    }
-    
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         let num = fetchedResultsQuotesController.fetchedObjects?.count
+        
+        if num == 0 {
+            displayError(self, error: "error loading")
+        }
+        
         return num!
-
         
     }
     
@@ -139,4 +117,19 @@ class PinSearchViewController: UIViewController, UITableViewDataSource, UITableV
 //        })
 //    
     }
+}
+
+
+
+extension PinSearchViewController {
+    
+    func displayError (_ vc: UIViewController, error: String?) {
+        let alertController = UIAlertController(title: "It's possible your aim is bad.", message: "If you didn't drop me in the ocean, reload the page.", preferredStyle: .alert)
+        let action = UIAlertAction(title: "Done", style: UIAlertActionStyle.default, handler: {(paramAction: UIAlertAction!) in
+            print(paramAction.title!)})
+        
+        alertController.addAction(action)
+        vc.present(alertController, animated: true, completion: nil)
+    }
+        
 }

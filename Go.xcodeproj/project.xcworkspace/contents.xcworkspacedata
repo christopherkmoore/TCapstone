@@ -2,6 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "self:T Capstone.xcodeproj">
+      location = "self:/Users/modelf/iOS_Developer_Nanodegree/T Capstone/Go.xcodeproj">
    </FileRef>
 </Workspace>
