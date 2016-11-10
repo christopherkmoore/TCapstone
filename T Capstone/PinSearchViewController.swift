@@ -67,11 +67,7 @@ class PinSearchViewController: UIViewController, UITableViewDataSource, UITableV
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         let num = fetchedResultsQuotesController.fetchedObjects?.count
-        
-        if num == 0 {
-            displayError(self, error: "error loading")
-        }
-        
+
         return num!
         
     }
@@ -79,8 +75,6 @@ class PinSearchViewController: UIViewController, UITableViewDataSource, UITableV
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell{
 
         let cell = tableView.dequeueReusableCell(withIdentifier: "CustomTableViewCell", for: indexPath) as! CustomTableViewCell
-        
-
 
         configureCell(cell: cell, indexPath: indexPath)
         return cell
@@ -119,17 +113,3 @@ class PinSearchViewController: UIViewController, UITableViewDataSource, UITableV
     }
 }
 
-
-
-extension PinSearchViewController {
-    
-    func displayError (_ vc: UIViewController, error: String?) {
-        let alertController = UIAlertController(title: "It's possible your aim is bad.", message: "If you didn't drop me in the ocean, reload the page.", preferredStyle: .alert)
-        let action = UIAlertAction(title: "Done", style: UIAlertActionStyle.default, handler: {(paramAction: UIAlertAction!) in
-            print(paramAction.title!)})
-        
-        alertController.addAction(action)
-        vc.present(alertController, animated: true, completion: nil)
-    }
-        
-}

@@ -346,7 +346,6 @@ protocol APICall {
     
     func grabQuotes(_ pin: Pin)
     func grabPlaces(_ pin: Pin)
-    func displayError (_ vc: UIViewController, error: String?)
 }
 
 extension APICall {
@@ -378,7 +377,14 @@ extension APICall {
             } else {
                 self.sharedContext.delete(pin)
                 CoreDataStackManager.sharedInstance().saveContext()
-                self.displayError(self as! UIViewController, error: error)
+                self.displayNetworkError(self as! UIViewController, error: error)
+            }
+            
+            if places == nil {
+                self.displayNoQuotesError(self as! UIViewController, error: error)
+//                self.mapView.removeAnnotation(pin)
+                self.sharedContext.delete(pin)
+                CoreDataStackManager.sharedInstance().saveContext()
             }
         }
     }
@@ -390,6 +396,12 @@ extension APICall {
             
             SkywaysClient.sharedInstance().browseCacheQuotes(pin) {(success, quotes, places, error) in
                 
+                print("success = \(success)")
+                print("quotes = \(quotes)")
+                print("places = \(places)")
+                print("error \(error)")
+                    
+                    
                 if (success) {
                     if let data = quotes {
                         DispatchQueue.main.async {
@@ -400,6 +412,7 @@ extension APICall {
                                 
                                 quotes.pin = pin
                                 
+                                
                                 return quotes
                             }
                             CoreDataStackManager.sharedInstance().saveContext()
@@ -409,13 +422,21 @@ extension APICall {
                 else {
                     self.sharedContext.delete(pin)
                     CoreDataStackManager.sharedInstance().saveContext()
-                    self.displayError(self as! UIViewController, error: error)
+                    self.displayNetworkError(self as! UIViewController, error: error)
                 }
+                
+                if quotes == nil {
+                    self.displayNoQuotesError(self as! UIViewController, error: error)
+//                    self.mapView.removeAnnotation(pin)
+                    self.sharedContext.delete(pin)
+                    CoreDataStackManager.sharedInstance().saveContext()
+                }
+                
             }
         }
     }
     
-    func displayError (_ vc: UIViewController, error: String?) {
+    func displayNetworkError (_ vc: UIViewController, error: String?) {
         if let error = error {
             let alertController = UIAlertController(title: "Error", message: error, preferredStyle: .alert)
             let action = UIAlertAction(title: "Done", style: UIAlertActionStyle.default, handler: {(paramAction: UIAlertAction!) in
@@ -425,6 +446,15 @@ extension APICall {
             vc.present(alertController, animated: true, completion: nil)
         }
         
+    }
+    
+    func displayNoQuotesError (_ vc: UIViewController, error: String?) {
+        let alertController = UIAlertController(title: "It's possible your aim is bad.", message: "Aim for an airport, not the ocean.", preferredStyle: .alert)
+        let action = UIAlertAction(title: "Done", style: UIAlertActionStyle.default, handler: {(paramAction: UIAlertAction!) in
+            print(paramAction.title!)})
+        
+        alertController.addAction(action)
+        vc.present(alertController, animated: true, completion: nil)
     }
 }
 
