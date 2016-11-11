@@ -354,10 +354,8 @@ extension APICall {
     
     func grabPlaces(_ pin: Pin ) {
         
-        SkywaysClient.sharedInstance().browseCacheQuotes(pin) {(success, quotes, places, error) in
-            
-            print(success)
-            
+        SkywaysClient.sharedInstance().browseCacheQuotes(pin) {(success, quotes, places, carriers, error) in
+                        
             if (success) {
                 if let data = places {
                     DispatchQueue.main.async {
@@ -394,14 +392,8 @@ extension APICall {
     func grabQuotes (_ pin: Pin ) {
         if pin.quotes?.count == 0 {
             
-            SkywaysClient.sharedInstance().browseCacheQuotes(pin) {(success, quotes, places, error) in
-                
-                print("success = \(success)")
-                print("quotes = \(quotes)")
-                print("places = \(places)")
-                print("error \(error)")
-                    
-                    
+            SkywaysClient.sharedInstance().browseCacheQuotes(pin) {(success, quotes, places, carriers, error) in
+        
                 if (success) {
                     if let data = quotes {
                         DispatchQueue.main.async {
