@@ -18,6 +18,8 @@
 		797C78F61DC64FCA001D809E /* To_do in Resources */ = {isa = PBXBuildFile; fileRef = 797C78F51DC64FCA001D809E /* To_do */; };
 		798302B81DD3B0F200350BCF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 798302B71DD3B0F200350BCF /* Assets.xcassets */; };
 		799D25681DC28978005AC0D9 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 799D25671DC28978005AC0D9 /* CoreLocation.framework */; };
+		79BADB451DD6700B0030ED9D /* Carriers+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79BADB431DD6700B0030ED9D /* Carriers+CoreDataClass.swift */; };
+		79BADB461DD6700B0030ED9D /* Carriers+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79BADB441DD6700B0030ED9D /* Carriers+CoreDataProperties.swift */; };
 		79C31AE41DA4A520005A060F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79C31AE31DA4A520005A060F /* AppDelegate.swift */; };
 		79C31AEE1DA4A520005A060F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 79C31AEC1DA4A520005A060F /* LaunchScreen.storyboard */; };
 		79C31AF91DA4A520005A060F /* T_CapstoneTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79C31AF81DA4A520005A060F /* T_CapstoneTests.swift */; };
@@ -66,6 +68,8 @@
 		797C78F51DC64FCA001D809E /* To_do */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = To_do; sourceTree = "<group>"; };
 		798302B71DD3B0F200350BCF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		799D25671DC28978005AC0D9 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		79BADB431DD6700B0030ED9D /* Carriers+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Carriers+CoreDataClass.swift"; path = "../Carriers+CoreDataClass.swift"; sourceTree = "<group>"; };
+		79BADB441DD6700B0030ED9D /* Carriers+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Carriers+CoreDataProperties.swift"; path = "../Carriers+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		79C31AE01DA4A520005A060F /* Go.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Go.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		79C31AE31DA4A520005A060F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		79C31AED1DA4A520005A060F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -205,11 +209,13 @@
 		79C31B171DA4A759005A060F /* CoreData */ = {
 			isa = PBXGroup;
 			children = (
+				79BADB441DD6700B0030ED9D /* Carriers+CoreDataProperties.swift */,
 				795140461DCC435600887D4E /* OriginPin+CoreDataProperties.swift */,
 				79E5EE481DC92F9C0071AA39 /* Pin+CoreDataProperties.swift */,
 				79CAC4781DA86B2900D38CCE /* Places+CoreDataProperties.swift */,
 				79CAC4791DA86B2900D38CCE /* Quotes+CoreDataProperties.swift */,
 				79C31B341DA5ACFA005A060F /* Model.xcdatamodeld */,
+				79BADB431DD6700B0030ED9D /* Carriers+CoreDataClass.swift */,
 				795140451DCC435600887D4E /* OriginPin+CoreDataClass.swift */,
 				79C31B1B1DA4A945005A060F /* Places+CoreDataClass.swift */,
 				79C31B1D1DA4A945005A060F /* Pin+CoreDataClass.swift */,
@@ -380,11 +386,13 @@
 				79C31B161DA4A6DB005A060F /* SkywaysConstants.swift in Sources */,
 				7902C6171DB09377005FA334 /* AirbnbMapViewController.swift in Sources */,
 				79C31B2F1DA57312005A060F /* CustomTableViewCell.swift in Sources */,
+				79BADB451DD6700B0030ED9D /* Carriers+CoreDataClass.swift in Sources */,
 				79C31B2B1DA4AEF9005A060F /* MapViewController.swift in Sources */,
 				79C31B211DA4A945005A060F /* Places+CoreDataClass.swift in Sources */,
 				79C31B231DA4A945005A060F /* Pin+CoreDataClass.swift in Sources */,
 				79C31B141DA4A620005A060F /* SkywaysClient.swift in Sources */,
 				79C31B251DA4A945005A060F /* Quotes+CoreDataClass.swift in Sources */,
+				79BADB461DD6700B0030ED9D /* Carriers+CoreDataProperties.swift in Sources */,
 				79CAC47C1DA86B2900D38CCE /* Quotes+CoreDataProperties.swift in Sources */,
 				7902C6131DB069B6005FA334 /* AirbnbClient.swift in Sources */,
 				79C31B2D1DA4B3D8005A060F /* PinSearchViewController.swift in Sources */,

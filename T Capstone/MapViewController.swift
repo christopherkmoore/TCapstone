@@ -202,8 +202,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
                 }
                 pins.append(newPin!)
                 mapView.addAnnotation(newPin!)
-                grabPlaces(newPin!)
-                grabQuotes(newPin!)
+                grabAPIDataFor(newPin!)
                 CoreDataStackManager.sharedInstance().saveContext()
                 print("new pin created in last if statement")
             }
@@ -343,87 +342,58 @@ extension MapViewController {
 protocol APICall {
     
     var sharedContext: NSManagedObjectContext { get }
-    
-    func grabQuotes(_ pin: Pin)
-    func grabPlaces(_ pin: Pin)
+
+    func grabAPIDataFor(_ pin: Pin)
 }
 
 extension APICall {
+
     
-    //MARK loading places
+    func grabAPIDataFor(_ pin: Pin) {
     
-    func grabPlaces(_ pin: Pin ) {
-        
         SkywaysClient.sharedInstance().browseCacheQuotes(pin) {(success, quotes, places, carriers, error) in
-                        
             if (success) {
-                if let data = places {
+                // get places and stash in coreData
+                if let safePlaces = places {
                     DispatchQueue.main.async {
-                        
-                        let mappedArray = data.map() {(item: [String:AnyObject]) -> Places in
-                            
+                        let _ = safePlaces.map() {(item: [String: AnyObject]) -> Places in
                             let places = Places(content: item, context: self.sharedContext)
-                            
                             places.pin = pin
-                            
                             return places
                         }
-                        CoreDataStackManager.sharedInstance().saveContext()
-                        
                     }
                 }
-            } else {
+                // get quotes and stash in coreData
+                if let safeQuotes = quotes {
+                    DispatchQueue.main.async {
+                        let _ = safeQuotes.map() {(item: [String: AnyObject]) -> Quotes in
+                            let quotes = Quotes(content: item, context: self.sharedContext)
+                            quotes.pin = pin
+                            return quotes
+                        }
+                    }
+                }
+                if let safeCarriers = carriers {
+                    DispatchQueue.main.async {
+                        let _ = safeCarriers.map() {(item: [String: AnyObject]) -> Carriers in
+                            let carriers = Carriers(content: item, context: self.sharedContext)
+                            carriers.pin = pin
+                            return carriers
+                        }
+                    }
+                }
+            }
+            // handle error if success is false
+            if !(success) {
                 self.sharedContext.delete(pin)
                 CoreDataStackManager.sharedInstance().saveContext()
                 self.displayNetworkError(self as! UIViewController, error: error)
             }
-            
-            if places == nil {
-                self.displayNoQuotesError(self as! UIViewController, error: error)
-//                self.mapView.removeAnnotation(pin)
+            // if success == true but quotes or places == nil
+            if quotes == nil || places == nil {
+                self.displayDataNilError(self as! UIViewController, error: error)
                 self.sharedContext.delete(pin)
                 CoreDataStackManager.sharedInstance().saveContext()
-            }
-        }
-    }
-    
-    
-    
-    func grabQuotes (_ pin: Pin ) {
-        if pin.quotes?.count == 0 {
-            
-            SkywaysClient.sharedInstance().browseCacheQuotes(pin) {(success, quotes, places, carriers, error) in
-        
-                if (success) {
-                    if let data = quotes {
-                        DispatchQueue.main.async {
-                            
-                            let mappedArrayQuotes = data.map() {(item: [String:AnyObject]) -> Quotes in
-                                
-                                let quotes = Quotes(content: item, context: self.sharedContext)
-                                
-                                quotes.pin = pin
-                                
-                                
-                                return quotes
-                            }
-                            CoreDataStackManager.sharedInstance().saveContext()
-                        }
-                    }
-                }
-                else {
-                    self.sharedContext.delete(pin)
-                    CoreDataStackManager.sharedInstance().saveContext()
-                    self.displayNetworkError(self as! UIViewController, error: error)
-                }
-                
-                if quotes == nil {
-                    self.displayNoQuotesError(self as! UIViewController, error: error)
-//                    self.mapView.removeAnnotation(pin)
-                    self.sharedContext.delete(pin)
-                    CoreDataStackManager.sharedInstance().saveContext()
-                }
-                
             }
         }
     }
@@ -440,7 +410,7 @@ extension APICall {
         
     }
     
-    func displayNoQuotesError (_ vc: UIViewController, error: String?) {
+    func displayDataNilError (_ vc: UIViewController, error: String?) {
         let alertController = UIAlertController(title: "It's possible your aim is bad.", message: "Aim for an airport, not the ocean.", preferredStyle: .alert)
         let action = UIAlertAction(title: "Done", style: UIAlertActionStyle.default, handler: {(paramAction: UIAlertAction!) in
             print(paramAction.title!)})
