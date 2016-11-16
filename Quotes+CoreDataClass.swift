@@ -52,6 +52,15 @@ public class Quotes: NSManagedObject {
             }
         }
         
+        
+        if carrier?.carrierID == outboundCarrierID {
+            outboundCarrierIDString = carrier?.name
+        }
+        
+        if carrier?.carrierID == inboundCarrierID {
+            inboundCarrierIDString = carrier?.name
+        }
+        
 
         // need to create conversions
         
@@ -72,10 +81,52 @@ extension Quotes {
     func outboundDestinationIDConvert(_ places: [Places]) {
         for item in places {
             if item.placeID == outboundDestinationID {
-                outboundDestinationIDString = "\(item.cityName!), \(item.countryName!)"
+                outboundDestinationIDString = "\(item.cityName!)"
             }
         }
     }
+    
+    func outboundOriginIDConvert(_ places: [Places]) {
+        for item in places {
+            if item.placeID == outboundOriginID {
+                outboundOriginIDString = "\(item.cityName!) -> "
+            }
+        }
+    }
+    
+    func outboundCarrierIDConvert(_ carrier: [Carriers]) {
+        for item in carrier {
+            if item.carrierID == outboundCarrierID {
+                outboundCarrierIDString = "\(item.name!)"
+            }
+        }
+    }
+    
+    func inboundDestinationIDConvert(_ places: [Places]) {
+        for item in places {
+            if item.placeID == inboundDestinationID {
+                inboundDestinationIDString = "\(item.cityName!)"
+            }
+        }
+    }
+    
+    func inboundOriginIDConvert(_ places: [Places]) {
+        for item in places {
+            if item.placeID == inboundOriginID {
+                inboundOriginIDString = "\(item.cityName!) -> "
+            }
+        }
+    }
+    
+    func inboundCarrierIDConvert(_ carrier: [Carriers]) {
+        for item in carrier {
+            if item.carrierID == inboundCarrierID {
+                inboundCarrierIDString = "\(item.name!)"
+            }
+        }
+    }
+    
+    
 }
 
 

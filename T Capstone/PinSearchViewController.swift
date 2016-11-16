@@ -21,6 +21,7 @@ class PinSearchViewController: UIViewController, NSFetchedResultsControllerDeleg
     
     var fetchedResultsQuotesController: NSFetchedResultsController<Quotes>!
     var fetchedResultsPlacesController: NSFetchedResultsController<Places>!
+    var fetchedResultsCarriersController: NSFetchedResultsController<Carriers>!
     
     var sharedContext: NSManagedObjectContext {
         return CoreDataStackManager.sharedInstance().managedObjectContext
@@ -42,8 +43,12 @@ class PinSearchViewController: UIViewController, NSFetchedResultsControllerDeleg
         fetchRequestPlaces.predicate = NSPredicate(format: "pin == %@", self.pin)
         fetchRequestPlaces.sortDescriptors = []
         
+        let fetchRequestCarriers: NSFetchRequest<Carriers> = Carriers.fetchRequest()
+        fetchRequestCarriers.sortDescriptors = []
+        
         fetchedResultsQuotesController = NSFetchedResultsController(fetchRequest: fetchRequestQuotes, managedObjectContext: sharedContext, sectionNameKeyPath: nil, cacheName: nil)
         fetchedResultsPlacesController = NSFetchedResultsController(fetchRequest: fetchRequestPlaces, managedObjectContext: sharedContext, sectionNameKeyPath: nil, cacheName: nil)
+        fetchedResultsCarriersController = NSFetchedResultsController(fetchRequest: fetchRequestCarriers, managedObjectContext: sharedContext, sectionNameKeyPath: nil, cacheName: nil)
 
         
         do {
@@ -56,6 +61,12 @@ class PinSearchViewController: UIViewController, NSFetchedResultsControllerDeleg
             try fetchedResultsPlacesController.performFetch()
         } catch let error as NSError {
             print("Unable to call fetchedResultsPlacesController, error = \(error.localizedDescription)")
+        }
+        
+        do {
+            try fetchedResultsCarriersController.performFetch()
+        } catch let error as NSError {
+            print("Carriers fetch failed with error: \(error.localizedDescription)")
         }
 
         fetchedResultsQuotesController.delegate = self
@@ -109,6 +120,14 @@ extension PinSearchViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         let quote = fetchedResultsQuotesController.object(at: indexPath)
+        
+        let controller = self.storyboard?.instantiateViewController(withIdentifier: "PinDisplayViewController") as! PinDisplayViewController
+        controller.quotes = quote
+        controller.pin = pin
+        controller.places = fetchedResultsPlacesController.fetchedObjects
+        controller.carriers = fetchedResultsCarriersController.fetchedObjects
+        
+        present(controller, animated: true, completion: nil)
         
         //        AirbnbClient.sharedInstance().browseAirbnbListing(quote, completionHandler: {(success, data, error) in
         //

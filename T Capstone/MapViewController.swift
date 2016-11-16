@@ -16,8 +16,7 @@ class MapViewController: UIViewController, NSFetchedResultsControllerDelegate, A
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var deleteView: UIView!
     @IBOutlet weak var editButton: UIBarButtonItem!
-    
-    
+        
     @IBOutlet weak var switchForPin: UISwitch!
     @IBOutlet weak var switchTitle: UINavigationItem!
     
@@ -148,16 +147,15 @@ class MapViewController: UIViewController, NSFetchedResultsControllerDelegate, A
     
     func handleLongPress(_ gestureRecognizer: UIGestureRecognizer) {
         
-        
         if gestureRecognizer.state != .began { return }
         let touchPoint = gestureRecognizer.location(in: self.mapView)
         let touchMapCoordinates = mapView.convert(touchPoint, toCoordinateFrom: self.mapView)
         let newMapPoint = MKPointAnnotation()        
         newMapPoint.coordinate = CLLocationCoordinate2DMake(touchMapCoordinates.latitude, touchMapCoordinates.longitude)
-        
-        
+
         switch gestureRecognizer.state {
         case .began:
+
             
             if switchForPin.isOn == true {
                 
@@ -197,13 +195,14 @@ class MapViewController: UIViewController, NSFetchedResultsControllerDelegate, A
                 CoreDataStackManager.sharedInstance().saveContext()
                 print("new pin created in last if statement")
             }
-
+            
             break
         default:
             return
         }
         
     }
+    
 }
 
 //delegate functions for MapKit
@@ -335,6 +334,7 @@ protocol APICall {
     var sharedContext: NSManagedObjectContext { get }
 
     func grabAPIDataFor(_ pin: Pin)
+    
 }
 
 extension APICall {
@@ -343,38 +343,33 @@ extension APICall {
     func grabAPIDataFor(_ pin: Pin) {
     
         SkywaysClient.sharedInstance().browseCacheQuotes(pin) {(success, quotes, places, carriers, error) in
+            
             if (success) {
                 // get carriers and stash in coreData
                 if let safeCarriers = carriers {
-                    DispatchQueue.main.async {
                         let _ = safeCarriers.map() {(item: [String: AnyObject]) -> Carriers in
                             let carriers = Carriers(content: item, context: self.sharedContext)
                             print("finished saving carriers")
                             return carriers
                         }
-                    }
                 }
                 // get places and stash in coreData
                 if let safePlaces = places {
-                    DispatchQueue.main.async {
                         let _ = safePlaces.map() {(item: [String: AnyObject]) -> Places in
                             let places = Places(content: item, context: self.sharedContext)
                             places.pin = pin
                             print("finished saving places")
                             return places
                         }
-                    }
                 }
                 // get quotes and stash in coreData
                 if let safeQuotes = quotes {
-                    DispatchQueue.main.async {
                         let _ = safeQuotes.map() {(item: [String: AnyObject]) -> Quotes in
                             let quotes = Quotes(content: item, context: self.sharedContext)
                             quotes.pin = pin
                             print("finished saving quotes")
                             return quotes
                         }
-                    }
                 }
             }
             // handle error if success is false

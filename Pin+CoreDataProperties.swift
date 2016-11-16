@@ -1,8 +1,8 @@
 //
 //  Pin+CoreDataProperties.swift
-//  T Capstone
+//  Go
 //
-//  Created by modelf on 11/6/16.
+//  Created by modelf on 11/16/16.
 //  Copyright © 2016 modelf. All rights reserved.
 //
 
@@ -18,25 +18,8 @@ extension Pin {
 
     @NSManaged public var latitude: Double
     @NSManaged public var longitude: Double
-    @NSManaged public var quotes: NSSet?
     @NSManaged public var places: NSSet?
-
-}
-
-// MARK: Generated accessors for quotes
-extension Pin {
-
-    @objc(addQuotesObject:)
-    @NSManaged public func addToQuotes(_ value: Quotes)
-
-    @objc(removeQuotesObject:)
-    @NSManaged public func removeFromQuotes(_ value: Quotes)
-
-    @objc(addQuotes:)
-    @NSManaged public func addToQuotes(_ values: NSSet)
-
-    @objc(removeQuotes:)
-    @NSManaged public func removeFromQuotes(_ values: NSSet)
+    @NSManaged public var quotes: NSSet?
 
 }
 
@@ -54,5 +37,22 @@ extension Pin {
 
     @objc(removePlaces:)
     @NSManaged public func removeFromPlaces(_ values: NSSet)
+
+}
+
+// MARK: Generated accessors for quotes
+extension Pin {
+
+    @objc(addQuotesObject:)
+    @NSManaged public func addToQuotes(_ value: Quotes)
+
+    @objc(removeQuotesObject:)
+    @NSManaged public func removeFromQuotes(_ value: Quotes)
+
+    @objc(addQuotes:)
+    @NSManaged public func addToQuotes(_ values: NSSet)
+
+    @objc(removeQuotes:)
+    @NSManaged public func removeFromQuotes(_ values: NSSet)
 
 }

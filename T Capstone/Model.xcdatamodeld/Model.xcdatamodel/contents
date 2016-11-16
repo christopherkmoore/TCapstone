@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="11542" systemVersion="16B2555" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
-    <entity name="Carriers" representedClassName=".Carriers" parentEntity="Quotes" syncable="YES">
+    <entity name="Carriers" representedClassName=".Carriers" syncable="YES">
         <attribute name="carrierID" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
-        <relationship name="quotes" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Quotes" inverseName="carrier" inverseEntity="Quotes" syncable="YES"/>
+        <relationship name="quotes" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Quotes" inverseName="carrier" inverseEntity="Quotes" syncable="YES"/>
     </entity>
     <entity name="OriginPin" representedClassName=".OriginPin" syncable="YES">
         <attribute name="originLatitude" optional="YES" attributeType="Double" usesScalarValueType="YES" syncable="YES"/>
@@ -12,7 +12,6 @@
     <entity name="Pin" representedClassName=".Pin" syncable="YES">
         <attribute name="latitude" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="longitude" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
-        <relationship name="carriers" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Carriers" syncable="YES"/>
         <relationship name="places" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Places" inverseName="pin" inverseEntity="Places" syncable="YES"/>
         <relationship name="quotes" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Quotes" inverseName="pin" inverseEntity="Quotes" syncable="YES"/>
     </entity>
@@ -51,7 +50,7 @@
     <elements>
         <element name="Carriers" positionX="-54" positionY="108" width="128" height="90"/>
         <element name="OriginPin" positionX="-45" positionY="72" width="128" height="75"/>
-        <element name="Pin" positionX="-63" positionY="-18" width="128" height="120"/>
+        <element name="Pin" positionX="-63" positionY="-18" width="128" height="105"/>
         <element name="Places" positionX="-54" positionY="-9" width="128" height="135"/>
         <element name="Quotes" positionX="-36" positionY="9" width="128" height="345"/>
     </elements>
