@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="11542" systemVersion="16B2555" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
-    <entity name="Carriers" representedClassName=".Carriers" syncable="YES">
+    <entity name="Carriers" representedClassName=".Carriers" parentEntity="Quotes" syncable="YES">
         <attribute name="carrierID" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
-        <relationship name="pin" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Pin" inverseName="carriers" inverseEntity="Pin" syncable="YES"/>
+        <relationship name="quotes" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Quotes" inverseName="carrier" inverseEntity="Quotes" syncable="YES"/>
     </entity>
     <entity name="OriginPin" representedClassName=".OriginPin" syncable="YES">
         <attribute name="originLatitude" optional="YES" attributeType="Double" usesScalarValueType="YES" syncable="YES"/>
@@ -12,7 +12,7 @@
     <entity name="Pin" representedClassName=".Pin" syncable="YES">
         <attribute name="latitude" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="longitude" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
-        <relationship name="carriers" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Carriers" inverseName="pin" inverseEntity="Carriers" syncable="YES"/>
+        <relationship name="carriers" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Carriers" syncable="YES"/>
         <relationship name="places" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Places" inverseName="pin" inverseEntity="Places" syncable="YES"/>
         <relationship name="quotes" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Quotes" inverseName="pin" inverseEntity="Quotes" syncable="YES"/>
     </entity>
@@ -25,18 +25,24 @@
         <relationship name="quote" optional="YES" toMany="YES" deletionRule="No Action" destinationEntity="Quotes" inverseName="place" inverseEntity="Quotes" syncable="YES"/>
     </entity>
     <entity name="Quotes" representedClassName=".Quotes" syncable="YES">
-        <attribute name="inboundCarrierID" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="inboundCarrierID" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="inboundCarrierIDString" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="inboundDepartureDate" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
-        <attribute name="inboundDestinationID" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="inboundOriginID" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="inboundDestinationID" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="inboundDestinationIDString" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="inboundOriginID" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="inboundOriginIDString" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="isDirect" optional="YES" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="outboundCarrierID" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="outboundCarrierIDString" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="outboundDepartureDate" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="outboundDestinationID" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="outboundDestinationIDString" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="outboundOriginID" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="outboundOriginIDString" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="price" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="quoteID" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <relationship name="carrier" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Carriers" inverseName="quotes" inverseEntity="Carriers" syncable="YES"/>
         <relationship name="pin" optional="YES" maxCount="1" deletionRule="Nullify" ordered="YES" destinationEntity="Pin" inverseName="quotes" inverseEntity="Pin" syncable="YES"/>
         <relationship name="place" optional="YES" toMany="YES" deletionRule="No Action" destinationEntity="Places" inverseName="quote" inverseEntity="Places" syncable="YES"/>
     </entity>
@@ -47,6 +53,6 @@
         <element name="OriginPin" positionX="-45" positionY="72" width="128" height="75"/>
         <element name="Pin" positionX="-63" positionY="-18" width="128" height="120"/>
         <element name="Places" positionX="-54" positionY="-9" width="128" height="135"/>
-        <element name="Quotes" positionX="-36" positionY="9" width="128" height="255"/>
+        <element name="Quotes" positionX="-36" positionY="9" width="128" height="345"/>
     </elements>
 </model>

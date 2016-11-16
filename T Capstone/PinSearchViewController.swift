@@ -13,7 +13,7 @@ import MapKit
 import AddressBookUI
 
 
-class PinSearchViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, NSFetchedResultsControllerDelegate {
+class PinSearchViewController: UIViewController, NSFetchedResultsControllerDelegate {
     
     @IBOutlet weak var tableView: UITableView!
     
@@ -65,17 +65,24 @@ class PinSearchViewController: UIViewController, UITableViewDataSource, UITableV
         
     }
     
+
+}
+
+extension PinSearchViewController: UITableViewDataSource, UITableViewDelegate {
+    
+    // MARK TableViews
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         let num = fetchedResultsQuotesController.fetchedObjects?.count
-
+        
         return num!
         
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell{
-
+        
         let cell = tableView.dequeueReusableCell(withIdentifier: "CustomTableViewCell", for: indexPath) as! CustomTableViewCell
-
+        
         configureCell(cell: cell, indexPath: indexPath)
         return cell
     }
@@ -85,6 +92,7 @@ class PinSearchViewController: UIViewController, UITableViewDataSource, UITableV
         let places = fetchedResultsPlacesController.fetchedObjects
         if let places = places {
             quote.outboundDestinationIDConvert(places)
+            cell.setNeedsLayout()
         }
         
         let timeDate = DateFormatter()
@@ -92,9 +100,9 @@ class PinSearchViewController: UIViewController, UITableViewDataSource, UITableV
         timeDate.timeStyle = .long
         timeDate.dateStyle = .medium
         cell.flightDate.text = timeDate.string(from: quote.inboundDepartureDate! as Date)
-
+        
         cell.destination.text = quote.outboundDestinationIDString
-            
+        
         cell.minPrice.text = "$\(quote.price)0"
     }
     
@@ -102,14 +110,14 @@ class PinSearchViewController: UIViewController, UITableViewDataSource, UITableV
         
         let quote = fetchedResultsQuotesController.object(at: indexPath)
         
-//        AirbnbClient.sharedInstance().browseAirbnbListing(quote, completionHandler: {(success, data, error) in
-//            
-//            if (success) {
-//                print(data!)
-//            }
-//            
-//        })
-//    
+        //        AirbnbClient.sharedInstance().browseAirbnbListing(quote, completionHandler: {(success, data, error) in
+        //
+        //            if (success) {
+        //                print(data!)
+        //            }
+        //            
+        //        })
+        //    
     }
 }
 

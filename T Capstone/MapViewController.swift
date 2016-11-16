@@ -11,7 +11,7 @@ import MapKit
 import CoreData
 import CoreLocation
 
-class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate, NSFetchedResultsControllerDelegate, APICall {
+class MapViewController: UIViewController, NSFetchedResultsControllerDelegate, APICall {
     
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var deleteView: UIView!
@@ -216,7 +216,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
 }
 
 //delegate functions for MapKit
-extension MapViewController {
+extension MapViewController: MKMapViewDelegate {
 
     //MARK MapView delegate functions
     
@@ -296,7 +296,7 @@ extension MapViewController {
     }
 }
 // delegates functions for CLLocationManager
-extension MapViewController {
+extension MapViewController: CLLocationManagerDelegate {
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         
@@ -353,12 +353,23 @@ extension APICall {
     
         SkywaysClient.sharedInstance().browseCacheQuotes(pin) {(success, quotes, places, carriers, error) in
             if (success) {
+                // get carriers and stash in coreData
+                if let safeCarriers = carriers {
+                    DispatchQueue.main.async {
+                        let _ = safeCarriers.map() {(item: [String: AnyObject]) -> Carriers in
+                            let carriers = Carriers(content: item, context: self.sharedContext)
+                            print("finished saving carriers")
+                            return carriers
+                        }
+                    }
+                }
                 // get places and stash in coreData
                 if let safePlaces = places {
                     DispatchQueue.main.async {
                         let _ = safePlaces.map() {(item: [String: AnyObject]) -> Places in
                             let places = Places(content: item, context: self.sharedContext)
                             places.pin = pin
+                            print("finished saving places")
                             return places
                         }
                     }
@@ -369,16 +380,8 @@ extension APICall {
                         let _ = safeQuotes.map() {(item: [String: AnyObject]) -> Quotes in
                             let quotes = Quotes(content: item, context: self.sharedContext)
                             quotes.pin = pin
+                            print("finished saving quotes")
                             return quotes
-                        }
-                    }
-                }
-                if let safeCarriers = carriers {
-                    DispatchQueue.main.async {
-                        let _ = safeCarriers.map() {(item: [String: AnyObject]) -> Carriers in
-                            let carriers = Carriers(content: item, context: self.sharedContext)
-                            carriers.pin = pin
-                            return carriers
                         }
                     }
                 }

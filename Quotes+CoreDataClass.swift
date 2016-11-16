@@ -37,9 +37,9 @@ public class Quotes: NSManagedObject {
         }
         
         if let inboundLeg = content["InboundLeg"] as? [String: AnyObject] {
-            inboundDestinationID = inboundLeg["DestinationId"] as? String
-            inboundOriginID = inboundLeg["OriginId"] as? String
-            if let newCarrier = inboundLeg["CarrierIds"] as? [String] {
+            inboundDestinationID = inboundLeg["DestinationId"] as! Int32
+            inboundOriginID = inboundLeg["OriginId"] as! Int32
+            if let newCarrier = inboundLeg["CarrierIds"] as? [Int32] {
                 if newCarrier.count > 0 {
                     inboundCarrierID = newCarrier.first!
                     // is there a case that could cause a crash above?

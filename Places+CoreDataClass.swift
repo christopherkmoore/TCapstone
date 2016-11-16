@@ -26,8 +26,6 @@ public class Places: NSManagedObject {
         cityName = content["CityName"] as? String
         countryName = content["CountryName"] as? String
         
-        
-        
 //        print("saving placeID of \(placeID) to name \(name) with optional values city name = \(cityName) and country name = \(countryName)")
 
     }

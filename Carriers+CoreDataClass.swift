@@ -23,6 +23,9 @@ public class Carriers: NSManagedObject {
         
         carrierID = content["CarrierId"] as! Int32
         name = content["Name"] as? String
+      
+        
+    
     }
     
 }
