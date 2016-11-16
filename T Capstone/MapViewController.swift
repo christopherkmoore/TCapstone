@@ -20,7 +20,6 @@ class MapViewController: UIViewController, NSFetchedResultsControllerDelegate, A
     
     @IBOutlet weak var switchForPin: UISwitch!
     @IBOutlet weak var switchTitle: UINavigationItem!
-//    var editButtonTapped = true
     
     var sharedContext: NSManagedObjectContext {
         return CoreDataStackManager.sharedInstance().managedObjectContext
@@ -58,7 +57,6 @@ class MapViewController: UIViewController, NSFetchedResultsControllerDelegate, A
         return [OriginPin]()
     }
     
-    //Mark deletetion
     func deleteOriginPin() {
         
         if !(originPin.isEmpty) {
@@ -72,17 +70,15 @@ class MapViewController: UIViewController, NSFetchedResultsControllerDelegate, A
     
     func loadMapPins() {
         
-//        DispatchQueue.main.async {
-            deleteOriginPin()
+        deleteOriginPin()
 
-            mapView.removeAnnotations(pins)
-            
-            if mapView.annotations.count == 0 {
-                if pins.count > 0 {
-                   mapView.addAnnotations(pins)
-                }
+        mapView.removeAnnotations(pins)
+        
+        if mapView.annotations.count == 0 {
+            if pins.count > 0 {
+               mapView.addAnnotations(pins)
             }
-//        }
+        }
     }
     
     //Mark Loading Views
@@ -135,20 +131,15 @@ class MapViewController: UIViewController, NSFetchedResultsControllerDelegate, A
         if editButton.title == "Done" {
             UIView.animate(withDuration: 0.7, animations: {
                 self.mapView.frame.origin.y += self.deleteView.frame.height
-                //                self.mapView.frame.origin.y += self.deleteView.frame.height
                 
             })
-            // hide tab bar, remember to animate the drop later.
-            //            self.tabBarController!.tabBar.isHidden = false
             print("center.x durinv Edit true Animation: \(deleteView.center.x)")
             editButton.title = "Edit"
             CoreDataStackManager.sharedInstance().saveContext()
         } else {
             UIView.animate(withDuration: 0.7, animations: {
                 self.mapView.frame.origin.y -= self.deleteView.frame.height
-                //                self.mapView.frame.origin.y -= self.deleteView.frame.height
             })
-            //            self.tabBarController!.tabBar.isHidden = true
             print("center.x during Done true Animation: \(deleteView.center.x)")
             editButton.title = "Done"
             CoreDataStackManager.sharedInstance().saveContext()
@@ -295,8 +286,8 @@ extension MapViewController: MKMapViewDelegate {
         
     }
 }
-// delegates functions for CLLocationManager
 extension MapViewController: CLLocationManagerDelegate {
+    //MARK CLLocationManager Delegates
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         
