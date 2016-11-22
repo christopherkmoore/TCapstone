@@ -13,6 +13,8 @@ You might be surprised how cheap some flights could be ;)
 
 just touch and hold where you'd like to drop the pin, then click it to see where you can go!'
 
+Now available on iTunes. Head on over to https://itunes.apple.com/us/app/travellr/id1174697570?ls=1&mt=8 
+
 Install - 
 build and run in Xcode
 
