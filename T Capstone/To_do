@@ -7,6 +7,7 @@ delete all pins function?
 mapViewFilter functionality is kinda shitty. need to adjust it for better results
 
 calls for origin -> taking too long, reduce number or set price ceiling
+    -> impliment NSFetchedResults updating to tableview. might be nice to not see a black tableView if the user clicks early on the pin.
 
 explication screen.
 

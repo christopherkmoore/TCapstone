@@ -32,7 +32,7 @@ class SkywaysClient {
 //            return "\(newLat),\(newLon)-latlong/"
 //            
 //        }
-                
+        
         var parameters = "\(ParameterValues.market)\(ParameterValues.currency)\(ParameterValues.locale)\(ParameterValues.originPlace)\(ParameterValues.destinationPlace)\(ParameterValues.outboundPartialDate)\(ParameterValues.inboundPartialDate)"
         
         parameters.append("apiKey=\(API.APIKey)")
@@ -43,27 +43,29 @@ class SkywaysClient {
         print(url)
         
         let request = URLRequest(url: Foundation.URL(string: url)!)
-        
-        session.dataTask(with: request, completionHandler: {(data, response, error) in
-         
-            guard let data = data else {
-                completionHandler(false, nil, nil, nil, error?.localizedDescription)
-                return
-            }
-            
-            var parsedObject: AnyObject?
-            do {
-                parsedObject = try JSONSerialization.jsonObject(with: data, options: .allowFragments) as AnyObject
-            } catch {
-                completionHandler(false, nil, nil, nil, error.localizedDescription)
-            }
-            
-            let parsedQuotes = self.parserHelperQuotes(parsedObject)
-            let parsedPlaces = self.parserHelperPlaces(parsedObject)
-            let parsedCarriers = self.parserHelperCarriers(parsedObject)
-            completionHandler(true, parsedQuotes, parsedPlaces, parsedCarriers, nil)
-            
-        }).resume()
+        DispatchQueue.global(qos: .userInitiated).async{ () -> Void in
+
+            self.session.dataTask(with: request, completionHandler: {(data, response, error) in
+             
+                guard let data = data else {
+                    completionHandler(false, nil, nil, nil, error?.localizedDescription)
+                    return
+                }
+                
+                var parsedObject: AnyObject?
+                do {
+                    parsedObject = try JSONSerialization.jsonObject(with: data, options: .allowFragments) as AnyObject
+                } catch {
+                    completionHandler(false, nil, nil, nil, error.localizedDescription)
+                }
+                
+                let parsedQuotes = self.parserHelperQuotes(parsedObject)
+                let parsedPlaces = self.parserHelperPlaces(parsedObject)
+                let parsedCarriers = self.parserHelperCarriers(parsedObject)
+                completionHandler(true, parsedQuotes, parsedPlaces, parsedCarriers, nil)
+                
+            }).resume()
+        }
     }
     
         func parserHelperPlaces(_ data: AnyObject!) -> [[String: AnyObject]]? {
