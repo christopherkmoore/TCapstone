@@ -17,6 +17,8 @@ class PinDisplayViewController: UIViewController {
     var carriers: [Carriers]!
     var pin: Pin?
     
+    enum Status { case inProgress, complete }
+    
     @IBOutlet weak var inboundOrigin: UILabel!
     @IBOutlet weak var inboundDestination: UILabel!
     
@@ -31,6 +33,16 @@ class PinDisplayViewController: UIViewController {
     @IBOutlet weak var inboundDepartTime: UILabel!
     
     @IBOutlet weak var priceLabel: UILabel!
+   
+    
+
+    @IBAction func browseAirbnb(_ sender: Any) {
+        
+        let controller = self.storyboard?.instantiateViewController(withIdentifier: "AirbnbMapViewController") as! AirbnbMapViewController
+        controller.quote = quotes
+        present(controller, animated: true, completion: nil)
+    }
+    
     
     @IBAction func dismiss(_ sender: Any) {
         dismiss(animated: true, completion: nil)
@@ -39,7 +51,7 @@ class PinDisplayViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        print("quotes: \(carriers)")
+//        print("quotes: \(carriers)")
         
         loadInfo()
     }

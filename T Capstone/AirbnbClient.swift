@@ -44,11 +44,11 @@ class AirbnbClient {
             ParameterKeys.sort: ParameterValues.sort,
             ParameterKeys.suppress_facets: ParameterValues.suppress_facets,
         ]
-//        print(parameters)
+        print(parameters)
         
         let url = URL.URLBase + Method.BrowseQuotes + escapedParameters(parameters)
         
-//        print(url)
+        print(url)
         
         let request = URLRequest(url: Foundation.URL(string: url)!)
         
@@ -63,9 +63,12 @@ class AirbnbClient {
             } catch {
                 completionHandler(false, nil, error.localizedDescription)
             }
+            
             print(parsedObject!)
+            
             let parsedPlaces = self.parserHelper(parsedObject)
             completionHandler(true, parsedPlaces, nil)
+            
         }).resume()
     }
     func parserHelper (_ data: AnyObject!) -> [[String: AnyObject]]? {
@@ -85,6 +88,7 @@ class AirbnbClient {
         if let location = quote.outboundDestinationIDString {
             urlString = location.replacingOccurrences(of: ",", with: "")
         }
+        print(urlString)
         return urlString
     }
     

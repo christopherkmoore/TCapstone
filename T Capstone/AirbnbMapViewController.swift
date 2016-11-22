@@ -10,12 +10,18 @@ import Foundation
 import UIKit
 import MapKit
 
-class AirbnbMapViewController: MapViewController {
+class AirbnbMapViewController: UIViewController {
+    
+    var quote: Quotes!
     
     override func viewDidLoad() {
+        
+        AirbnbClient.sharedInstance().browseAirbnbListing(quote) {(success, data, error) in
+        print(data)
+        }
         super.viewDidLoad()
         
-        
     }
+    
     
 }
