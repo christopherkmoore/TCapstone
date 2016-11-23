@@ -23,6 +23,15 @@ public class AirbnbListing: NSManagedObject {
         if let listing = content["listing"] as? [String: AnyObject] {
             bnbLatitude = listing["lat"] as! Double
             bnbLongitude = listing["lng"] as! Double
+            beds = listing["beds"] as! Int16
+            person_capacity = listing["person_capacity"] as! Int16
+            bathrooms = listing["bathrooms"] as! Int16
+        }
+        
+        if let pricing_quote = content["pricing_quote"] as? [String: AnyObject] {
+            if let price = pricing_quote["rate"] as? [String: AnyObject] {
+                amount = price["amount"] as! Int16
+            }
         }
     }
 }

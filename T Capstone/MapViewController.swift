@@ -329,11 +329,41 @@ extension MapViewController: CLLocationManagerDelegate {
 
 
 
-protocol APICall {
+protocol APICall: DisplayError {
     
     var sharedContext: NSManagedObjectContext { get }
 
     func grabAPIDataFor(_ pin: Pin)
+    
+}
+
+protocol DisplayError {
+    
+}
+
+extension DisplayError {
+    
+    func displayNetworkError (_ vc: UIViewController, error: String?) {
+        if let error = error {
+            let alertController = UIAlertController(title: "Error", message: error, preferredStyle: .alert)
+            let action = UIAlertAction(title: "Done", style: UIAlertActionStyle.default, handler: {(paramAction: UIAlertAction!) in
+                print(paramAction.title!)})
+            
+            alertController.addAction(action)
+            vc.present(alertController, animated: true, completion: nil)
+        }
+        
+    }
+    
+    func displayDataNilError (_ vc: UIViewController, error: String?) {
+        let alertController = UIAlertController(title: "It's possible your aim is bad.", message: "Aim for an airport, not the ocean.", preferredStyle: .alert)
+        let action = UIAlertAction(title: "Done", style: UIAlertActionStyle.default, handler: {(paramAction: UIAlertAction!) in
+            print(paramAction.title!)})
+        
+        alertController.addAction(action)
+        vc.present(alertController, animated: true, completion: nil)
+    }
+
     
 }
 
@@ -389,26 +419,6 @@ extension APICall {
         }
     }
     
-    func displayNetworkError (_ vc: UIViewController, error: String?) {
-        if let error = error {
-            let alertController = UIAlertController(title: "Error", message: error, preferredStyle: .alert)
-            let action = UIAlertAction(title: "Done", style: UIAlertActionStyle.default, handler: {(paramAction: UIAlertAction!) in
-                print(paramAction.title!)})
-            
-            alertController.addAction(action)
-            vc.present(alertController, animated: true, completion: nil)
-        }
-        
-    }
-    
-    func displayDataNilError (_ vc: UIViewController, error: String?) {
-        let alertController = UIAlertController(title: "It's possible your aim is bad.", message: "Aim for an airport, not the ocean.", preferredStyle: .alert)
-        let action = UIAlertAction(title: "Done", style: UIAlertActionStyle.default, handler: {(paramAction: UIAlertAction!) in
-            print(paramAction.title!)})
-        
-        alertController.addAction(action)
-        vc.present(alertController, animated: true, completion: nil)
-    }
 }
 
 

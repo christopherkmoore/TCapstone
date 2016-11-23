@@ -110,7 +110,7 @@ extension PinSearchViewController: UITableViewDataSource, UITableViewDelegate {
         timeDate.dateFormat = "yyyy-MM-dd'T'HH:mm:ss +zzzz"
         timeDate.timeStyle = .long
         timeDate.dateStyle = .medium
-        cell.flightDate.text = timeDate.string(from: quote.inboundDepartureDate! as Date)
+        cell.flightDate.text = timeDate.string(from: quote.outboundDepartureDate! as Date)
         
         cell.destination.text = quote.outboundDestinationIDString
         
@@ -128,15 +128,6 @@ extension PinSearchViewController: UITableViewDataSource, UITableViewDelegate {
         controller.carriers = fetchedResultsCarriersController.fetchedObjects
         
         present(controller, animated: true, completion: nil)
-        
-        //        AirbnbClient.sharedInstance().browseAirbnbListing(quote, completionHandler: {(success, data, error) in
-        //
-        //            if (success) {
-        //                print(data!)
-        //            }
-        //            
-        //        })
-        //    
     }
 }
 

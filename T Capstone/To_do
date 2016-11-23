@@ -15,3 +15,8 @@ Bugs
 ________
 
 
+Features
+++++++++++++++
+
+would be really cool if the API call to airbnb could be triggered by changes in the span, so that when the user scrolls across the mapView, more listings could fill in the empty mapView
+

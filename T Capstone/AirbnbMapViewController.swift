@@ -11,12 +11,15 @@ import UIKit
 import MapKit
 import CoreData
 
-class AirbnbMapViewController: UIViewController {
+class AirbnbMapViewController: UIViewController, DisplayError {
     
     var quote: Quotes!
     
     @IBOutlet weak var mapView: MKMapView!
     
+    @IBAction func dismiss(_ sender: Any) {
+        dismiss(animated: true, completion: nil)
+    }
     var sharedContext: NSManagedObjectContext {
         return CoreDataStackManager.sharedInstance().managedObjectContext
     }
@@ -61,6 +64,13 @@ class AirbnbMapViewController: UIViewController {
                     }
                 }
             }
+            // success fails, create alert
+            if !(success) {
+                self.displayNetworkError(self, error: error)
+            }
+            if data == nil {
+                self.displayDataNilError(self, error: "No available AirBnb listings for this area")
+            }
         }
     }
     
@@ -68,6 +78,7 @@ class AirbnbMapViewController: UIViewController {
         for item in bnbListing {
             let annotation = MKPointAnnotation()
             annotation.coordinate = CLLocationCoordinate2DMake(item.bnbLatitude, item.bnbLongitude)
+            annotation.title = "💰: \(item.amount) 🐸 : \(item.person_capacity) 🛌 : \(item.beds) 🚽 : \(item.bathrooms) "
             mapView.addAnnotation(annotation)
         }
     }
@@ -83,17 +94,16 @@ extension AirbnbMapViewController: MKMapViewDelegate {
         if annotationView == nil {
             annotationView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: "bnbListing")
             annotationView?.animatesDrop = true
-            print("delegate firing for pin")
+            annotationView?.canShowCallout = true
+//            annotationView?.rightCalloutAccessoryView = UIButton(type: .detailDisclosure)
+            print("delegate creating new pin")
             return annotationView
         } else {
             annotationView?.annotation = annotation
             return annotationView
         }
     }
-//
-//    
-//    
-//    func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
-//        <#code#>
+    
+//    func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
 //    }
 }
