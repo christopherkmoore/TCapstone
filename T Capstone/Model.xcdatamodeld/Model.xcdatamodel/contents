@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="11542" systemVersion="16B2555" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="AirbnbListing" representedClassName=".AirbnbListing" syncable="YES">
+        <attribute name="bnbLatitude" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="bnbLongitude" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
+    </entity>
     <entity name="Carriers" representedClassName=".Carriers" syncable="YES">
         <attribute name="carrierID" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
@@ -48,6 +52,7 @@
     <fetchRequest name="PlacesFetchRequest" entity="Places"/>
     <fetchRequest name="QuotesFetchRequest" entity="Quotes"/>
     <elements>
+        <element name="AirbnbListing" positionX="-54" positionY="135" width="128" height="75"/>
         <element name="Carriers" positionX="-54" positionY="108" width="128" height="90"/>
         <element name="OriginPin" positionX="-45" positionY="72" width="128" height="75"/>
         <element name="Pin" positionX="-63" positionY="-18" width="128" height="105"/>

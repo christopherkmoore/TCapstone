@@ -63,9 +63,7 @@ class AirbnbClient {
             } catch {
                 completionHandler(false, nil, error.localizedDescription)
             }
-            
-            print(parsedObject!)
-            
+                        
             let parsedPlaces = self.parserHelper(parsedObject)
             completionHandler(true, parsedPlaces, nil)
             

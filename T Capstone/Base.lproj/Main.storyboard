@@ -533,6 +533,9 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
+                    <connections>
+                        <outlet property="mapView" destination="8X3-yV-OsT" id="NR0-vz-Xa9"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aXS-c9-hPP" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
