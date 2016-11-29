@@ -46,7 +46,7 @@ class AirbnbClient {
         ]
         print(parameters)
         
-        let url = URL.URLBase + Method.BrowseQuotes + escapedParameters(parameters)
+        let url = AirbnbURL.URLBase + Method.BrowseQuotes + escapedParameters(parameters)
         
         print(url)
         
@@ -69,6 +69,26 @@ class AirbnbClient {
             
         }).resume()
     }
+    
+//    func getImages(_ photoURLS: NSSet?, completionHandler: @escaping (Data?, Error?) -> Void ) -> URLSessionTask? {
+//    
+//        if let photoURLS = photoURLS {
+//            for url in photoURLS {
+//                let newURL = URL(string: url as! String)!
+//                let request = URLRequest(url: newURL)
+//                let task = session.dataTask(with: request) {(data, response, error) in
+//                    
+//                    if let error = error {
+//                        completionHandler(nil, error)
+//                    } else {
+//                        completionHandler(data!, nil)
+//                    }
+//                }
+//            }
+//        }
+//        
+//    }
+    
     func parserHelper (_ data: AnyObject!) -> [[String: AnyObject]]? {
         
         if data != nil {

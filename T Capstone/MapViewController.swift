@@ -45,16 +45,16 @@ class MapViewController: UIViewController, NSFetchedResultsControllerDelegate, A
         return [Pin]()
     }
     
-    func fetchOriginPin() -> [OriginPin] {
-        do {
-            let fetchRequest: NSFetchRequest<OriginPin> = NSFetchRequest(entityName: "OriginPin")
-            originPin = try sharedContext.fetch(fetchRequest)
-            return originPin
-        } catch {
-            print("error fetching origin pin")
-        }
-        return [OriginPin]()
-    }
+//    func fetchOriginPin() -> [OriginPin] {
+//        do {
+//            let fetchRequest: NSFetchRequest<OriginPin> = NSFetchRequest(entityName: "OriginPin")
+//            originPin = try sharedContext.fetch(fetchRequest)
+//            return originPin
+//        } catch {
+//            print("error fetching origin pin")
+//        }
+//        return [OriginPin]()
+//    }
     
     func deleteOriginPin() {
         
@@ -109,6 +109,8 @@ class MapViewController: UIViewController, NSFetchedResultsControllerDelegate, A
         longPressRecognizer.minimumPressDuration = 0.7
         mapView.addGestureRecognizer(longPressRecognizer)
         
+        print("origin pin: \(originPin)")
+        print("pins: \(pins)")
 
     }
 
@@ -134,14 +136,12 @@ class MapViewController: UIViewController, NSFetchedResultsControllerDelegate, A
             })
             print("center.x durinv Edit true Animation: \(deleteView.center.x)")
             editButton.title = "Edit"
-            CoreDataStackManager.sharedInstance().saveContext()
         } else {
             UIView.animate(withDuration: 0.7, animations: {
                 self.mapView.frame.origin.y -= self.deleteView.frame.height
             })
             print("center.x during Done true Animation: \(deleteView.center.x)")
             editButton.title = "Done"
-            CoreDataStackManager.sharedInstance().saveContext()
         }
     }
     

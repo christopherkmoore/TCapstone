@@ -14,6 +14,9 @@ import CoreData
 class AirbnbMapViewController: UIViewController, DisplayError {
     
     var quote: Quotes!
+    var listings = [AirbnbListing]()
+    var currentListing: AirbnbListing?
+    var urls = [String]()
     
     @IBOutlet weak var mapView: MKMapView!
     
@@ -41,6 +44,7 @@ class AirbnbMapViewController: UIViewController, DisplayError {
     }
     
     func zoomToQuoteArea(_ quote: Quotes) {
+        // This code is problematic. causes a bug without an origin because the pin lat/lng isn't neccessarily == the quote lat/lng
         mapView.setRegion(MKCoordinateRegion(center: CLLocationCoordinate2DMake((quote.pin?.latitude)!, (quote.pin?.longitude)!), span: MKCoordinateSpanMake(0.50, 0.50)), animated: true)
     
     }
@@ -50,18 +54,23 @@ class AirbnbMapViewController: UIViewController, DisplayError {
         AirbnbClient.sharedInstance().browseAirbnbListing(quote) {(success, data, error) in
             if success {
                 DispatchQueue.global(qos: .background).async { () -> Void in
-                var listings = [AirbnbListing]()
                     if let safeBnbListings = data {
                         let _ = safeBnbListings.map() {(item: [String: AnyObject]) -> [AirbnbListing] in
                             let bnbListings = AirbnbListing(content: item, context: self.sharedContext)
-                            listings.append(bnbListings)
-                            print("finished saving AirBnB Listings")
-                            return listings
+                            let pictures = item["listing"]?["picture_urls"] as! [String]
+                            for picture in pictures {
+                                let photoToAdd = AirbnbPhotos(content: picture, context: self.sharedContext)
+                                bnbListings.addToPhotos(photoToAdd)
+                            }
+                            self.listings.append(bnbListings)
+                            print(bnbListings.photos)
+                            return self.listings
                         }
                         DispatchQueue.main.async( execute: { () -> Void in
-                            handler(listings)
+                            handler(self.listings)
                         })
                     }
+                    
                 }
             }
             // success fails, create alert
@@ -95,7 +104,7 @@ extension AirbnbMapViewController: MKMapViewDelegate {
             annotationView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: "bnbListing")
             annotationView?.animatesDrop = true
             annotationView?.canShowCallout = true
-//            annotationView?.rightCalloutAccessoryView = UIButton(type: .detailDisclosure)
+            annotationView?.rightCalloutAccessoryView = UIButton(type: .detailDisclosure)
             print("delegate creating new pin")
             return annotationView
         } else {
@@ -104,6 +113,26 @@ extension AirbnbMapViewController: MKMapViewDelegate {
         }
     }
     
-//    func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
-//    }
+    func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
+        
+        guard let selectedAnnotation = view.annotation else {return}
+
+        
+        func findSelectedListing() -> AirbnbListing? {
+            
+            for house in listings {
+                if house.bnbLatitude == selectedAnnotation.coordinate.latitude && house.bnbLongitude == selectedAnnotation.coordinate.longitude {
+                    
+                    currentListing = house
+                    return currentListing
+                }
+            }
+            return nil
+        }
+        
+        let controller = self.storyboard?.instantiateViewController(withIdentifier: "AirbnbPicturesViewController") as! AirbnbPicturesViewController
+        controller.currentListing = findSelectedListing()
+        present(controller, animated: true, completion: nil)
+        
+    }
 }

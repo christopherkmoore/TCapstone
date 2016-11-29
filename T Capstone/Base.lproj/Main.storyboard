@@ -592,6 +592,90 @@
             </objects>
             <point key="canvasLocation" x="807.20000000000005" y="777.66116941529242"/>
         </scene>
+        <!--Airbnb Pictures View Controller-->
+        <scene sceneID="1ej-RV-ceI">
+            <objects>
+                <viewController storyboardIdentifier="AirbnbPicturesViewController" id="sEC-c8-Bzo" customClass="AirbnbPicturesViewController" customModule="Go" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="3mT-FR-AVb"/>
+                        <viewControllerLayoutGuide type="bottom" id="3iG-Lw-lNz"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="BYf-9t-i64">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kbR-Ve-dQS">
+                                <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                                <items>
+                                    <navigationItem title="Title" id="idk-eu-rtk">
+                                        <barButtonItem key="leftBarButtonItem" title="Item" id="EZX-1r-NjW">
+                                            <connections>
+                                                <action selector="dismiss:" destination="sEC-c8-Bzo" id="npg-9z-9Th"/>
+                                            </connections>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="liM-6G-w4V">
+                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="m8d-GX-jTM">
+                                    <size key="itemSize" width="183" height="208"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="AirbnbCollectionViewCell" id="7Md-qa-JL4" customClass="AirbnbCollectionViewCell" customModule="Go" customModuleProvider="target">
+                                        <rect key="frame" x="96" y="0.0" width="183" height="208"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                            <rect key="frame" x="0.0" y="0.0" width="183" height="208"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="iZC-yh-WFz">
+                                                    <rect key="frame" x="5" y="5" width="173" height="198"/>
+                                                </imageView>
+                                                <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="2ag-y9-iyg">
+                                                    <rect key="frame" x="81" y="94" width="20" height="20"/>
+                                                </activityIndicatorView>
+                                            </subviews>
+                                        </view>
+                                        <constraints>
+                                            <constraint firstItem="iZC-yh-WFz" firstAttribute="leading" secondItem="7Md-qa-JL4" secondAttribute="leading" constant="5" id="3bq-HX-C1U"/>
+                                            <constraint firstAttribute="trailing" secondItem="iZC-yh-WFz" secondAttribute="trailing" constant="5" id="K4h-e5-S8U"/>
+                                            <constraint firstItem="2ag-y9-iyg" firstAttribute="centerX" secondItem="7Md-qa-JL4" secondAttribute="centerX" id="Yad-L5-dud"/>
+                                            <constraint firstItem="2ag-y9-iyg" firstAttribute="centerY" secondItem="7Md-qa-JL4" secondAttribute="centerY" id="hlb-Jj-nzx"/>
+                                            <constraint firstItem="iZC-yh-WFz" firstAttribute="top" secondItem="7Md-qa-JL4" secondAttribute="top" constant="5" id="iOk-vi-x0T"/>
+                                            <constraint firstAttribute="bottom" secondItem="iZC-yh-WFz" secondAttribute="bottom" constant="5" id="s48-go-zdX"/>
+                                        </constraints>
+                                        <connections>
+                                            <outlet property="activityIndicator" destination="2ag-y9-iyg" id="ghT-CK-ABO"/>
+                                            <outlet property="imageView" destination="iZC-yh-WFz" id="ba9-Fr-VvR"/>
+                                        </connections>
+                                    </collectionViewCell>
+                                </cells>
+                            </collectionView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="kbR-Ve-dQS" firstAttribute="leading" secondItem="BYf-9t-i64" secondAttribute="leadingMargin" constant="-16" id="2nw-ur-la1"/>
+                            <constraint firstItem="kbR-Ve-dQS" firstAttribute="top" secondItem="3mT-FR-AVb" secondAttribute="bottom" id="C0D-FQ-fPK"/>
+                            <constraint firstItem="liM-6G-w4V" firstAttribute="leading" secondItem="BYf-9t-i64" secondAttribute="leading" id="EZF-ze-aJs"/>
+                            <constraint firstAttribute="trailing" secondItem="liM-6G-w4V" secondAttribute="trailing" id="MJv-1A-LE4"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="kbR-Ve-dQS" secondAttribute="trailing" constant="-16" id="gZ4-7k-Gfc"/>
+                            <constraint firstItem="3iG-Lw-lNz" firstAttribute="top" secondItem="liM-6G-w4V" secondAttribute="bottom" id="kzP-pX-kbX"/>
+                            <constraint firstItem="liM-6G-w4V" firstAttribute="top" secondItem="kbR-Ve-dQS" secondAttribute="bottom" id="ywj-O3-8AQ"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="collectionView" destination="liM-6G-w4V" id="5oq-fT-vif"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="2NA-Wk-7MM" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1592.8" y="777.66116941529242"/>
+        </scene>
         <!--View Controller-->
         <scene sceneID="SCn-vS-1Cj">
             <objects>

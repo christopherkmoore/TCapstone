@@ -20,12 +20,23 @@ public class AirbnbListing: NSManagedObject {
         let entity = NSEntityDescription.entity(forEntityName: "AirbnbListing", in: context)!
         super.init(entity: entity, insertInto: context)
         
+        
         if let listing = content["listing"] as? [String: AnyObject] {
             bnbLatitude = listing["lat"] as! Double
             bnbLongitude = listing["lng"] as! Double
             beds = listing["beds"] as! Int16
             person_capacity = listing["person_capacity"] as! Int16
             bathrooms = listing["bathrooms"] as! Int16
+            picture_count = listing["picture_count"] as! Int16
+            id = listing["id"] as! Int32
+            // if theres an error check to make sure the property value is type [String]
+
+            
+            
+            
+//            picture_urls = [listing["picture_urls"] as! NSString]
+            
+            
         }
         
         if let pricing_quote = content["pricing_quote"] as? [String: AnyObject] {
@@ -34,4 +45,8 @@ public class AirbnbListing: NSManagedObject {
             }
         }
     }
+}
+
+extension AirbnbListing {
+    
 }

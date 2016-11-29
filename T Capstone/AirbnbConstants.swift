@@ -15,7 +15,7 @@ extension AirbnbClient {
         
     }
     
-    struct URL {
+    struct AirbnbURL {
         static var URLBase = "https://api.airbnb.com/v2/"
         
     }

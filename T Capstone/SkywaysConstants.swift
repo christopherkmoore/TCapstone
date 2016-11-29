@@ -14,7 +14,7 @@ extension SkywaysClient {
     struct API {
         
         //testing API Key prt167...
-        static var APIKey = "prtl6749387986743898559646983194"
+        static var APIKey = "ch576698382676059633696453451632"
         
     }
     
