@@ -14,6 +14,7 @@ import CoreData
 class AirbnbPicturesViewController : UIViewController {
     
     var currentListing: AirbnbListing!
+    var cache = NSCache<AnyObject, AnyObject>()
     
     var sharedContext: NSManagedObjectContext {
         return CoreDataStackManager.sharedInstance().managedObjectContext
@@ -107,13 +108,20 @@ extension AirbnbPicturesViewController: UICollectionViewDelegate, UICollectionVi
                             cell.imageView.image = image
                             cell.activityIndicator.stopAnimating()
                             cell.activityIndicator.isHidden = true
+                            self.cache.setObject(image, forKey: indexPath.row as AnyObject)
                         })
                     }
                 }
             }
         }
 
-        getImages(photo.photo)
+        if self.cache.object(forKey: indexPath.row as AnyObject) != nil {
+            cell.imageView.image = (self.cache.object(forKey: indexPath.row as AnyObject) as! UIImage)
+            cell.activityIndicator.stopAnimating()
+            cell.activityIndicator.isHidden = true
+        } else {
+            getImages(photo.photo)
+        }
         
         print("delegate for cell printing")
         

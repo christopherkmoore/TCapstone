@@ -38,9 +38,12 @@ class AirbnbMapViewController: UIViewController, DisplayError {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        fetchListings{(listings) in
-            self.createPinsFromListings(listings)
+        if mapView.annotations.count == 0 {
+            fetchListings{(listings) in
+                self.createPinsFromListings(listings)
+            }
         }
+
     }
     
     func zoomToQuoteArea(_ quote: Quotes) {
@@ -63,7 +66,6 @@ class AirbnbMapViewController: UIViewController, DisplayError {
                                 bnbListings.addToPhotos(photoToAdd)
                             }
                             self.listings.append(bnbListings)
-                            print(bnbListings.photos)
                             return self.listings
                         }
                         DispatchQueue.main.async( execute: { () -> Void in
