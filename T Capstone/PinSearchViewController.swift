@@ -33,7 +33,6 @@ class PinSearchViewController: UIViewController, NSFetchedResultsControllerDeleg
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
         
         let fetchRequestQuotes: NSFetchRequest<Quotes> = Quotes.fetchRequest()
         fetchRequestQuotes.sortDescriptors = [NSSortDescriptor(key: "price", ascending: true)]
@@ -68,6 +67,10 @@ class PinSearchViewController: UIViewController, NSFetchedResultsControllerDeleg
         } catch let error as NSError {
             print("Carriers fetch failed with error: \(error.localizedDescription)")
         }
+        
+        print("Quotes Controller: \(fetchedResultsQuotesController.fetchedObjects)")
+        print("Places Controller: \(fetchedResultsPlacesController.fetchedObjects)")
+        print("Carriers Controller: \(fetchedResultsCarriersController.fetchedObjects)")
 
         fetchedResultsQuotesController.delegate = self
 

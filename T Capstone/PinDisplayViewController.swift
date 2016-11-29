@@ -16,9 +16,7 @@ class PinDisplayViewController: UIViewController {
     var places: [Places]!
     var carriers: [Carriers]!
     var pin: Pin?
-    
-    enum Status { case inProgress, complete }
-    
+        
     @IBOutlet weak var inboundOrigin: UILabel!
     @IBOutlet weak var inboundDestination: UILabel!
     

@@ -2,7 +2,7 @@
 //  Carriers+CoreDataProperties.swift
 //  Go
 //
-//  Created by modelf on 11/16/16.
+//  Created by modelf on 11/29/16.
 //  Copyright © 2016 modelf. All rights reserved.
 //
 
@@ -18,6 +18,5 @@ extension Carriers {
 
     @NSManaged public var carrierID: Int32
     @NSManaged public var name: String?
-    @NSManaged public var quotes: Quotes?
 
 }

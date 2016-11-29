@@ -34,15 +34,13 @@ class MapViewController: UIViewController, NSFetchedResultsControllerDelegate, A
 
     //MARK Loading Pins
     
-    func fetchAllPins() -> [Pin] {
+    func fetchAllPins(){
         do {
             let fetchRequest: NSFetchRequest<Pin> = NSFetchRequest(entityName: "Pin")
             pins = try sharedContext.fetch(fetchRequest)
-            return pins
         } catch {
             print("error fetching pins")
         }
-        return [Pin]()
     }
     
 //    func fetchOriginPin() -> [OriginPin] {
@@ -62,7 +60,6 @@ class MapViewController: UIViewController, NSFetchedResultsControllerDelegate, A
             DispatchQueue.main.async {
                 self.mapView.removeAnnotation(self.originPin[0])
                 self.originPin.removeFirst()
-                CoreDataStackManager.sharedInstance().saveContext()
             }
         }
     }
@@ -86,7 +83,7 @@ class MapViewController: UIViewController, NSFetchedResultsControllerDelegate, A
         super.viewDidLoad()
         mapView.delegate = self
 
-        pins = fetchAllPins()
+        fetchAllPins()
         
         if pins.count != 0 {
             loadMapPins()
@@ -155,8 +152,6 @@ class MapViewController: UIViewController, NSFetchedResultsControllerDelegate, A
 
         switch gestureRecognizer.state {
         case .began:
-
-            
             if switchForPin.isOn == true {
                 
                 if originPin.count == 0 {
@@ -164,7 +159,6 @@ class MapViewController: UIViewController, NSFetchedResultsControllerDelegate, A
                     SkywaysClient.ParameterValues.originPlace = "\(touchMapCoordinates.latitude),\(touchMapCoordinates.longitude)-latlong/"
                     originPin.append(newOriginPin!)
                     mapView.addAnnotation(newOriginPin!)
-                    CoreDataStackManager.sharedInstance().saveContext()
                     print("new pin created in nested if")
                 }
                 else {
@@ -174,7 +168,6 @@ class MapViewController: UIViewController, NSFetchedResultsControllerDelegate, A
                     originPin.append(newOriginPin!)
                   
                     mapView.addAnnotation(newOriginPin!)
-                    CoreDataStackManager.sharedInstance().saveContext()
                     print("new pin created in nested else")
                     
                     deleteOriginPin()
@@ -192,7 +185,6 @@ class MapViewController: UIViewController, NSFetchedResultsControllerDelegate, A
                 pins.append(newPin!)
                 mapView.addAnnotation(newPin!)
                 grabAPIDataFor(newPin!)
-                CoreDataStackManager.sharedInstance().saveContext()
                 print("new pin created in last if statement")
             }
             
@@ -200,7 +192,6 @@ class MapViewController: UIViewController, NSFetchedResultsControllerDelegate, A
         default:
             return
         }
-        
     }
     
 }
@@ -270,6 +261,7 @@ extension MapViewController: MKMapViewDelegate {
         }
         
         if editButton.title == "Edit" {
+            CoreDataStackManager.sharedInstance().saveContext()
             if let value = findSelectedPin() {
                 let controller = self.storyboard?.instantiateViewController(withIdentifier: "PinSearchViewController") as! PinSearchViewController
                 controller.pin = value
@@ -277,6 +269,7 @@ extension MapViewController: MKMapViewDelegate {
             }
         } else {
             if let value = findSelectedPin() {
+                //theres redundant code here.
                 sharedContext.delete(value)
                 CoreDataStackManager.sharedInstance().saveContext()
             }
@@ -307,8 +300,7 @@ extension MapViewController: CLLocationManagerDelegate {
                     
                     newOriginPin = OriginPin(latitude: locationManager.coordinate.latitude, longitude: locationManager.coordinate.longitude, context: self.sharedContext)
                     originPin.append(newOriginPin!)
-                    CoreDataStackManager.sharedInstance().saveContext()
-                    
+                    CoreDataStackManager.sharedInstance().saveContext()                    
                     SkywaysClient.ParameterValues.originPlace = "\(locationManager.coordinate.latitude),\(locationManager.coordinate.longitude)-latlong/"
                     mapView.addAnnotation(newOriginPin!)
                 }
@@ -372,53 +364,52 @@ extension APICall {
     
     func grabAPIDataFor(_ pin: Pin) {
         
-        
-    
         SkywaysClient.sharedInstance().browseCacheQuotes(pin) {(success, quotes, places, carriers, error) in
-            
-            if (success) {
-                // get carriers and stash in coreData
-                if let safeCarriers = carriers {
+            DispatchQueue.global(qos: .userInitiated).async { () -> Void in
+                if (success) {
+                    // get carriers and stash in coreData
+                    if let safeCarriers = carriers {
                         let _ = safeCarriers.map() {(item: [String: AnyObject]) -> Carriers in
                             let carriers = Carriers(content: item, context: self.sharedContext)
                             print("finished saving carriers")
                             return carriers
                         }
-                }
-                // get places and stash in coreData
-                if let safePlaces = places {
+                    }
+                    // get places and stash in coreData
+                    if let safePlaces = places {
                         let _ = safePlaces.map() {(item: [String: AnyObject]) -> Places in
                             let places = Places(content: item, context: self.sharedContext)
                             places.pin = pin
                             print("finished saving places")
                             return places
                         }
-                }
-                // get quotes and stash in coreData
-                if let safeQuotes = quotes {
+                    }
+                    // get quotes and stash in coreData
+                    if let safeQuotes = quotes {
                         let _ = safeQuotes.map() {(item: [String: AnyObject]) -> Quotes in
                             let quotes = Quotes(content: item, context: self.sharedContext)
                             quotes.pin = pin
                             print("finished saving quotes")
                             return quotes
                         }
+                    }
+                    CoreDataStackManager.sharedInstance().saveContext()
                 }
-            }
-            // handle error if success is false
-            if !(success) {
-                self.sharedContext.delete(pin)
-                CoreDataStackManager.sharedInstance().saveContext()
-                self.displayNetworkError(self as! UIViewController, error: error)
-            }
-            // if success == true but quotes or places == nil
-            if quotes == nil || places == nil {
-                self.displayDataNilError(self as! UIViewController, error: error)
-                self.sharedContext.delete(pin)
-                CoreDataStackManager.sharedInstance().saveContext()
+                // handle error if success is false
+                if !(success) {
+                    self.sharedContext.delete(pin)
+                    CoreDataStackManager.sharedInstance().saveContext()
+                    self.displayNetworkError(self as! UIViewController, error: error)
+                }
+                // if success == true but quotes or places == nil
+                if quotes == nil || places == nil {
+                    self.displayDataNilError(self as! UIViewController, error: error)
+                    self.sharedContext.delete(pin)
+                    CoreDataStackManager.sharedInstance().saveContext()
+                }
             }
         }
     }
-    
 }
 
 

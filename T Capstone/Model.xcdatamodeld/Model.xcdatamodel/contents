@@ -18,7 +18,6 @@
     <entity name="Carriers" representedClassName=".Carriers" syncable="YES">
         <attribute name="carrierID" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
-        <relationship name="quotes" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Quotes" inverseName="carrier" inverseEntity="Quotes" syncable="YES"/>
     </entity>
     <entity name="OriginPin" representedClassName=".OriginPin" syncable="YES">
         <attribute name="originLatitude" optional="YES" attributeType="Double" usesScalarValueType="YES" syncable="YES"/>
@@ -27,7 +26,6 @@
     <entity name="Pin" representedClassName=".Pin" syncable="YES">
         <attribute name="latitude" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="longitude" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
-        <relationship name="places" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Places" inverseName="pin" inverseEntity="Places" syncable="YES"/>
         <relationship name="quotes" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Quotes" inverseName="pin" inverseEntity="Quotes" syncable="YES"/>
     </entity>
     <entity name="Places" representedClassName=".Places" syncable="YES">
@@ -35,8 +33,7 @@
         <attribute name="countryName" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="placeID" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
-        <relationship name="pin" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Pin" inverseName="places" inverseEntity="Pin" syncable="YES"/>
-        <relationship name="quote" optional="YES" toMany="YES" deletionRule="No Action" destinationEntity="Quotes" inverseName="place" inverseEntity="Quotes" syncable="YES"/>
+        <relationship name="pin" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="Pin" syncable="YES"/>
     </entity>
     <entity name="Quotes" representedClassName=".Quotes" syncable="YES">
         <attribute name="inboundCarrierID" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
@@ -56,19 +53,18 @@
         <attribute name="outboundOriginIDString" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="price" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="quoteID" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
-        <relationship name="carrier" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Carriers" inverseName="quotes" inverseEntity="Carriers" syncable="YES"/>
-        <relationship name="pin" optional="YES" maxCount="1" deletionRule="Nullify" ordered="YES" destinationEntity="Pin" inverseName="quotes" inverseEntity="Pin" syncable="YES"/>
-        <relationship name="place" optional="YES" toMany="YES" deletionRule="No Action" destinationEntity="Places" inverseName="quote" inverseEntity="Places" syncable="YES"/>
+        <relationship name="carrier" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="Carriers" syncable="YES"/>
+        <relationship name="pin" optional="YES" maxCount="1" deletionRule="Cascade" ordered="YES" destinationEntity="Pin" inverseName="quotes" inverseEntity="Pin" syncable="YES"/>
     </entity>
     <fetchRequest name="PlacesFetchRequest" entity="Places"/>
     <fetchRequest name="QuotesFetchRequest" entity="Quotes"/>
     <elements>
         <element name="AirbnbListing" positionX="-54" positionY="135" width="128" height="180"/>
-        <element name="Carriers" positionX="-54" positionY="108" width="128" height="90"/>
-        <element name="OriginPin" positionX="-45" positionY="72" width="128" height="75"/>
-        <element name="Pin" positionX="-63" positionY="-18" width="128" height="105"/>
-        <element name="Places" positionX="-54" positionY="-9" width="128" height="135"/>
-        <element name="Quotes" positionX="-36" positionY="9" width="128" height="345"/>
         <element name="AirbnbPhotos" positionX="-9" positionY="180" width="128" height="75"/>
+        <element name="Carriers" positionX="-54" positionY="108" width="128" height="75"/>
+        <element name="OriginPin" positionX="-45" positionY="72" width="128" height="75"/>
+        <element name="Pin" positionX="-63" positionY="-18" width="128" height="90"/>
+        <element name="Places" positionX="-54" positionY="-9" width="128" height="120"/>
+        <element name="Quotes" positionX="-36" positionY="9" width="128" height="330"/>
     </elements>
 </model>
