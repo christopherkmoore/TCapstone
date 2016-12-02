@@ -607,8 +607,8 @@
                             <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kbR-Ve-dQS">
                                 <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                                 <items>
-                                    <navigationItem title="Title" id="idk-eu-rtk">
-                                        <barButtonItem key="leftBarButtonItem" title="Item" id="EZX-1r-NjW">
+                                    <navigationItem title="Pictures" id="idk-eu-rtk">
+                                        <barButtonItem key="leftBarButtonItem" systemItem="done" id="EZX-1r-NjW">
                                             <connections>
                                                 <action selector="dismiss:" destination="sEC-c8-Bzo" id="npg-9z-9Th"/>
                                             </connections>
@@ -670,6 +670,7 @@
                     </view>
                     <connections>
                         <outlet property="collectionView" destination="liM-6G-w4V" id="5oq-fT-vif"/>
+                        <outlet property="navigationBar" destination="kbR-Ve-dQS" id="ZCD-6o-26S"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2NA-Wk-7MM" userLabel="First Responder" sceneMemberID="firstResponder"/>

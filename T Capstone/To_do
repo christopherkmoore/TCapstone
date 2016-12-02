@@ -24,3 +24,11 @@ Features
 
 would be really cool if the API call to airbnb could be triggered by changes in the span, so that when the user scrolls across the mapView, more listings could fill in the empty mapView
 
+
+Next time you sit down -
+
+try setting a delegate for UIGesture. Notifications seems wrong.
+
+navigation bar still in the way.
+
+picture aspect seems wrong.

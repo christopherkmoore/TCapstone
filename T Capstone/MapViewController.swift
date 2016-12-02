@@ -265,7 +265,7 @@ extension MapViewController: MKMapViewDelegate {
             if let value = findSelectedPin() {
                 let controller = self.storyboard?.instantiateViewController(withIdentifier: "PinSearchViewController") as! PinSearchViewController
                 controller.pin = value
-                present(controller, animated: true, completion: nil)
+                present(controller, animated: true)
             }
         } else {
             if let value = findSelectedPin() {

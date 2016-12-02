@@ -13,6 +13,8 @@ import CoreData
 
 class AirbnbPicturesViewController : UIViewController {
     
+    @IBOutlet weak var navigationBar: UINavigationBar!
+    
     var currentListing: AirbnbListing!
     var cache = NSCache<AnyObject, AnyObject>()
     
@@ -29,8 +31,24 @@ class AirbnbPicturesViewController : UIViewController {
         return results
     }()
     
+    lazy var layout: UICollectionViewLayout = {
+        let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
+        layout.sectionInset = UIEdgeInsets(top: 0.0, left: 0.0, bottom: 0.0, right: 0.0)
+        layout.minimumLineSpacing = 0
+        layout.minimumInteritemSpacing = 0
+        
+        let width = floor(self.collectionView.frame.size.width/3)
+        layout.itemSize = CGSize(width: width, height: width)
+        return layout
+    }()
+    
     @IBAction func dismiss(_ sender: Any) {
         dismiss(animated: true)
+    }
+    
+    func dismissFullscreenImage(_ sender: UITapGestureRecognizer) {
+        sender.view?.removeFromSuperview()
+        collectionView.reloadData()
     }
     
     @IBOutlet weak var collectionView: UICollectionView!
@@ -47,21 +65,11 @@ class AirbnbPicturesViewController : UIViewController {
         collectionView.dataSource = self
         collectionView.reloadData()
         print(currentListing)
-        
     }
-    func reCreateURLS(_ bnbListing: AirbnbListing) {
-        
-    }
+
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
-        let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
-        layout.sectionInset = UIEdgeInsets(top: 0.0, left: 0.0, bottom: 0.0, right: 0.0)
-        layout.minimumLineSpacing = 0
-        layout.minimumInteritemSpacing = 0
-        
-        let width = floor(self.collectionView.frame.size.width/3)
-        layout.itemSize = CGSize(width: width, height: width)
         collectionView.collectionViewLayout = layout
     }
     
@@ -77,6 +85,7 @@ class AirbnbPicturesViewController : UIViewController {
         return image
         
     }()
+    
 }
 
 extension AirbnbPicturesViewController: UICollectionViewDelegate, UICollectionViewDataSource {
@@ -129,7 +138,23 @@ extension AirbnbPicturesViewController: UICollectionViewDelegate, UICollectionVi
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        return
+
+        
+        UIView.animate(withDuration: 0.9) {
+            let newCollection = collectionView.visibleCells
+            let imageToEdit = collectionView.cellForItem(at: indexPath)
+            if imageToEdit?.isSelected == true {
+                var newUIView = UIView()
+                newUIView = imageToEdit!
+                newUIView.frame = self.collectionView.frame
+                newUIView.backgroundColor = .black
+                print("resizing cell")
+                
+                let tap = UITapGestureRecognizer(target: self, action: #selector(AirbnbPicturesViewController.dismissFullscreenImage(_:)))
+                newUIView.addGestureRecognizer(tap)
+                self.view.addSubview(newUIView)
+            }
+        }
+
     }
-    
 }
